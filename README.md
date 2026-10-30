@@ -7,69 +7,67 @@
 
 # ✳️ 00 — Learn The Singularity Workshop
 
-**A practical learning center for building with The Singularity Workshop.** Choose a goal, follow a guided path, try a real example, and use the source repositories when you need deeper technical detail.
+**Start with a problem. Learn the model. See the result. Check that it works.**
 
-This guide follows the [FSM_COS documentation standard](https://github.com/TrentBest/TheSingularityWorkshop.FSM_COS/blob/master/DOCUMENTATION_STANDARD.md): edify, not mystify; teach from a recognizable problem toward the implementation; explain boundaries; and show how to verify claims.
+A practical learning center for building with The Singularity Workshop. The guides are organized around problems to solve and workflows to follow; linked project repositories hold the deeper API, setup, and implementation references.
 
-## 🟦 01 — What is this?
+## A problem made visible
 
-The Singularity Workshop is a family of software projects for modeling behavior, defining and composing capabilities, and building experiences for different hosts and forms of interaction.
+[![GUI.SVG fox and sheepdog scene on a 10×10 grid](https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.GUI/development/docs/assets/fox-sheepdog-10x10.svg)](https://github.com/TrentBest/TheSingularityWorkshop.GUI/blob/development/samples/FoxSheepdogPlane/Program.cs)
 
-You can enter through one project, but the projects have different jobs. This center explains those jobs through learner goals and workflows. Each project remains authoritative for its own installation, API, status, limitations, and implementation.
+*GUI.SVG turns a scene model into a vector image. This animated fox-and-sheepdog scene is illustrative choreography; it is not driven by a live FSM_API execution trace. The [worked oscillator lesson](docs/PROBLEM_TO_PROOF.md) shows an evidence-backed path from actual state changes to a rendered snapshot.*
 
-## 🟣 02 — Why a learning center?
+## Learn by solving
 
-A long list of repositories asks a newcomer to know the project names before knowing what to build. This guide starts with the learner's question instead:
-
-- *How do I model behavior that changes over time?*
-- *How do I assemble capabilities and their prerequisites?*
-- *How can I describe and send a REST request?*
-- *How do authored Experiences relate to the app that presents them?*
-- *Where do meaning, rendering, physical behavior, and input fit?*
-
-The [functional map](docs/FUNCTIONAL_MAP.md) groups projects around these kinds of tasks. The [learning paths](docs/LEARNING_PATHS.md) give a recommended order for exploring them.
-
-## 🩵 03 — How to learn here
-
-1. Pick the outcome closest to what you want to build in [Start Here](docs/START_HERE.md).
-2. Follow a [learning path](docs/LEARNING_PATHS.md) and use its first concrete example.
-3. Use the [functional map](docs/FUNCTIONAL_MAP.md) to see where each project fits.
-4. Open the linked repository for its quickstart, runnable examples, exact contracts, and current constraints.
-5. Check the [shared vocabulary](docs/GLOSSARY.md) whenever a term crosses project boundaries.
-
-You do not need to read every project before trying the first example. You do need to follow each project's own setup and status guidance before relying on a package or integration.
-
-## 🟢 04 — See a composition work
-
-FSM_COS has a minimal consumer that requests a report capability while its catalog provides both the report and its data-source prerequisite.
-
-With Git and the .NET 8 SDK installed, run:
-
-```bash
-git clone https://github.com/TrentBest/TheSingularityWorkshop.FSM_COS.git
-cd TheSingularityWorkshop.FSM_COS
-dotnet run --project samples/FSM_COS.MinimalConsumer/FSM_COS.MinimalConsumer.csproj
+```mermaid
+flowchart LR
+    A["01 · Problem"] --> B["02 · Model"]
+    B --> C["03 · Rules"]
+    C --> D["04 · Run"]
+    D --> E["05 · Visualize"]
+    E --> F["06 · Verify"]
+    classDef normal fill:#14283b,stroke:#49677d,color:#eef6ff,stroke-width:2px
+    classDef featured fill:#123e43,stroke:#66e0be,color:#f3fffc,stroke-width:4px
+    class A,B,C,D,F normal
+    class E featured
 ```
 
-Expected final line:
+Each lesson should help you answer: What problem are we solving? What changes? Which Workshop project owns each part? What result should I expect? What does that result actually prove?
 
-```text
-Assembly order: 2 -> 1
-```
+## Featured lesson: state that stays within bounds
 
-That is a source-documented example of dependency ordering. It does not show a running application, graphical interface, remote artifact download, or production catalog. For the line-by-line lesson and a small exercise, follow [Learn FSM_COS by Following One Request](https://github.com/TrentBest/TheSingularityWorkshop.FSM_COS/blob/master/docs/LEARNING_GUIDE.md).
+See how a finite state machine keeps a value between endpoints, reverses direction at each boundary, records the result, and passes the final state to GUI.SVG for a picture.
 
-**Evidence:** Source-checked against FSM_COS `master` on 2026-10-30; this learning-center author did not independently run the sample. See the upstream guide for its verification notes.
+[**Follow the worked problem from model to proof →**](docs/PROBLEM_TO_PROOF.md)
 
-## 🟪 05 — Learning center guides
+The source recipe is [FSM-driven bounded oscillator](https://github.com/TrentBest/TheSingularityWorkshop.GUI/blob/development/samples/demonstrations/recipes/07-fsm-driven-oscillator.md). Its CI run and generated artifacts are [here](https://github.com/TrentBest/TheSingularityWorkshop.GUI/actions/runs/40961583029).
 
-- [Start Here](docs/START_HERE.md) — choose a goal and get oriented.
-- [Learning Paths](docs/LEARNING_PATHS.md) — routes through related projects, ordered by what you want to do.
-- [Functional Map](docs/FUNCTIONAL_MAP.md) — project families, their roles, and the core composition boundary.
-- [Shared Vocabulary](docs/GLOSSARY.md) — plain-language definitions with boundaries and source links.
-- [Editorial Standard](docs/EDITORIAL_STANDARD.md) — how lessons label evidence and stay accurate.
+## Choose your next problem
 
-These pages are the learning layer, not duplicate API references. For exact project behavior, follow the links to its own documentation.
+- **Model changing behavior:** [Control behavior with state machines](docs/LEARNING_PATHS.md#control-behavior-with-state-machines)
+- **Assemble reusable capabilities:** [Compose capabilities into a runtime](docs/LEARNING_PATHS.md#compose-capabilities-into-a-runtime)
+- **Describe and send requests:** [Describe and send a REST capability](docs/LEARNING_PATHS.md#describe-and-send-a-rest-capability)
+- **Create something people can experience:** [Author and present an Experience](docs/LEARNING_PATHS.md#author-and-present-an-experience)
+- **Make meaning and interaction visible:** [Model, render, and interact](docs/LEARNING_PATHS.md#model-render-and-interact)
+- **Explore the project landscape:** [Functional Map](docs/FUNCTIONAL_MAP.md)
+
+## How to use this center
+
+1. Start with a goal or challenge, not a repository name.
+2. Follow one lesson from input/problem through model, execution, visible result, and checks.
+3. Change a parameter and predict what should change.
+4. Use the linked project docs for exact setup, APIs, security, limitations, and current implementation status.
+
+The learning pages are the guide; the linked repositories remain the authority for implementation. Code and diagrams are labeled as verified, source-checked, or conceptual so you can see the evidence behind each claim.
+
+## 🟪 Learning center guides
+
+- [Start Here](docs/START_HERE.md)
+- [Problem to Proof](docs/PROBLEM_TO_PROOF.md)
+- [Learning Paths](docs/LEARNING_PATHS.md)
+- [Functional Map](docs/FUNCTIONAL_MAP.md)
+- [Shared Vocabulary](docs/GLOSSARY.md)
+- [Editorial Standard](docs/EDITORIAL_STANDARD.md)
 
 ---
 
