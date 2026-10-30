@@ -5,7 +5,7 @@
 
 The course builds from concrete output toward more system boundaries. Each stop teaches one useful idea and gives you a source to inspect. You can follow the sequence or jump to the lesson that matches your current problem.
 
-🧭 [Explore the visual learning center](https://trentbest.github.io/TheSingularityWorkshop.Learning/) to browse the progression and try its bounded-motion teaching model.
+🧭 [Explore the visual learning center](https://trentbest.github.io/TheSingularityWorkshop.Learning/site/) to browse the progression and try its bounded-motion teaching model.
 
 ```mermaid
 flowchart LR
