@@ -5,6 +5,8 @@
 
 Pick a challenge, follow the data and behavior that solve it, then inspect the visible result. The projects are useful because they help with those steps; you do not need to memorize their names before you begin.
 
+🧭 Want to explore visually first? [Open the interactive learning explorer](https://trentbest.github.io/TheSingularityWorkshop.Learning/). It includes a small adjustable model and links back to each problem guide.
+
 ## See a scene
 
 [![GUI.SVG fox and sheepdog scene on a 10×10 grid](https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.GUI/development/docs/assets/fox-sheepdog-10x10.svg)](https://github.com/TrentBest/TheSingularityWorkshop.GUI/blob/development/samples/FoxSheepdogPlane/Program.cs)
