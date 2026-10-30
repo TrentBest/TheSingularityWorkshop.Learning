@@ -21,6 +21,8 @@ flowchart LR
     class E focus
 ```
 
+**Diagram status:** authored learning progression, not a runtime architecture or captured execution.
+
 ## A scene the eye can follow
 
 [![GUI.SVG fox and sheepdog scene on a ten-by-ten grid](https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.GUI/development/docs/assets/fox-sheepdog-10x10.svg)](https://github.com/TrentBest/TheSingularityWorkshop.GUI/blob/development/samples/FoxSheepdogPlane/Program.cs)
