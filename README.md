@@ -48,7 +48,7 @@ The source recipe is [FSM-driven bounded oscillator](https://github.com/TrentBes
 
 - **Model changing behavior:** [Control behavior with state machines](docs/LEARNING_PATHS.md#control-behavior-with-state-machines)
 - **Assemble reusable capabilities:** [Compose capabilities into a runtime](docs/LEARNING_PATHS.md#compose-capabilities-into-a-runtime)
-- **Describe and send requests:** [Describe and send a REST capability](docs/LEARNING_PATHS.md#describe-and-send-a-rest-capability)
+- **Describe and send requests:** [Follow the REST operation walkthrough](docs/REST_CAPABILITY.md)
 - **Turn recorded results into a picture:** [Follow a Physics run record into GUI.SVG](docs/TRACE_TO_TRAJECTORY.md)
 - **Create something people can experience:** [Author and present an Experience](docs/LEARNING_PATHS.md#author-and-present-an-experience)
 - **Make meaning and interaction visible:** [Model, render, and interact](docs/LEARNING_PATHS.md#model-render-and-interact)
@@ -69,6 +69,7 @@ The learning pages are the guide; the linked repositories remain the authority f
 - [Start Here](docs/START_HERE.md)
 - [Problem to Proof](docs/PROBLEM_TO_PROOF.md)
 - [Run Record to Trajectory Picture](docs/TRACE_TO_TRAJECTORY.md)
+- [REST Capability](docs/REST_CAPABILITY.md)
 - [Visual Lab](docs/VISUAL_LAB.md)
 - [Learning Paths](docs/LEARNING_PATHS.md)
 - [Functional Map](docs/FUNCTIONAL_MAP.md)
