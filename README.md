@@ -34,6 +34,8 @@ flowchart LR
 
 Each lesson should help you answer: What problem are we solving? What changes? Which Workshop project owns each part? What result should I expect? What does that result actually prove?
 
+The progression diagram is an authored teaching framework, not a project architecture or runtime trace.
+
 ## Featured lesson: state that stays within bounds
 
 See how a finite state machine keeps a value between endpoints, reverses direction at each boundary, records the result, and passes the final state to GUI.SVG for a picture.
