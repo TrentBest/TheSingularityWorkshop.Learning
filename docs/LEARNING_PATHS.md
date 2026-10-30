@@ -5,7 +5,7 @@
 
 Choose a path by the problem you need to solve. Each path moves from a goal to a model, through a runnable example where one exists, and toward a visible result and checks. Project links are there for the deeper explanation and exact contract, not as a reading checklist.
 
-The recommended first lesson is [From Problem to Proof](PROBLEM_TO_PROOF.md): keep a changing value within bounds, reverse at the endpoints, record its behavior, and visualize the computed result.
+The recommended first lesson is [From Problem to Proof](PROBLEM_TO_PROOF.md): keep a changing value within bounds, reverse at the endpoints, record its behavior, and visualize the computed result. To browse more worked visual examples, see the [Visual Lab](VISUAL_LAB.md).
 
 ## Control behavior with state machines
 
@@ -79,7 +79,8 @@ The recommended first lesson is [From Problem to Proof](PROBLEM_TO_PROOF.md): ke
 
 - Start with [Ontology](https://github.com/TrentBest/TheSingularityWorkshop.Ontology) for defining and relating semantic information.
 - Explore [Physics](https://github.com/TrentBest/TheSingularityWorkshop.Physics) for physical modeling.
-- Explore [GUI.SVG](https://github.com/TrentBest/TheSingularityWorkshop.GUI/tree/development/src/SVG) and its [demonstration gallery](https://github.com/TrentBest/TheSingularityWorkshop.GUI/tree/development/samples/demonstrations) for vector output and recipes that start with a problem and show a generated artifact.
+- To follow actual Physics data into a picture, use [From Run Record to Trajectory Picture](TRACE_TO_TRAJECTORY.md): the run record belongs to Physics, while GUI.Core and GUI.SVG make and check the visual representation.
+- Explore [GUI.SVG](https://github.com/TrentBest/TheSingularityWorkshop.GUI/tree/development/src/SVG) and its [demonstration gallery](https://github.com/TrentBest/TheSingularityWorkshop.GUI/tree/development/samples/demonstrations) for more vector-output lessons.
 - Explore [Visualize](https://github.com/TrentBest/TheSingularityWorkshop.Visualize) for scene/image-producing work. Visualize and GUI.SVG have different roles; see their own repository docs before treating one as a substitute for the other.
 - Explore [Gestures](https://github.com/TrentBest/TheSingularityWorkshop.Gestures) for gesture input and [FSM_UserIO](https://github.com/TrentBest/FSM_UserIO) for user I/O.
 - Use [StoryBuilder](https://github.com/TrentBest/StoryBuilder) to explore the distinct task of designing an Experience or Tool and composing narrative material.
