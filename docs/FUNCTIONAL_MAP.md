@@ -5,7 +5,7 @@
 
 This page groups projects by the job a learner may want to do. It is an orientation map, not a copy of project documentation, a dependency graph, or a claim that every project in a group is already integrated with the others.
 
-For an outcome-based route, see [Learning Paths](LEARNING_PATHS.md). For a concrete worked problem, follow [From Problem to Proof](PROBLEM_TO_PROOF.md). Each project link leads to its own deeper reading.
+For an outcome-based route, see [Learning Paths](LEARNING_PATHS.md). For a concrete worked problem, follow [From Problem to Proof](PROBLEM_TO_PROOF.md). For a data-driven visualization lesson, follow [From Run Record to Trajectory Picture](TRACE_TO_TRAJECTORY.md). Each project link leads to its own deeper reading.
 
 ## The composition loop
 
@@ -98,8 +98,8 @@ Find projects that focus on the meaning of a world, physical behavior, visual ou
 - [Ontology](https://github.com/TrentBest/TheSingularityWorkshop.Ontology) — define, version, index, address, and relate ontological information.
 - [Physics](https://github.com/TrentBest/TheSingularityWorkshop.Physics) — physical modeling project.
 - [GUI.SVG](https://github.com/TrentBest/TheSingularityWorkshop.GUI/tree/development/src/SVG) — render a semantic GUI scene as SVG; see the [adapter contract](https://github.com/TrentBest/TheSingularityWorkshop.GUI/blob/development/docs/SVG_ADAPTER.md) and [generated demonstrations](https://github.com/TrentBest/TheSingularityWorkshop.GUI/tree/development/samples/demonstrations).
-- [Renderer](https://github.com/TrentBest/TheSingularityWorkshop.Renderer) and [Visualize](https://github.com/TrentBest/TheSingularityWorkshop.Visualize) — rendering and image-producing work. They have distinct roles from GUI.SVG; check their own docs before treating one as a substitute for another.
-- [Gestures](https://github.com/TrentBest/TheSingularityWorkshop.Gestures) and [FSM_UserIO](https://github.com/TrentBest/FSM_UserIO) — input and interaction starting points.
+- [Renderer](https://github.com/TrentBest/TheSingularityWorkshop.Renderer) and [Visualize](https://github.com/TrentBest/TheSingularityWorkshop.Visualize) — rendering and image-producing work. They have distinct roles from GUI.SVG; check their own docs before treating one as a substitute for the other.
+- [Gestures](https://github.com/TrentBest/TheSingularityWorkshop.Gestures) for gesture input and [FSM_UserIO](https://github.com/TrentBest/FSM_UserIO) for user I/O.
 - [StoryBuilder](https://github.com/TrentBest/StoryBuilder) — author an Experience or Tool design record and compose its narrative material.
 
 ### Work with identity and creator systems
