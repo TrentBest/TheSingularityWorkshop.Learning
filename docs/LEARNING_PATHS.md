@@ -37,7 +37,7 @@ The recommended first lesson is [From Problem to Proof](PROBLEM_TO_PROOF.md): ke
 
 **Problem:** describe a reusable remote operation once, bind values for one call, and send a request without treating the current response as part of the reusable description.
 
-1. Start with the [FSM_REST capability recipe](https://github.com/TrentBest/TheSingularityWorkshop.FSM_REST).
+1. Follow this center's problem-led [REST operation walkthrough](REST_CAPABILITY.md), then open the [FSM_REST capability recipe](https://github.com/TrentBest/TheSingularityWorkshop.FSM_REST).
 2. Identify the method, path, parameters, and response metadata in its operation descriptor example.
 3. Follow the separate binding step that supplies runtime parameter values.
 4. Follow the request through an `IRestTransport` implementation.
