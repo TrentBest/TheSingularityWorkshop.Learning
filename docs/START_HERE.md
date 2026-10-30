@@ -5,7 +5,7 @@
 
 Pick a challenge, follow the data and behavior that solve it, then inspect the visible result. The projects are useful because they help with those steps; you do not need to memorize their names before you begin.
 
-🧭 Want to explore visually first? [Open the interactive learning explorer](https://trentbest.github.io/TheSingularityWorkshop.Learning/). It includes a small adjustable model and links back to each problem guide.
+🧭 Want to explore visually first? [Open the interactive learning explorer](https://trentbest.github.io/TheSingularityWorkshop.Learning/site/). It includes a small adjustable model and links back to each problem guide.
 
 ## See a scene
 
