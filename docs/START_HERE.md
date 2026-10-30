@@ -28,7 +28,7 @@ flowchart LR
 
 **Diagram status:** authored teaching framework; it shows how this center structures a lesson, not an observed execution trace.
 
-The first full walkthrough is [Keep Motion Inside a Safe Range](PROBLEM_TO_PROOF.md). It uses the FSM-driven bounded oscillator: an FSM controls the value, the sample records its behavior, and GUI.SVG renders a static picture of the computed result.
+See the [Learning Journey](LEARNING_JOURNEY.md) for the recommended progression across examples. The first full walkthrough is [Keep Motion Inside a Safe Range](PROBLEM_TO_PROOF.md). It uses the FSM-driven bounded oscillator: an FSM controls the value, the sample records its behavior, and GUI.SVG renders a static picture of the computed result.
 
 ## Choose the challenge closest to yours
 
