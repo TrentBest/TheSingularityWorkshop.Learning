@@ -19,6 +19,24 @@ Every new lesson should make these things clear:
 
 Teach a concrete task before abstracting into theory. Use analogies only when you explain where they stop matching reality. Define specialized terms when they first matter and link to the project that owns their contract.
 
+## Make the learning progression visible
+
+A lesson should let the learner *see* how a problem moves through the technology:
+
+```text
+Problem → model → rules/contracts → execution → observable result → checks
+```
+
+- Show the progression as a clearly labeled diagram, annotated visual, or short numbered sequence. Emphasize the current step and preserve a readable text equivalent.
+- Use a concrete generated artifact to explain what the learner should notice: the input, changing state, output, and important boundary or failure case.
+- Use **GUI.SVG** when the subject is a semantic GUI tree or a GUI.SVG manifestation. Link to its source example and state whether the displayed asset is a generated snapshot, authored illustration, or runtime observation.
+- GUI.SVG is an adapter for semantic GUI scenes; do not use it as a blanket claim that it owns FSM execution, a live clock, general visualization, or interactive behavior. Use the rendering or visualization project that actually owns the data and output.
+- Prefer project-owned visuals and link to the generating source. Do not copy a screenshot or SVG into this repository unless the learner needs a versioned teaching artifact here.
+- Use motion only when it teaches a process. Respect reduced-motion behavior, and never let animation imply that a static output is a live computation.
+- Use labels, captions, contrast, and shape/line cues; do not rely on color alone.
+
+A visual is part of the lesson, not decoration. It should answer a learner question that is harder to answer with prose alone.
+
 ## Protect accuracy
 
 - The linked project source and its current documentation are authoritative for implementation behavior.
@@ -36,7 +54,7 @@ Teach a concrete task before abstracting into theory. Use analogies only when yo
 - Give every code block a purpose; mark snippets partial when they are not complete programs.
 - Make commands copyable and say which directory they run from.
 - Give outputs, expected results, and a quick way to diagnose a mismatch when the source docs provide them.
-- Use diagrams only when they clarify a workflow or boundary. Add descriptive alt text and explain what the diagram does and does not prove.
+- Add descriptive alt text and explain what a diagram does and does not prove.
 - Write for a curious newcomer. Never require the reader to decode the entire repository before reaching a useful first result.
 - Review every lesson for broken links, stale commands, contradictory claims, and accidental duplication of authoritative project documentation.
 
