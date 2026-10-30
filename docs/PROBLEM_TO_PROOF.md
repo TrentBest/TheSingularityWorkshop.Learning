@@ -26,6 +26,8 @@ flowchart LR
     class V highlight
 ```
 
+**Diagram status:** authored teaching model, source-checked against the oscillator recipe; it is not a runtime trace. The tick table below is the recipe's documented expected behavior.
+
 The highlighted step is where a hidden state becomes something people can inspect. In the worked sample, the SVG is generated from the final FSM context; it is a snapshot of computed data, not the thing that computes or advances that data.
 
 ## 1. Model the changing facts
