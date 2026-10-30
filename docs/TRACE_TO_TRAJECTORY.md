@@ -29,6 +29,8 @@ flowchart LR
     class V,G,S,C highlight
 ```
 
+**Diagram status:** authored teaching model, source-checked against the Physics run-record guide and GUI.SVG consumer recipe; it is not a captured runtime trace.
+
 The highlight marks the handoff where stored simulation facts become a visual artifact. It does not move the simulation into the renderer.
 
 ## What the record says
