@@ -5,7 +5,7 @@
 
 This page groups projects by the job a learner may want to do. It is an orientation map, not a copy of project documentation, a dependency graph, or a claim that every project in a group is already integrated with the others.
 
-For a practical route, see [Learning Paths](LEARNING_PATHS.md). For full implementation details, follow each project link.
+For an outcome-based route, see [Learning Paths](LEARNING_PATHS.md). For a concrete worked problem, follow [From Problem to Proof](PROBLEM_TO_PROOF.md). Each project link leads to its own deeper reading.
 
 ## The composition loop
 
@@ -25,11 +25,31 @@ flowchart LR
 
 **Diagram status:** authored, source-checked orientation diagram. It summarizes the boundary documented in FSM_COS's [learning guide](https://github.com/TrentBest/TheSingularityWorkshop.FSM_COS/blob/master/docs/LEARNING_GUIDE.md). It is not a runtime trace or a complete dependency map of the Workshop. The host supplies the manifest and catalog. FSM_COS resolves and validates the reachable MicroBundle dependencies, loads prerequisites first, arbitrates within its configured bound, and returns a RuntimeAssembly. The host owns what happens after handoff.
 
+## Make a changing value observable
+
+The GUI repository contains a worked example that joins three jobs without confusing their ownership:
+
+```mermaid
+flowchart LR
+    Tick["Host supplies a tick"] --> FSM["FSM_API updates value and direction"]
+    FSM --> Context["Final FSM context"]
+    Context --> Scene["GUI.Core builds a semantic scene"]
+    Scene --> SVG["GUI.SVG writes an SVG snapshot"]
+    classDef stage fill:#14283b,stroke:#49677d,color:#eef6ff,stroke-width:2px
+    classDef highlight fill:#123e43,stroke:#66e0be,color:#f3fffc,stroke-width:4px
+    class Tick,FSM,Context,Scene stage
+    class SVG highlight
+```
+
+This is a source-checked description of the [FSM-driven bounded oscillator recipe](https://github.com/TrentBest/TheSingularityWorkshop.GUI/blob/development/samples/demonstrations/recipes/07-fsm-driven-oscillator.md), CI-verified and artifact-reviewed at commit `dce2b360f45ff268d156b162f162c252a3ccc748`. The generated picture is a static snapshot. GUI.SVG serializes the scene; it does not advance FSM_API or own an animation clock.
+
+The [fox-and-sheepdog plane](https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.GUI/development/docs/assets/fox-sheepdog-10x10.svg) is another colorful GUI.SVG example. It is authored SVG motion and is explicitly not a live FSM trace. Browse the [SVG adapter guide](https://github.com/TrentBest/TheSingularityWorkshop.GUI/blob/development/docs/SVG_ADAPTER.md) for its actual contract and limits.
+
 ## Find a project by the job you want to do
 
 ### Control stateful behavior
 
-Use these when you want to define behavior as named states and transitions, then connect that behavior to an application's update cycle or input surface.
+Use these when you want to define behavior as named states and transitions, then connect it to an application's update cycle or input surface.
 
 - [FSM_API](https://github.com/TrentBest/FSM_API) — state-machine foundations for C# applications.
 - [FSM_API_Unity](https://github.com/TrentBest/FSM_API_Unity) — Unity integration for FSM_API.
@@ -77,7 +97,8 @@ Find projects that focus on the meaning of a world, physical behavior, visual ou
 
 - [Ontology](https://github.com/TrentBest/TheSingularityWorkshop.Ontology) — define, version, index, address, and relate ontological information.
 - [Physics](https://github.com/TrentBest/TheSingularityWorkshop.Physics) — physical modeling project.
-- [Renderer](https://github.com/TrentBest/TheSingularityWorkshop.Renderer) and [Visualize](https://github.com/TrentBest/TheSingularityWorkshop.Visualize) — rendering and image-producing work.
+- [GUI.SVG](https://github.com/TrentBest/TheSingularityWorkshop.GUI/tree/development/src/SVG) — render a semantic GUI scene as SVG; see the [adapter contract](https://github.com/TrentBest/TheSingularityWorkshop.GUI/blob/development/docs/SVG_ADAPTER.md) and [generated demonstrations](https://github.com/TrentBest/TheSingularityWorkshop.GUI/tree/development/samples/demonstrations).
+- [Renderer](https://github.com/TrentBest/TheSingularityWorkshop.Renderer) and [Visualize](https://github.com/TrentBest/TheSingularityWorkshop.Visualize) — rendering and image-producing work. They have distinct roles from GUI.SVG; check their own docs before treating one as a substitute for another.
 - [Gestures](https://github.com/TrentBest/TheSingularityWorkshop.Gestures) and [FSM_UserIO](https://github.com/TrentBest/FSM_UserIO) — input and interaction starting points.
 - [StoryBuilder](https://github.com/TrentBest/StoryBuilder) — author an Experience or Tool design record and compose its narrative material.
 
@@ -100,4 +121,4 @@ For the last four projects, use their current repository README as the authority
 
 ## Sources and scope
 
-Project descriptions and the FSM_COS composition loop were checked against public repository documentation on 2026-10-30. This is a selected, learner-relevant map, not an inventory of every repository owned by The Singularity Workshop. Recheck each linked project before relying on current behavior.
+Project descriptions and the FSM_COS composition loop were checked against public repository documentation on 2026-10-30. The GUI.SVG oscillator recipe and fox sample were checked against the GUI repository's `development` branch and artifact records. This is a selected, learner-relevant map, not an inventory of every repository owned by The Singularity Workshop. Recheck each linked project before relying on current behavior.
