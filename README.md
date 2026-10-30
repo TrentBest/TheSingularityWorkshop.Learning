@@ -1,103 +1,79 @@
 <!-- The Singularity Workshop moniker -->
 <p align="center">
   <a href="https://github.com/TrentBest">
-    <img src="https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.Visualize/master/docs/assets/moniker.svg" alt="The Singularity Workshop — animated moniker" width="720" />
+    <img src="https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.Visualize/development/docs/assets/moniker.svg" alt="The Singularity Workshop — animated moniker" width="720" />
   </a>
 </p>
 
 # ✳️ 00 — Learn The Singularity Workshop
 
-A practical guide to using The Singularity Workshop technology. Find a task that matches what you want to build, follow a learning path, and open the linked project when you need its full documentation, examples, contracts, or source.
+**A practical learning center for building with The Singularity Workshop.** Choose a goal, follow a guided path, try a real example, and use the source repositories when you need deeper technical detail.
 
-This guide follows the [FSM_COS documentation standard](https://github.com/TrentBest/TheSingularityWorkshop.FSM_COS/blob/master/DOCUMENTATION_STANDARD.md): explain the human problem, teach through examples, state boundaries and evidence, and link to the authoritative technical reference.
+This guide follows the [FSM_COS documentation standard](https://github.com/TrentBest/TheSingularityWorkshop.FSM_COS/blob/master/DOCUMENTATION_STANDARD.md): edify, not mystify; teach from a recognizable problem toward the implementation; explain boundaries; and show how to verify claims.
 
-## 🟣 01 — Why this guide exists
+## 🟦 01 — What is this?
 
-The Workshop is spread across projects because different parts solve different problems. A learner should be able to start from an outcome—such as composing capabilities, handling input, or building an experience—and discover the relevant projects in one place.
+The Singularity Workshop is a family of software projects for modeling behavior, defining and composing capabilities, and building experiences for different hosts and forms of interaction.
 
-This repository is a **learning map and set of task-oriented guides**. It does not copy project READMEs or replace their detailed documentation. Each guide should teach how to use one or more capabilities together; linked project repositories remain the source for implementation details and deeper reading.
+You can enter through one project, but the projects have different jobs. This center explains those jobs through learner goals and workflows. Each project remains authoritative for its own installation, API, status, limitations, and implementation.
 
-## 🟦 02 — Choose a learning path
+## 🟣 02 — Why a learning center?
 
-### Compose capabilities and runtime behavior
+A long list of repositories asks a newcomer to know the project names before knowing what to build. This guide starts with the learner's question instead:
 
-Learn how to define a reusable capability, declare what it needs, request a composition, and hand the result to an application host.
+- *How do I model behavior that changes over time?*
+- *How do I assemble capabilities and their prerequisites?*
+- *How can I describe and send a REST request?*
+- *How do authored Experiences relate to the app that presents them?*
+- *Where do meaning, rendering, physical behavior, and input fit?*
 
-- [FSM_API](https://github.com/TrentBest/FSM_API) — finite-state-machine and state/context foundations.
-- [MicroBundleDomain](https://github.com/TrentBest/TheSingularityWorkshop.MicroBundleDomain) — contracts for independently authored capabilities.
-- [FSM_COS](https://github.com/TrentBest/TheSingularityWorkshop.FSM_COS) — resolve dependencies and assemble a requested runtime.
-- [FSM_Serialization](https://github.com/TrentBest/TheSingularityWorkshop.FSM_Serialization) — represent and serialize FSM ecosystem data.
-- [FSM_REST](https://github.com/TrentBest/TheSingularityWorkshop.FSM_REST) — REST capability and transport for the FSM ecosystem.
-- [MicroBundleRepository](https://github.com/TrentBest/TheSingularityWorkshop.MicroBundleRepository) — work with a repository of MicroBundles.
-- [MicroBundleIngestor](https://github.com/TrentBest/TheSingularityWorkshop.MicroBundleIngestor) — ingest MicroBundle artifacts.
+The [functional map](docs/FUNCTIONAL_MAP.md) groups projects around these kinds of tasks. The [learning paths](docs/LEARNING_PATHS.md) give a recommended order for exploring them.
 
-### Build AI-driven capabilities
+## 🩵 03 — How to learn here
 
-Explore projects for communicating with AI services, working with structured language, and using AI in different kinds of hosts.
+1. Pick the outcome closest to what you want to build in [Start Here](docs/START_HERE.md).
+2. Follow a [learning path](docs/LEARNING_PATHS.md) and use its first concrete example.
+3. Use the [functional map](docs/FUNCTIONAL_MAP.md) to see where each project fits.
+4. Open the linked repository for its quickstart, runnable examples, exact contracts, and current constraints.
+5. Check the [shared vocabulary](docs/GLOSSARY.md) whenever a term crosses project boundaries.
 
-- [ProtocolAi](https://github.com/TrentBest/TheSingularityWorkshop.ProtocolAi)
-- [GrammarAi](https://github.com/TrentBest/TheSingularityWorkshop.GrammarAi)
-- [HeadlessAi](https://github.com/TrentBest/TheSingularityWorkshop.HeadlessAi)
-- [CommandAi](https://github.com/TrentBest/TheSingularityWorkshop.CommandAi)
-- [CiAi](https://github.com/TrentBest/TheSingularityWorkshop.CiAi) and its [CogA](https://github.com/TrentBest/TheSingularityWorkshop.CiAi.CogA), [CogB](https://github.com/TrentBest/TheSingularityWorkshop.CiAi.CogB), [CogC](https://github.com/TrentBest/TheSingularityWorkshop.CiAi.CogC), [CogD](https://github.com/TrentBest/TheSingularityWorkshop.CiAi.CogD), and [CogE](https://github.com/TrentBest/TheSingularityWorkshop.CiAi.CogE) projects.
+You do not need to read every project before trying the first example. You do need to follow each project's own setup and status guidance before relying on a package or integration.
 
-### Build and deliver user experiences
+## 🟢 04 — See a composition work
 
-Follow the path from an authored experience to an application or host that presents it.
+FSM_COS has a minimal consumer that requests a report capability while its catalog provides both the report and its data-source prerequisite.
 
-- [Experiences](https://github.com/TrentBest/TheSingularityWorkshop.Experiences)
-- [WebApp](https://github.com/TrentBest/TheSingularityWorkshop.WebApp)
-- [GUI](https://github.com/TrentBest/TheSingularityWorkshop.GUI)
-- [AnyApp](https://github.com/TrentBest/AnyApp)
-- [WebPage](https://github.com/TrentBest/WebPage)
-- [MyVR](https://github.com/TrentBest/TheSingularityWorkshop.MyVR)
+With Git and the .NET 8 SDK installed, run:
 
-### Model, render, and interact with a world
+```bash
+git clone https://github.com/TrentBest/TheSingularityWorkshop.FSM_COS.git
+cd TheSingularityWorkshop.FSM_COS
+dotnet run --project samples/FSM_COS.MinimalConsumer/FSM_COS.MinimalConsumer.csproj
+```
 
-Find projects concerned with representing meaning, creating visual output, modeling physical behavior, or accepting user gestures.
+Expected final line:
 
-- [Ontology](https://github.com/TrentBest/TheSingularityWorkshop.Ontology)
-- [Renderer](https://github.com/TrentBest/TheSingularityWorkshop.Renderer)
-- [Visualize](https://github.com/TrentBest/TheSingularityWorkshop.Visualize)
-- [Physics](https://github.com/TrentBest/TheSingularityWorkshop.Physics)
-- [Gestures](https://github.com/TrentBest/TheSingularityWorkshop.Gestures)
-- [FSM_UserIO](https://github.com/TrentBest/FSM_UserIO) — user I/O for FSM-based applications.
-- [FSM_API_Unity](https://github.com/TrentBest/FSM_API_Unity) — Unity integration for FSM_API.
+```text
+Assembly order: 2 -> 1
+```
 
-### Create, organize, and support projects
+That is a source-documented example of dependency ordering. It does not show a running application, graphical interface, remote artifact download, or production catalog. For the line-by-line lesson and a small exercise, follow [Learn FSM_COS by Following One Request](https://github.com/TrentBest/TheSingularityWorkshop.FSM_COS/blob/master/docs/LEARNING_GUIDE.md).
 
-Explore tools for authoring, storing, and supporting Workshop work.
+**Evidence:** Source-checked against FSM_COS `master` on 2026-10-30; this learning-center author did not independently run the sample. See the upstream guide for its verification notes.
 
-- [StoryBuilder](https://github.com/TrentBest/StoryBuilder) — design records and narrative composition for Experiences and Tools.
-- [Foundry](https://github.com/TrentBest/TheSingularityWorkshop.Foundry)
-- [DataWarehouse](https://github.com/TrentBest/TheSingularityWorkshop.DataWarehouse)
-- [Profiles](https://github.com/TrentBest/TheSingularityWorkshop.Profiles)
-- [Economy](https://github.com/TrentBest/TheSingularityWorkshop.Economy)
-- [CreatorNetwork](https://github.com/TrentBest/TheSingularityWorkshop.CreatorNetwork)
+## 🟪 05 — Learning center guides
 
-## 🩵 03 — How to use this guide
+- [Start Here](docs/START_HERE.md) — choose a goal and get oriented.
+- [Learning Paths](docs/LEARNING_PATHS.md) — routes through related projects, ordered by what you want to do.
+- [Functional Map](docs/FUNCTIONAL_MAP.md) — project families, their roles, and the core composition boundary.
+- [Shared Vocabulary](docs/GLOSSARY.md) — plain-language definitions with boundaries and source links.
+- [Editorial Standard](docs/EDITORIAL_STANDARD.md) — how lessons label evidence and stay accurate.
 
-Start with a goal, not a repository name:
-
-1. Choose the path above closest to what you want to accomplish.
-2. Follow its learning guide or runnable tutorial as those materials are added.
-3. Use the linked project's quick start to install or run the capability.
-4. Return to that project's documentation for exact APIs, configuration, limitations, and implementation details.
-5. Treat a claim as verified only when the guide names the project revision and says how it was checked.
-
-The category map is a learner-facing orientation. A project may support more than one workflow; its placement here is a starting point, not an exclusive boundary.
-
-## 🟢 04 — See it in a minute
-
-The shortest complete path into the Workshop today is FSM_COS's minimal consumer: [run the sample](https://github.com/TrentBest/TheSingularityWorkshop.FSM_COS/blob/master/samples/FSM_COS.MinimalConsumer/Program.md) to see a host request a capability and FSM_COS assemble its prerequisite first. Then continue with [Consuming MicroBundles](https://github.com/TrentBest/TheSingularityWorkshop.FSM_COS/blob/master/docs/CONSUMING_MICROBUNDLES.md) to adapt the pattern.
-
-## 🟪 05 — What to learn next
-
-Task guides in this repository will be added by workflow: each should explain the goal, required pieces, steps, expected result, common alternatives or failures, and what to read next. See the [FSM_COS documentation index](https://github.com/TrentBest/TheSingularityWorkshop.FSM_COS/blob/master/DOCUMENTATION_INDEX.md) when you need a deeper reference for FSM_COS.
+These pages are the learning layer, not duplicate API references. For exact project behavior, follow the links to its own documentation.
 
 ---
 
 ## 🔗 Project links
 
-- [The Singularity Workshop repositories](https://github.com/TrentBest?tab=repositories)
+- [Workshop public repositories](https://github.com/TrentBest?tab=repositories)
 - [FSM_COS documentation standard](https://github.com/TrentBest/TheSingularityWorkshop.FSM_COS/blob/master/DOCUMENTATION_STANDARD.md)
