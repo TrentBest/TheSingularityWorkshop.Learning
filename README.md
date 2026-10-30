@@ -34,6 +34,8 @@ flowchart LR
 
 Each lesson should help you answer: What problem are we solving? What changes? Which Workshop project owns each part? What result should I expect? What does that result actually prove?
 
+Follow the course-level [Learning Journey](docs/LEARNING_JOURNEY.md) to see how the worked problems build from a visible scene toward capability, data, and host boundaries.
+
 The progression diagram is an authored teaching framework, not a project architecture or runtime trace.
 
 ## Featured lesson: state that stays within bounds
@@ -67,6 +69,7 @@ The learning pages are the guide; the linked repositories remain the authority f
 ## 🟪 Learning center guides
 
 - [Start Here](docs/START_HERE.md)
+- [Learning Journey](docs/LEARNING_JOURNEY.md)
 - [Problem to Proof](docs/PROBLEM_TO_PROOF.md)
 - [Run Record to Trajectory Picture](docs/TRACE_TO_TRAJECTORY.md)
 - [REST Capability](docs/REST_CAPABILITY.md)
