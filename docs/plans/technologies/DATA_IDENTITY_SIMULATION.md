@@ -6,6 +6,25 @@
 
 `Domain concepts → identity/relationships → model or run → captured record → query/visualization`
 
+Keep the labels for authored concepts, captured observations, and rendered output distinct.
+
+**Progress map:** Domain concepts → Identity + relations → Model / run → Captured record → Query / view
+
+```mermaid
+flowchart LR
+ A["Domain concepts"] --> B
+ B["Identity + relations"] --> C
+ C["Model / run"] --> D
+ D["Captured record"] --> E
+ E["Query / view"]
+ classDef trail fill:#14283b,stroke:#49677d,color:#eef6ff,stroke-width:2px
+ classDef evidence fill:#123e43,stroke:#66e0be,color:#f3fffc,stroke-width:3px
+ class A,B,C,D trail
+ class E evidence
+```
+
+
+
 1. Start with the problem vocabulary. Use [Ontology](https://github.com/TrentBest/TheSingularityWorkshop.Ontology) to inspect contracts for defining, versioning, indexing, addressing, and relating ontological information.
 2. Explore [DataWarehouse](https://github.com/TrentBest/TheSingularityWorkshop.DataWarehouse) for the project's current data infrastructure.
 3. Read [Physics](https://github.com/TrentBest/TheSingularityWorkshop.Physics) for its own current model and run record contracts.
