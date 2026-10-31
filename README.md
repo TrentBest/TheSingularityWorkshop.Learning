@@ -13,6 +13,10 @@ A practical learning center for building with The Singularity Workshop. The guid
 
 🧭 **[Open the interactive learning explorer →](https://trentbest.github.io/TheSingularityWorkshop.Learning/)** — choose a plan by the application you want to build or the Workshop technology you want to learn. Each path has its own guided page and deeper project links.
 
+## Arrive, explore, and listen
+
+The Pages home now begins with a short, skippable torchlit passage that opens into a cavern of learning routes. In the cavern, the **Acoustic side vault** lets visitors hear a browser-generated pulse preview scheduled from the real direct/reflected path values in a committed Physics experiment. The page distinguishes those model measurements from the generated waveform and from the separate atmospheric cue. [Read the arrival and evidence notes](docs/FIRST_CONTACT_CAVERN.md).
+
 ## Explore the technology and its boundaries
 
 The [technology atlas](docs/TECHNOLOGY_ATLAS.md) maps the Workshop package landscape by user problem and follows the package seams across behavior, composition, data, AI, services, visual output, and hosts. The [interactive Frontier Lab](https://trentbest.github.io/TheSingularityWorkshop.Learning/frontier.html) turns that map into stress-test routes; the [challenge protocol](docs/FRONTIER_CHALLENGES.md) makes failure signals and evidence reproducible. The planner proposes experiments, while measured limits require actual runs and are reported separately.
