@@ -31,6 +31,10 @@ These plans are guided trails through separate repositories. They teach you what
 | Ontology, data, and simulation | [Data, identity, and simulation](technologies/DATA_IDENTITY_SIMULATION.md) |
 | Experiences and application hosts | [Experiences and hosts](technologies/EXPERIENCES_AND_HOSTS.md) |
 
+## See the wider Workshop
+
+These plans highlight project areas with a clear learning route. The Workshop also includes supporting, experimental, and newer projects whose current scope is best read from their own repositories. [Browse all Workshop repositories](https://github.com/TrentBest?tab=repositories) to explore the full collection.
+
 ## A useful way to travel
 
 `Mission → smallest useful model → Workshop capability → visible result → evidence → deeper project reference`
