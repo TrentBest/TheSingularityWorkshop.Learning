@@ -56,6 +56,7 @@ A visual is part of the lesson, not decoration. It should answer a learner quest
 - Give outputs, expected results, and a quick way to diagnose a mismatch when the source docs provide them.
 - Add descriptive alt text and explain what a diagram does and does not prove.
 - Write for a curious newcomer. Never require the reader to decode the entire repository before reaching a useful first result.
+- Give interactive controls keyboard support, clear labels and announced results; show which model produced the output and what the interaction does not prove.
 - Review every lesson for broken links, stale commands, contradictory claims, and accidental duplication of authoritative project documentation.
 
 ## Evidence labels used here
