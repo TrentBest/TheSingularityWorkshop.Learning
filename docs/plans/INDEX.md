@@ -16,6 +16,7 @@ These plans are guided trails through separate repositories. They teach you what
 | An AI-enabled application path | [AI-enabled applications](applications/AI_ENABLED_APPLICATIONS.md) |
 | An application composed from reusable capabilities | [Composed-capability application](applications/COMPOSED_CAPABILITY_APP.md) |
 | A simulation result people can explore | [Simulation to visual](applications/SIMULATION_TO_VISUAL.md) |
+| An application that calls a remote service | [Service integrations](applications/SERVICE_INTEGRATIONS.md) |
 | An application organized around identity and data | [Identity and data](applications/IDENTITY_AND_DATA.md) |
 
 ## Choose by the technology you want to learn
