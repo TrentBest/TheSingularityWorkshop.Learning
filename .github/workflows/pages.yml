@@ -39,6 +39,8 @@ jobs:
         run: |
           mkdir -p _site/data
           dotnet run --project physics-source/tools/FirstOrderRoomReflectionRunRecordGenerator/FirstOrderRoomReflectionRunRecordGenerator.csproj --configuration Release -- _site/data/first-order-room-reflection.run.json
+          dotnet run --project physics-source/tools/FirstOrderRoomReflectionRunRecordGenerator/FirstOrderRoomReflectionRunRecordGenerator.csproj --configuration Release -- physics-source/docs/experiments/first-order-room-reflection.run.json --check
+          cmp _site/data/first-order-room-reflection.run.json physics-source/docs/experiments/first-order-room-reflection.run.json
           printf '%s\n' '${{ steps.physics.outputs.commit }}' > _site/data/physics-source-commit.txt
 
       - name: Install .NET 10 for the browser showcase
