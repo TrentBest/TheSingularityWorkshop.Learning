@@ -13,6 +13,10 @@ A practical learning center for building with The Singularity Workshop. The guid
 
 🧭 **[Open the interactive learning explorer →](https://trentbest.github.io/TheSingularityWorkshop.Learning/)** — choose a plan by the application you want to build or the Workshop technology you want to learn. Each path has its own guided page and deeper project links.
 
+## Explore the technology and its boundaries
+
+The [technology atlas](docs/TECHNOLOGY_ATLAS.md) maps the Workshop package landscape by user problem and follows the package seams across behavior, composition, data, AI, services, visual output, and hosts. The [interactive Frontier Lab](https://trentbest.github.io/TheSingularityWorkshop.Learning/frontier.html) turns that map into stress-test routes; the [challenge protocol](docs/FRONTIER_CHALLENGES.md) makes failure signals and evidence reproducible. The planner proposes experiments, while measured limits require actual runs and are reported separately.
+
 ## Choose a targeted learning plan
 
 Start with the job you want to do, then follow the relevant Workshop technology. The [plan catalog](docs/plans/INDEX.md) groups six application missions and seven technology routes; each opens a focused learning page with progression steps and checkpoints.
