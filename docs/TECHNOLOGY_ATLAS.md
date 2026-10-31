@@ -49,6 +49,12 @@
 - [GrammarAi](https://github.com/TrentBest/TheSingularityWorkshop.GrammarAi) — structural layer for self-defining, integer-backed protocols.
 - [HeadlessAi](https://github.com/TrentBest/TheSingularityWorkshop.HeadlessAi) — direct HTTP input-to-response path for a configured AI-capable endpoint.
 - [CommandAi](https://github.com/TrentBest/TheSingularityWorkshop.CommandAi) · [CiAi](https://github.com/TrentBest/TheSingularityWorkshop.CiAi) — command and composable cognition routes.
+- [CiAi.CogA](https://github.com/TrentBest/TheSingularityWorkshop.CiAi.CogA) through [CogE](https://github.com/TrentBest/TheSingularityWorkshop.CiAi.CogE) — capability catalog, request, result correlation, authorization, and lifecycle evidence slices. The individual Cog repositories own their precise responsibilities and readiness.
+
+### Additional domain packages and evidence projects
+- [CreatorNetwork](https://github.com/TrentBest/TheSingularityWorkshop.CreatorNetwork) — repository in the Workshop ecosystem; follow its owned documentation for current purpose and readiness.
+- [FSM_Helix](https://github.com/TrentBest/FSM_Helix) — public FSM-oriented project adjacent to the current FSM_API route.
+- Benchmark and example repositories: [FSM_API_Benchmark](https://github.com/TrentBest/FSM_API_Benchmark), [FSM_COS_Benchmarks](https://github.com/TrentBest/FSM_COS_Benchmarks), [FSM_Serialization_Benchmarks](https://github.com/TrentBest/FSM_Serialization_Benchmarks), [MicroBundleDomain_Benchmarks](https://github.com/TrentBest/MicroBundleDomain_Benchmarks), [Renderer.Benchmarks](https://github.com/TrentBest/TheSingularityWorkshop.Renderer.Benchmarks), [DataWarehouse.Benchmarks](https://github.com/TrentBest/TheSingularityWorkshop.Benchmarks.DataWarehouse), [HeadlessAi.Benchmarks](https://github.com/TrentBest/TheSingularityWorkshop.HeadlessAi.Benchmarks), and [HeadlessAi.AnyAppExample](https://github.com/TrentBest/TheSingularityWorkshop.HeadlessAi.AnyAppExample). These are evidence/examples, not additional runtime layers.
 
 ### Service and representation boundaries
 - [FSM_REST](https://github.com/TrentBest/TheSingularityWorkshop.FSM_REST) — REST capability and transport substrate.
@@ -65,6 +71,15 @@ These are constraints to explore, not claims that a package has failed:
 5. **Scene versus rendered image.** Compare the semantic scene, generated representation, and display. A visually plausible result does not prove the underlying data is correct.
 6. **Package combination versus product.** A set of individually useful packages is not automatically a finished, secure, deployable application. Test the seams: versions, dependency resolution, configuration, observability, recovery, and host lifecycle.
 
+## Existing measured footholds
+
+Two existing reports already show how to separate a useful narrow measurement from a sweeping product claim:
+
+- [Renderer benchmark report](https://github.com/TrentBest/TheSingularityWorkshop.Renderer.Benchmarks/blob/master/README.md) measures observer-relative math primitives. In its recorded run, ProjectHorizontal remained about 6.2–6.3 ns from 10 m to 300 km with 0 B allocated; SelectEventHorizon was about 35–38 ns and allocated 64 B per call. The report explicitly says this is not complete renderer performance and identifies the allocation as an optimization target.
+- [MicroBundleDomain benchmark report](https://github.com/TrentBest/MicroBundleDomain_Benchmarks/blob/master/README.md) measures descriptor construction/validation/materialization up to 64 dependencies/providers on a named .NET 8 machine. At 64 dependencies plus providers it reports 2,761.9 ns and 8,224 B. It explicitly does not measure FSM_COS composition.
+
+These are existing repository measurements, not fresh reruns in this learning center. The difference between a measured narrow boundary and an unmeasured end-to-end claim is part of what the Frontier Lab teaches.
+
 ## Evidence labels
 
 Use these labels in every experiment report:
@@ -74,6 +89,10 @@ Use these labels in every experiment report:
 - **Measured:** includes reproducible inputs, environment, repetitions, and results.
 - **Hypothesis:** a boundary to probe; no result is implied.
 - **Blocked by host:** requires a runtime, credential, service, device, or persistence layer not present in static Pages.
+
+## Inventory notes
+
+This map covers the public Workshop package and adjacent project repositories found during this pass. Benchmark, sample, and host repositories are separated from package layers. Private repositories are not presented as user-facing learning routes. Some public project roots have sparse READMEs; when an owner repository does not clearly establish a package purpose or maturity, this atlas links through without inventing one. Repository and package availability can change, so each owner repository remains authoritative.
 
 ## Next
 
