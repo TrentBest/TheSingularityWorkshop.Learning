@@ -39,7 +39,7 @@ jobs:
         run: |
           mkdir -p _site/data
           dotnet run --project physics-source/tools/FirstOrderRoomReflectionRunRecordGenerator/FirstOrderRoomReflectionRunRecordGenerator.csproj --configuration Release -- _site/data/first-order-room-reflection.run.json
-          printf '%s\\n' '${{ steps.physics.outputs.commit }}' > _site/data/physics-source-commit.txt
+          printf '%s\n' '${{ steps.physics.outputs.commit }}' > _site/data/physics-source-commit.txt
 
       - name: Install .NET 10 for the browser showcase
         uses: actions/setup-dotnet@v4
@@ -49,12 +49,10 @@ jobs:
       - name: Build the browser showcase
         run: dotnet publish apps/FsmApiShowcase/FsmApiShowcase.csproj --configuration Release
 
-      - name: Assemble the static Pages site and compute Physics evidence
+      - name: Assemble the static Pages site
         shell: bash
         run: |
           mkdir -p _site/demo _site/data
-          dotnet run --project physics-source/tools/FirstOrderRoomReflectionRunRecordGenerator/FirstOrderRoomReflectionRunRecordGenerator.csproj --configuration Release -- _site/data/first-order-room-reflection.run.json
-          printf '%s\n' '${{ steps.physics.outputs.commit }}' > _site/data/physics-source-commit.txt
           cp index.html _site/index.html
           cp frontier.html _site/frontier.html
           cp -R apps/FsmApiShowcase/bin/Release/net10.0/publish/wwwroot/. _site/demo/
