@@ -12,7 +12,7 @@ html.arrival-locked,html.arrival-locked body{overflow:hidden}
 .arrival-world:before{content:"";position:absolute;inset:-20%;background:radial-gradient(ellipse at 50% 48%,#ed8d2520 0,transparent 8%,transparent 38%,#000 69%);opacity:.35;transition:opacity 2s,transform 3s}
 .arrival-world:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#000 0%,transparent 22%,transparent 67%,#000 100%),radial-gradient(ellipse at center,transparent 8%,#000 88%);pointer-events:none}
 .arrival-art{position:absolute;width:100%;height:100%;inset:0;transform:scale(1);transition:transform 2.3s cubic-bezier(.2,.7,.1,1),filter 2.2s}
-.arrival-art svg{width:100%;height:100%;display:block}
+.arrival-art svg,.arrival-art img{width:100%;height:100%;display:block;object-fit:cover}
 .arrival-lines{opacity:0;transition:opacity 1.4s}
 .arrival-flame{transform-box:fill-box;transform-origin:50% 100%;animation:flame 1.7s ease-in-out infinite alternate;filter:url(#torch-glow)}
 .arrival-light{opacity:.24;transition:opacity 1.4s}
@@ -75,45 +75,7 @@ body.arrival-done #replay-arrival{display:block}
 <div id="arrival" class="arrival" data-stage="dark" role="dialog" aria-modal="true" aria-label="The Singularity Workshop arrival" tabindex="-1">
   <div class="arrival-world" aria-hidden="true">
     <div class="arrival-art">
-      <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A narrow stone passage leads toward a single torch, turns, and opens into a vast cavern">
-        <defs>
-          <radialGradient id="torch-glow"><stop stop-color="#ffe3a0" stop-opacity=".96"/><stop offset=".22" stop-color="#ffae42" stop-opacity=".78"/><stop offset="1" stop-color="#ff7620" stop-opacity="0"/></radialGradient>
-          <radialGradient id="cave-light"><stop stop-color="#ffd78b" stop-opacity=".48"/><stop offset=".46" stop-color="#c58b48" stop-opacity=".12"/><stop offset="1" stop-color="#e0a657" stop-opacity="0"/></radialGradient>
-          <linearGradient id="floor" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#171c20"/><stop offset="1" stop-color="#030507"/></linearGradient>
-          <linearGradient id="stone" x1="0" x2="1"><stop stop-color="#0b1015"/><stop offset=".55" stop-color="#27343a"/><stop offset="1" stop-color="#10161b"/></linearGradient>
-          <filter id="blur"><feGaussianBlur stdDeviation="24"/></filter>
-        </defs>
-        <rect width="1440" height="900" fill="#000"/>
-        <g class="cavern-shape">
-          <path d="M0 0H1440V214Q1325 163 1212 203T982 185Q842 103 704 170T443 153Q257 231 0 145Z" fill="#070c11"/>
-          <path d="M0 900V647Q151 575 263 622Q344 483 487 499Q591 348 736 413Q833 292 1013 362Q1170 290 1265 402Q1374 390 1440 337V900Z" fill="#080e13"/>
-          <path d="M182 900Q358 727 523 735T861 669Q1070 580 1320 667" fill="none" stroke="#52636a" stroke-opacity=".22" stroke-width="7"/>
-          <path d="M0 516Q182 429 328 478M1030 486Q1232 402 1440 475" fill="none" stroke="#9b8c70" stroke-opacity=".16" stroke-width="5"/>
-          <ellipse cx="970" cy="488" rx="432" ry="330" fill="url(#cave-light)"/>
-          <path d="M1040 651Q944 491 1016 392Q1091 305 1194 399Q1269 486 1194 651Z" fill="#11181d" stroke="#8c7656" stroke-opacity=".3" stroke-width="3"/>
-          <path d="M1110 647V470Q1110 402 1172 402Q1231 402 1231 470V647" fill="#080d11" stroke="#b38e54" stroke-opacity=".42" stroke-width="4"/>
-          <path d="M0 870Q250 775 505 822T986 811T1440 789" fill="none" stroke="#35424a" stroke-opacity=".34" stroke-width="4"/>
-        </g>
-        <g class="arrival-lines" fill="none" stroke="#7b8586" stroke-opacity=".38" stroke-width="3">
-          <path d="M0 80Q328 120 538 274L567 535 0 900Z" fill="url(#stone)" stroke="#4b5558"/>
-          <path d="M1440 80Q1112 120 902 274L873 535 1440 900Z" fill="#11171c" stroke="#424d51"/>
-          <path d="M0 0H1440L902 274H538Z" fill="#0a0e12" stroke="#343b3e"/>
-          <path d="M0 900H1440L873 535H567Z" fill="url(#floor)" stroke="#31383b"/>
-          <path d="M117 139L566 292M1323 139L874 292M45 743L571 517M1395 743L869 517" stroke-opacity=".2"/>
-          <path d="M299 76L574 285M1141 76L866 285" stroke-opacity=".13"/>
-        </g>
-        <g class="arrival-light"><ellipse cx="718" cy="320" rx="220" ry="165" fill="url(#torch-glow)" opacity=".72"/><ellipse cx="1084" cy="512" rx="470" ry="320" fill="url(#cave-light)" filter="url(#blur)"/></g>
-        <g transform="translate(718 324)">
-          <path d="M-13 10H13L17 104H-17Z" fill="#523414" stroke="#b8894d" stroke-width="3"/>
-          <path d="M-24 12H24L17 24H-17Z" fill="#312316" stroke="#a8753c" stroke-width="2"/>
-          <path class="arrival-flame" d="M0 5C-31-14-2-42-3-66 23-48 29-29 14-8 26-23 36-16 31-3Z" fill="#ffca63"/>
-          <path d="M-8 3Q0-19 8 3" fill="#fff4c4"/>
-        </g>
-        <g fill="none" stroke="#ffcf79" stroke-opacity=".28">
-          <path d="M720 378L356 900M720 378L1090 900" stroke-width="2"/>
-          <path d="M718 378L0 652M718 378L1440 652" stroke-width="1"/>
-        </g>
-      </svg>
+      <img src="./data/arrival-scene.svg" alt="" fetchpriority="high">
     </div>
   </div>
   <div class="arrival-top"><div class="arrival-controls"><button class="arrival-ctl" id="arrival-sound" type="button" aria-label="Turn sound on" aria-pressed="false" title="Sound">♫</button><button class="arrival-ctl" id="arrival-skip" type="button" aria-label="Skip arrival" title="Skip arrival">↗</button></div></div>
