@@ -11,7 +11,7 @@ The recommended first lesson is [From Problem to Proof](PROBLEM_TO_PROOF.md): ke
 
 Use the [plan catalog](plans/INDEX.md) to start from either of two questions:
 
-- **What are you building?** Choose an interactive system, browser/desktop experience, AI-enabled application, composed-capability application, simulation visualization, or identity-aware data application.
+- **What are you building?** Choose an interactive system, browser/desktop experience, service-integrating application, AI-enabled application, composed-capability application, simulation visualization, or identity-aware data application.
 - **Which technology are you learning?** Choose state and interaction, visual systems, runtime composition, service and serialization, AI application stack, data/identity/simulation, or Experiences and hosts.
 
 Each card opens its own plan page with a practical progression and checkpoints. This page remains the cross-cutting set of problem-solving walkthroughs; the catalog helps you choose a route into them and the owning repositories.
