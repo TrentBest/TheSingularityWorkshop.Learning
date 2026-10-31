@@ -40,6 +40,23 @@
         </div>
     </section>
 
+    @if (_enrolledCourses.Count > 0)
+    {
+        <section class="userio-trace" aria-labelledby="enrollment-title">
+            <div class="userio-trace-heading">
+                <span class="eyebrow">Singularity University · session registration</span>
+                <h2 id="enrollment-title">Your learning plan is on the board.</h2>
+                <p>These course enrollments arrived as semantic user intents from the campus. This is a browser-session demonstration, not a persistent student account.</p>
+            </div>
+            <div class="userio-intent-list">
+                @foreach (var course in _enrolledCourses)
+                {
+                    <span class="userio-intent"><code>@course</code><small>FSM_UserIO accepted</small></span>
+                }
+            </div>
+        </section>
+    }
+
     <main>
         <section class="hero">
             <div class="hero-copy">
@@ -183,6 +200,7 @@
     private const string DefinitionName = "LearningCenter.SentinelBehavior";
     private int _tick;
     private readonly List<SemanticIntent> _arrivalIntents = [];
+    private readonly List<string> _enrolledCourses = [];
     private SemanticIntent? _lastIntent;
     private int _selectedId = 1;
     private readonly List<AgentContext> _agents = [];
@@ -206,7 +224,18 @@
         {
             var trace = await JS.InvokeAsync<string?>("learningUserIo.readTrace");
             if (!string.IsNullOrWhiteSpace(trace))
+            {
                 _arrivalIntents.AddRange(JsonSerializer.Deserialize<List<SemanticIntent>>(trace) ?? []);
+                _enrolledCourses.Clear();
+                foreach (var intent in _arrivalIntents.Where(intent => intent.Name.StartsWith("Course.Enroll.", StringComparison.Ordinal)))
+                {
+                    var courseId = intent.Name["Course.Enroll.".Length..];
+                    if (!string.IsNullOrWhiteSpace(courseId) && !_enrolledCourses.Contains(courseId))
+                        _enrolledCourses.Add(courseId);
+                }
+                if (_arrivalIntents.Count > 0)
+                    _lastIntent = _arrivalIntents[^1];
+            }
         }
         catch (JSException)
         {
