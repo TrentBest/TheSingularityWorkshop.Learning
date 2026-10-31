@@ -19,9 +19,11 @@ Start with the job you want to do, then follow the relevant Workshop technology.
 
 ## A problem made visible
 
+🧪 **[Launch the FSM_API Behavior Lab →](https://trentbest.github.io/TheSingularityWorkshop.Learning/demo/)** — change agent inputs, advance the shared processing group, and inspect real state transitions. The lab runs as a static Blazor WebAssembly app on GitHub Pages; it uses the published FSM_API package.
+
 [![GUI.SVG fox and sheepdog scene on a 10×10 grid](https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.GUI/development/docs/assets/fox-sheepdog-10x10.svg)](https://github.com/TrentBest/TheSingularityWorkshop.GUI/blob/development/samples/FoxSheepdogPlane/Program.cs)
 
-*GUI.SVG turns semantic scenes and computed data into vector images. Start with the [live FSM_API exercise in the Workshop WebApp](https://lemon-ground-09f542010.1.azurestaticapps.net/fsm-api), then follow the [worked oscillator lesson](docs/PROBLEM_TO_PROOF.md) from state changes through a rendered snapshot.*
+*GUI.SVG turns semantic scenes and computed data into vector images. Start with the [live FSM_API Behavior Lab running in your browser](https://trentbest.github.io/TheSingularityWorkshop.Learning/demo/), then follow the [worked oscillator lesson](docs/PROBLEM_TO_PROOF.md) from state changes through a rendered snapshot.*
 
 ## Learn by solving
 
