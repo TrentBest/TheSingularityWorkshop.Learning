@@ -5,7 +5,7 @@
 
 This page groups projects by the job a learner may want to do. It is an orientation map, not a copy of project documentation, a dependency graph, or a claim that every project in a group is already integrated with the others.
 
-For an outcome-based route, see [Learning Paths](LEARNING_PATHS.md). For a concrete worked problem, follow [From Problem to Proof](PROBLEM_TO_PROOF.md). For a data-driven visualization lesson, follow [From Run Record to Trajectory Picture](TRACE_TO_TRAJECTORY.md). Each project link leads to its own deeper reading.
+For an outcome-based route, see [Learning Paths](LEARNING_PATHS.md). For a concrete worked problem, follow [From Problem to Proof](PROBLEM_TO_PROOF.md). For a data-driven visualization lesson, follow [From Run Record to Trajectory Picture](TRACE_TO_TRAJECTORY.md). If an output is wrong, [trace the first divergence](DEBUG_A_RESULT.md). Each project link leads to its own deeper reading.
 
 ## The composition loop
 
