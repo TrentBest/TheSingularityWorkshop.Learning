@@ -32,7 +32,7 @@ The **Hear the path pulse** control synthesizes two short noise pulses in the br
 - **Browser audio preview:** a short generated pulse scheduled using the recorded direct/reflected path values.
 - **Not modeled by this preview:** cavern geometry, a full room response, waveform propagation, phase/interference, absorption by frequency, scattering, diffraction, multiple-reflection reverberation, binaural perception, or material-driven sound generation.
 - **Creative arrival ambience:** a separate optional browser-generated wind/torch texture. It is an authored atmospheric cue, not a Physics result.
-- **Sound recipe direction:** [Experiences/Sound](https://github.com/TrentBest/TheSingularityWorkshop.Experiences/blob/master/experiences/Sound/README.md) is currently a design contract; it does not claim a complete SFX engine or executable sound MicroBundle. [The WebPage integration brief](https://github.com/TrentBest/WebPage/blob/development/docs/integrations/SINGULARITY_STUDIOS_SFX_WEBPAGELLM.md) describes the intended separation between creative sound and physical causality.
+- **Sound recipe direction:** [Experiences/Sound](https://github.com/TrentBest/TheSingularityWorkshop.Experiences/blob/development/experiences/Sound/README.md) is currently a design contract; it does not claim a complete SFX engine or executable sound MicroBundle. [The WebPage integration brief](https://github.com/TrentBest/WebPage/blob/development/docs/integrations/SINGULARITY_STUDIOS_SFX_WEBPAGELLM.md) describes the intended separation between creative sound and physical causality.
 
 ## Why this still belongs at the front door
 
