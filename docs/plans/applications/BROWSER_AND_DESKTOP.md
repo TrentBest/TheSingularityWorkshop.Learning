@@ -4,6 +4,24 @@
 
 **Route:** choose the host → compose behavior → build the presentation → trace what the user sees.
 
+This map keeps the authored work and the host that presents it visible as separate steps.
+
+**Progress map:** Choose host → Author experience → Compose behavior → Present + observe
+
+```mermaid
+flowchart LR
+ A["Choose host"] --> B
+ B["Author experience"] --> C
+ C["Compose behavior"] --> D
+ D["Present + observe"]
+ classDef trail fill:#14283b,stroke:#49677d,color:#eef6ff,stroke-width:2px
+ classDef evidence fill:#123e43,stroke:#66e0be,color:#f3fffc,stroke-width:3px
+ class A,B,C trail
+ class D evidence
+```
+
+
+
 ## Your route
 
 1. **Start with the user outcome.** Decide whether you are shaping a browser app, a desktop app, or a portable authored Experience.
