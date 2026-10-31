@@ -24,6 +24,8 @@ flowchart LR
 
 ## Your route
 
+🧪 **[Operate the FSM_API Behavior Lab →](https://trentbest.github.io/TheSingularityWorkshop.Learning/demo/)**. Change one agent’s context, advance the processing group, and inspect its transitions before following the implementation links below.
+
 1. **Name the modes.** Start with a small state vocabulary and the conditions that change it. Work through the [FSM_API quickstart](https://github.com/TrentBest/FSM_API).
 2. **Connect a person to the model.** Explore [FSM_UserIO](https://github.com/TrentBest/FSM_UserIO) for the FSM input/output layer. If the experience depends on motion or gesture, inspect [Gestures](https://github.com/TrentBest/TheSingularityWorkshop.Gestures).
 3. **Choose the runtime.** For Unity, follow [FSM_API_Unity](https://github.com/TrentBest/FSM_API_Unity); for a browser host, compare [WebPage](https://github.com/TrentBest/WebPage) and [GUI](https://github.com/TrentBest/TheSingularityWorkshop.GUI).
