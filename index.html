@@ -31,10 +31,10 @@ html.arrival-locked,html.arrival-locked body{overflow:hidden}
 .arrival[data-stage=cavern] .arrival-light{opacity:.95}
 .arrival[data-stage=cavern] .arrival-lines{opacity:.18}
 @keyframes flame{from{transform:scaleX(.88) scaleY(.95) rotate(-2deg)}to{transform:scaleX(1.05) scaleY(1.07) rotate(2deg)}}
-.arrival-top{position:fixed;z-index:3;top:18px;left:22px;right:22px;display:flex;justify-content:space-between;align-items:center;gap:12px;pointer-events:none}
-.arrival-mark{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:#b4c4ca;text-shadow:0 1px 12px #000}
+.arrival-top{position:fixed;z-index:3;top:18px;left:22px;right:22px;display:flex;justify-content:flex-end;align-items:center;gap:12px;pointer-events:none}
+.arrival-mark{display:none}
 .arrival-controls{display:flex;gap:8px;pointer-events:auto}
-.arrival-ctl{border:1px solid #b9c9d044;border-radius:999px;background:#05090dc9;color:#edf6fa;padding:8px 13px;font:700 .78rem system-ui;cursor:pointer;backdrop-filter:blur(8px)}
+.arrival-ctl{width:42px;height:42px;border:1px solid #b9c9d044;border-radius:50%;background:#05090dc9;color:#edf6fa;padding:0;font:700 1rem system-ui;cursor:pointer;backdrop-filter:blur(8px)}
 .arrival-ctl:hover,.arrival-ctl:focus-visible{border-color:#ffd27d;color:#ffe3ac}
 .arrival-content{position:relative;z-index:2;display:flex;min-height:100svh;align-items:flex-end;justify-content:center;padding:90px 24px 5vh;text-align:center;pointer-events:none}
 .arrival-panel{width:min(940px,100%);padding:24px 26px 18px;border:1px solid #c3d7e024;border-radius:26px;background:linear-gradient(180deg,#061019a8,#05090de8);box-shadow:0 26px 90px #0009;backdrop-filter:blur(13px);pointer-events:auto;transition:opacity .6s,transform .6s}
@@ -72,7 +72,7 @@ body.arrival-done #replay-arrival{display:block}
 @media(max-width:460px){.arrival-top{left:11px;right:11px;top:11px}.arrival-mark{max-width:44%;font-size:.56rem}.arrival-ctl{padding:7px 10px;font-size:.7rem}.arrival-routes{gap:7px}.arrival-route{min-height:92px;padding:10px}.arrival-route strong{font-size:.82rem}.arrival-route span{font-size:.68rem}}
 @media(prefers-reduced-motion:reduce){.arrival-world,.arrival-world:before,.arrival-art,.arrival-lines,.cavern-shape,.arrival-light{transition-duration:.01ms!important}.arrival-flame{animation:none!important}}
 </style></head><body>
-<div id="arrival" class="arrival" data-stage="dark" role="dialog" aria-modal="true" aria-labelledby="arrival-title">
+<div id="arrival" class="arrival" data-stage="dark" role="dialog" aria-modal="true" aria-label="The Singularity Workshop arrival" tabindex="-1">
   <div class="arrival-world" aria-hidden="true">
     <div class="arrival-art">
       <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A narrow stone passage leads toward a single torch, turns, and opens into a vast cavern">
@@ -116,15 +116,9 @@ body.arrival-done #replay-arrival{display:block}
       </svg>
     </div>
   </div>
-  <div class="arrival-top"><div class="arrival-mark">The Singularity Workshop · first contact</div><div class="arrival-controls"><button class="arrival-ctl" id="arrival-sound" type="button" aria-pressed="false">Sound off</button><button class="arrival-ctl" id="arrival-skip" type="button">Skip to cavern</button></div></div>
+  <div class="arrival-top"><div class="arrival-controls"><button class="arrival-ctl" id="arrival-sound" type="button" aria-label="Turn sound on" aria-pressed="false" title="Sound">♫</button><button class="arrival-ctl" id="arrival-skip" type="button" aria-label="Skip arrival" title="Skip arrival">↗</button></div></div>
   <div class="arrival-content">
-    <section class="arrival-panel" id="arrival-intro">
-      <div class="arrival-kicker">A small light in a very large world</div>
-      <h1 id="arrival-title" tabindex="-1">Follow the torch.</h1>
-      <p>One step into the dark. A turn in the passage. Then the Workshop opens around you.</p>
-      <div class="arrival-actions"><button class="arrival-primary" id="arrival-enter" type="button">Walk toward the light <span aria-hidden="true">→</span></button></div>
-      <p class="arrival-hint">A brief 4-second arrival · sound is optional · skip is always available</p>
-    </section>
+    <section class="arrival-panel" id="arrival-intro" hidden aria-hidden="true"></section>
     <section class="arrival-panel" id="arrival-cavern" hidden>
       <div class="arrival-kicker">The passage ends. The world begins.</div>
       <h1 id="cavern-title" tabindex="-1">A cavern full of possibility.</h1>
@@ -185,23 +179,23 @@ document.querySelectorAll(".diag-choice").forEach(function(button){button.addEve
 "use strict";
 var root=document.documentElement,arrival=document.querySelector("#arrival"),intro=document.querySelector("#arrival-intro"),cavern=document.querySelector("#arrival-cavern");
 var soundButton=document.querySelector("#arrival-sound"),audioContext=null,ambienceNodes=[],soundOn=false,journeyTimers=[],physicsRun=null;
-function setStage(stage){arrival.dataset.stage=stage;intro.hidden=stage==="cavern";cavern.hidden=stage!=="cavern";if(stage==="cavern")document.querySelector("#cavern-title").focus?.({preventScroll:true})}
+function setStage(stage){arrival.dataset.stage=stage;intro.hidden=true;cavern.hidden=stage!=="cavern";if(stage==="cavern")document.querySelector("#cavern-title").focus?.({preventScroll:true})}
 function stopJourney(){journeyTimers.forEach(clearTimeout);journeyTimers=[]}
 function openCavern(){stopJourney();setStage("cavern")}
 function beginWalk(){stopJourney();setStage("walk");journeyTimers.push(setTimeout(function(){setStage("turn")},1300));journeyTimers.push(setTimeout(openCavern,2850))}
 function closeArrival(){stopJourney();arrival.hidden=true;root.classList.remove("arrival-locked");document.body.classList.add("arrival-done");document.querySelectorAll("body > header, body > main, body > footer").forEach(function(node){node.inert=false});stopAmbience();window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"})}
-function replay(){arrival.hidden=false;root.classList.add("arrival-locked");document.body.classList.remove("arrival-done");document.querySelectorAll("body > header, body > main, body > footer").forEach(function(node){node.inert=true});setStage("dark");document.querySelector("#arrival-enter").focus({preventScroll:true});window.scrollTo(0,0)}
+function replay(){arrival.hidden=false;root.classList.add("arrival-locked");document.body.classList.remove("arrival-done");document.querySelectorAll("body > header, body > main, body > footer").forEach(function(node){node.inert=true});setStage("dark");arrival.focus({preventScroll:true});window.scrollTo(0,0)}
 function context(){if(!audioContext){var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;audioContext=new AC()}if(audioContext.state==="suspended")audioContext.resume();return audioContext}
 function makeNoiseBuffer(ctx,seconds){var n=Math.max(1,Math.floor(ctx.sampleRate*seconds)),buffer=ctx.createBuffer(1,n,ctx.sampleRate),data=buffer.getChannelData(0);for(var i=0;i<n;i++)data[i]=Math.random()*2-1;return buffer}
 function startAmbience(){var ctx=context();if(!ctx)return;var wind=ctx.createBufferSource();wind.buffer=makeNoiseBuffer(ctx,2);wind.loop=true;var filter=ctx.createBiquadFilter();filter.type="lowpass";filter.frequency.value=240;var gain=ctx.createGain();gain.gain.value=.035;wind.connect(filter).connect(gain).connect(ctx.destination);wind.start();ambienceNodes.push(wind);var flame=ctx.createBufferSource();flame.buffer=makeNoiseBuffer(ctx,1);flame.loop=true;var high=ctx.createBiquadFilter();high.type="bandpass";high.frequency.value=1100;high.Q.value=.7;var crackle=ctx.createGain();crackle.gain.value=.018;flame.connect(high).connect(crackle).connect(ctx.destination);flame.start();ambienceNodes.push(flame);var drone=ctx.createOscillator(),droneGain=ctx.createGain();drone.type="sine";drone.frequency.value=54;droneGain.gain.value=.012;drone.connect(droneGain).connect(ctx.destination);drone.start();ambienceNodes.push(drone)}
 function stopAmbience(){ambienceNodes.forEach(function(n){try{n.stop()}catch(e){}});ambienceNodes=[]}
-function setSound(on){soundOn=on;soundButton.setAttribute("aria-pressed",on?"true":"false");soundButton.textContent=on?"Sound on · mute":"Sound off";if(on)startAmbience();else stopAmbience()}
+function setSound(on){soundOn=on;soundButton.setAttribute("aria-pressed",on?"true":"false");soundButton.setAttribute("aria-label",on?"Turn sound off":"Turn sound on");soundButton.textContent=on?"♫":"♪";if(on)startAmbience();else stopAmbience()}
 function playPhysicsPulse(){if(!physicsRun)return;var ctx=context();if(!ctx)return;var direct=physicsRun.directObservation,reflection=physicsRun.reflections&&physicsRun.reflections[0];if(!direct||!reflection)return;var directStart=ctx.currentTime+.04;var reflectedStart=directStart+(reflection.propagationDelaySeconds-direct.propagationDelaySeconds);var reflectionGain=Math.pow(10,(reflection.receivedLevelDbSpl-direct.receivedLevelDbSpl)/20);function pulse(at,level){var src=ctx.createBufferSource(),filter=ctx.createBiquadFilter(),gain=ctx.createGain();src.buffer=makeNoiseBuffer(ctx,.012);filter.type="highpass";filter.frequency.value=700;gain.gain.setValueAtTime(level,at);gain.gain.exponentialRampToValueAtTime(.0001,at+.012);src.connect(filter).connect(gain).connect(ctx.destination);src.start(at);src.stop(at+.013)}pulse(directStart,.28);pulse(reflectedStart,.28*reflectionGain)}
 function loadPhysicsRun(){var status=document.querySelector("#physics-run-status"),pulseButton=document.querySelector("#arrival-pulse");fetch("./data/first-order-room-reflection.run.json",{cache:"no-store"}).then(function(response){if(!response.ok)throw new Error("Physics run record unavailable");return response.json()}).then(function(data){if(data.status!=="computed-from-physics-model"||!data.directObservation||!data.reflections||!data.reflections.length)throw new Error("Physics run record is incomplete");physicsRun=data;var direct=data.directObservation,reflection=data.reflections[0];document.querySelector("#arrival-direct-readout").textContent="DIRECT "+direct.distanceMeters.toFixed(4)+" m · "+(direct.propagationDelaySeconds*1000).toFixed(4)+" ms · "+direct.receivedLevelDbSpl.toFixed(4)+" dB SPL";document.querySelector("#arrival-reflection-readout").textContent="REFLECTION "+reflection.pathLengthMeters.toFixed(4)+" m · "+(reflection.propagationDelaySeconds*1000).toFixed(4)+" ms · "+reflection.receivedLevelDbSpl.toFixed(4)+" dB SPL";pulseButton.disabled=false;fetch("./data/physics-source-commit.txt",{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(sha){status.textContent=sha?"Computed from Physics source "+sha.trim().slice(0,12)+" · run record status: "+data.status:"Physics model run loaded · source revision not reported"}).catch(function(){status.textContent="Physics model run loaded · source revision not reported"})}).catch(function(){status.textContent="Physics run could not be loaded. The path pulse is unavailable for this visit.";pulseButton.disabled=true})}
 document.querySelector("#arrival-enter").addEventListener("click",beginWalk);document.querySelector("#arrival-skip").addEventListener("click",openCavern);document.querySelector("#arrival-continue").addEventListener("click",closeArrival);document.querySelector("#arrival-replay").addEventListener("click",replay);document.querySelector("#replay-arrival").addEventListener("click",replay);soundButton.addEventListener("click",function(){setSound(!soundOn)});document.querySelector("#arrival-pulse").addEventListener("click",playPhysicsPulse);
 arrival.addEventListener("click",function(e){if(e.target.closest(".arrival-route"))closeArrival()});
 document.addEventListener("keydown",function(e){if(arrival.hidden)return;if(e.key==="Escape"){openCavern()}else if(e.key==="Enter"&&arrival.dataset.stage==="dark"){beginWalk()}});
-root.classList.add("arrival-locked");document.querySelectorAll("body > header, body > main, body > footer").forEach(function(node){node.inert=true});setStage("dark");document.querySelector("#arrival-enter").focus({preventScroll:true});loadPhysicsRun();
+root.classList.add("arrival-locked");document.querySelectorAll("body > header, body > main, body > footer").forEach(function(node){node.inert=true});setStage("dark");arrival.focus({preventScroll:true});loadPhysicsRun();journeyTimers.push(setTimeout(beginWalk,180));
 })();
 </script>
 </body></html>
