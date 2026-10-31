@@ -37,7 +37,15 @@ jobs:
           ref: development
           path: visualize-source
 
-      - name: Install .NET 8 for the Physics and Visualize models
+      - name: Check out the FSM_UserIO semantic boundary
+        id: userio
+        uses: actions/checkout@v4
+        with:
+          repository: TrentBest/FSM_UserIO
+          ref: master
+          path: fsm-userio-source
+
+      - name: Install .NET 8 for the Physics, Visualize, and UserIO models
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
