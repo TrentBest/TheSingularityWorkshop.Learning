@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>TheSingularityWorkshop.LearningExplorer</RootNamespace>
+    <AssemblyName>TheSingularityWorkshop.LearningExplorer</AssemblyName>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.31" />
+    <PackageReference Include="TheSingularityWorkshop.FSM_API" Version="1.0.13" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../dependencies/TheSingularityWorkshop.GUI/src/Core/TheSingularityWorkshop.GUI.Core.csproj" />
+    <ProjectReference Include="../../dependencies/TheSingularityWorkshop.GUI/src/Blazor/TheSingularityWorkshop.GUI.Blazor.csproj" />
+    <ProjectReference Include="../../dependencies/TheSingularityWorkshop.GUI/src/SVG/TheSingularityWorkshop.GUI.SVG.csproj" />
+  </ItemGroup>
+</Project>
