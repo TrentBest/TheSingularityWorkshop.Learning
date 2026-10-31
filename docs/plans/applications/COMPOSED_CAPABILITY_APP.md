@@ -4,6 +4,24 @@
 
 **Route:** define the contract → request a root → resolve its closure → hand the result back to the host.
 
+This map highlights the host handoff after capability composition.
+
+**Progress map:** Capability contract → Request root → Resolve closure → Host owns execution
+
+```mermaid
+flowchart LR
+ A["Capability contract"] --> B
+ B["Request root"] --> C
+ C["Resolve closure"] --> D
+ D["Host owns execution"]
+ classDef trail fill:#14283b,stroke:#49677d,color:#eef6ff,stroke-width:2px
+ classDef evidence fill:#123e43,stroke:#66e0be,color:#f3fffc,stroke-width:3px
+ class A,B,C trail
+ class D evidence
+```
+
+
+
 ## Your route
 
 1. **Learn the contract.** Read [MicroBundleDomain](https://github.com/TrentBest/TheSingularityWorkshop.MicroBundleDomain) to understand the neutral capability boundary.
