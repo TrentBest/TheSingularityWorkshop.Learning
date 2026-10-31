@@ -258,7 +258,8 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
             var center = (triangle.A + triangle.B + triangle.C) / 3f;
             var depth = Vector3.Transform(center, view).Z;
             return (Triangle: triangle, Index: index, Depth: depth);
-        }).Where(item => item.Depth < -.12f).OrderBy(item => item.Depth).ToArray();
+        }).Where(item => item.Depth < -.12f && InFrontOfCamera(item.Triangle, view, projection))
+          .OrderBy(item => item.Depth).ToArray();
         var vertices = new List<VisualizerVertex>(visible.Length * 3);
         var indices = new List<uint>(visible.Length * 3);
         var commands = new List<VisualizerDrawCommand>(visible.Length);
@@ -273,9 +274,21 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
         }
         _resources.SetGeometry(new VisualizerResourceId(1), new VisualizerGeometry(1, vertices, indices));
         var frame = new VisualizerFrame(new VisualizerView(camera, view, projection), commands);
-        _sceneSvg = _svgBackend.BuildSvg(frame, _resources);
+        _sceneSvg = _svgBackend.BuildSvg(frame, _resources).Replace("<svg ", "<svg preserveAspectRatio=\"xMidYMid slice\" ", StringComparison.Ordinal);
         _campusClock = DateTime.Now.ToString("HH:mm", CultureInfo.InvariantCulture);
         UpdateNearby();
+    }
+
+    private static bool InFrontOfCamera(FaceTriangle triangle, Matrix4x4 view, Matrix4x4 projection)
+    {
+        var points = new[] { triangle.A, triangle.B, triangle.C }
+            .Select(point => Vector4.Transform(new Vector4(point, 1), view * projection))
+            .ToArray();
+        if (points.Any(point => !float.IsFinite(point.W) || point.W <= .12f))
+            return false;
+        var xs = points.Select(point => point.X / point.W).ToArray();
+        var ys = points.Select(point => point.Y / point.W).ToArray();
+        return xs.Max() >= -1.25f && xs.Min() <= 1.25f && ys.Max() >= -1.25f && ys.Min() <= 1.25f;
     }
 
     private void AddStudents(List<FaceTriangle> scene, float time)
