@@ -228,8 +228,10 @@
 
     private void TickGroup()
     {
-        FSM_API.Interaction.Update(ProcessingGroup);
         _tick++;
+        foreach (var agent in _agents)
+            agent.TickCount = _tick;
+        FSM_API.Interaction.Update(ProcessingGroup);
         foreach (var agent in _agents)
             AddEvent(agent, $"Processing group tick {_tick}");
     }
@@ -343,7 +345,7 @@
         public bool TargetVisible { get; set; }
         public int Health { get; set; } = 100;
         public double Distance { get; set; }
-        public int TickCount => _tick;
+        public int TickCount { get; set; }
         public int TransitionCount { get; set; }
         public int PatrolTicks { get; set; }
         public int ChaseTicks { get; set; }
