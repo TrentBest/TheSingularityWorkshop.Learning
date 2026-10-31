@@ -363,6 +363,11 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
     [JSInvokable]
     public async Task OnCampusFrame(float forward, float strafe, float look)
     {
+        if (!_started && (forward != 0 || strafe != 0 || Math.Abs(look) > .01f))
+        {
+            _started = true;
+            _toast = "Welcome to Singularity University. The quad is open.";
+        }
         if (!_started || _mapOpen || _selectedBuilding is not null) return;
         _yaw += look * .0026f;
         var direction = new Vector2(MathF.Sin(_yaw), -MathF.Cos(_yaw));
