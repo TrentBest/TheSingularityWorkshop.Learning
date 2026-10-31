@@ -7,6 +7,15 @@ Choose a path by the problem you need to solve. Each path moves from a goal to a
 
 The recommended first lesson is [From Problem to Proof](PROBLEM_TO_PROOF.md): keep a changing value within bounds, reverse at the endpoints, record its behavior, and visualize the computed result. To browse more worked visual examples, see the [Visual Lab](VISUAL_LAB.md). When a result is wrong, follow [Debug a Result by Finding the First Divergence](DEBUG_A_RESULT.md) to locate the first mismatching handoff.
 
+## Choose a targeted plan
+
+Use the [plan catalog](plans/INDEX.md) to start from either of two questions:
+
+- **What are you building?** Choose an interactive system, browser/desktop experience, AI-enabled application, composed-capability application, simulation visualization, or identity-aware data application.
+- **Which technology are you learning?** Choose state and interaction, visual systems, runtime composition, service and serialization, AI application stack, data/identity/simulation, or Experiences and hosts.
+
+Each card opens its own plan page with a practical progression and checkpoints. This page remains the cross-cutting set of problem-solving walkthroughs; the catalog helps you choose a route into them and the owning repositories.
+
 ## Control behavior with state machines
 
 **Problem:** behavior has distinct modes and must change predictably as conditions change.
