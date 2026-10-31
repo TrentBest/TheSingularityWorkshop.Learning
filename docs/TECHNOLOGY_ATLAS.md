@@ -4,6 +4,8 @@
 
 ## Start with the job
 
+The [First Contact Cavern](FIRST_CONTACT_CAVERN.md) is the short immersive entry point. Its acoustic side vault presents a narrow Physics path experiment and labels the browser audio preview separately from solver output.
+
 | What you need to make | Follow this package trail | Learning route |
 |---|---|---|
 | Behavior with explicit modes | [FSM_API](https://github.com/TrentBest/FSM_API) → [FSM_API_Unity](https://github.com/TrentBest/FSM_API_Unity) where Unity is the host | [State and interaction](plans/technologies/STATE_AND_INTERACTION.md) · [live behavior lab](https://trentbest.github.io/TheSingularityWorkshop.Learning/demo/) |
