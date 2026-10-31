@@ -1,105 +1,50 @@
 <!-- The Singularity Workshop moniker -->
-<p align="center">
-  <a href="https://github.com/TrentBest">
-    <img src="https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.Visualize/development/docs/assets/moniker.svg" alt="The Singularity Workshop — animated moniker" width="720" />
-  </a>
-</p>
+<p align="center"><a href="https://github.com/TrentBest"><img src="https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.Visualize/development/docs/assets/moniker.svg" alt="The Singularity Workshop moniker" width="720" /></a></p>
 
-# ✳️ 00 — Learn The Singularity Workshop
+# ✳️ Singularity University
 
-**Start with a problem. Learn the model. See the result. Check that it works.**
+**Learn the Workshop by living in the problem.**
 
-A practical learning center for building with The Singularity Workshop. The guides are organized around problems to solve and workflows to follow; linked project repositories hold the deeper API, setup, and implementation references.
+The Learning Center is a browser-based university prototype set inside the vision of Singularity City. Explore the city map, step into a campus based on WebPage's own campus catalog, see the day unfold, and enroll in short problem-solving courses.
 
-🧭 **[Open the interactive learning explorer →](https://trentbest.github.io/TheSingularityWorkshop.Learning/)** — choose a plan by the application you want to build or the Workshop technology you want to learn. Each path has its own guided page and deeper project links.
+🧭 **[Enter Singularity University →](https://trentbest.github.io/TheSingularityWorkshop.Learning/)**
 
-## Arrive, explore, and listen
+## Start with a problem
 
-The Pages home now begins with a short, skippable torchlit passage that opens into a cavern of learning routes. In the cavern, the **Acoustic side vault** lets visitors hear a browser-generated pulse preview scheduled from the real direct/reflected path values in a committed Physics experiment. The page distinguishes those model measurements from the generated waveform and from the separate atmospheric cue. [Read the arrival and evidence notes](docs/FIRST_CONTACT_CAVERN.md).
+Each course asks you to do something concrete: give meaning to a click, build a scene from a model, compose a capability, hear a reflected path, design a learner activity, or diagnose a mismatch. Course cards point to the relevant Workshop repositories and current learning guides for deeper reading.
 
-## Explore the technology and its boundaries
+Enrollment is a same-browser session demonstration. It becomes a semantic intent that the FSM_UserIO-powered FSM_API showcase reads when it opens. It does not create a persistent student account or registration.
 
-The [technology atlas](docs/TECHNOLOGY_ATLAS.md) maps the Workshop package landscape by user problem and follows the package seams across behavior, composition, data, AI, services, visual output, and hosts. The [interactive Frontier Lab](https://trentbest.github.io/TheSingularityWorkshop.Learning/frontier.html) turns that map into stress-test routes; the [challenge protocol](docs/FRONTIER_CHALLENGES.md) makes failure signals and evidence reproducible. The planner proposes experiments, while measured limits require actual runs and are reported separately.
+## A living campus, with clear evidence
 
-## Choose a targeted learning plan
+GitHub Pages checks out the WebPage development branch and generates city and campus SVG maps through TheSingularityWorkshop.Visualize from `SingularityCityCatalog` and `SingularityCampusCatalog`. The city catalog describes University Quarter as future; the Learning Center presents an educational campus prototype based on the source catalog, not as an already-composed Singularity City runtime.
 
-Start with the job you want to do, then follow the relevant Workshop technology. The [plan catalog](docs/plans/INDEX.md) groups six application missions and seven technology routes; each opens a focused learning page with progression steps and checkpoints.
-
-## A problem made visible
-
-🧪 **[Launch the FSM_API Behavior Lab →](https://trentbest.github.io/TheSingularityWorkshop.Learning/demo/)** — change agent inputs, advance the shared processing group, and inspect real state transitions. The lab runs as a static Blazor WebAssembly app on GitHub Pages; it uses the published FSM_API package.
-
-[![GUI.SVG fox and sheepdog scene on a 10×10 grid](https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.GUI/development/docs/assets/fox-sheepdog-10x10.svg)](https://github.com/TrentBest/TheSingularityWorkshop.GUI/blob/development/samples/FoxSheepdogPlane/Program.cs)
-
-*GUI.SVG turns semantic scenes and computed data into vector images. Start with the [live FSM_API Behavior Lab running in your browser](https://trentbest.github.io/TheSingularityWorkshop.Learning/demo/), then follow the [worked oscillator lesson](docs/PROBLEM_TO_PROOF.md) from state changes through a rendered snapshot.*
+The moving campus activity feed and schedule are local presentation simulations. For implementation status, source links, and the boundary between catalog concepts and running systems, see the [University experience notes](docs/SINGULARITY_UNIVERSITY.md).
 
 ## Learn by solving
 
 ```mermaid
 flowchart LR
-    A["01 · Problem"] --> B["02 · Model"]
-    B --> C["03 · Rules"]
-    C --> D["04 · Run"]
-    D --> E["05 · Visualize"]
-    E --> F["06 · Verify"]
-    classDef normal fill:#14283b,stroke:#49677d,color:#eef6ff,stroke-width:2px
-    classDef featured fill:#123e43,stroke:#66e0be,color:#f3fffc,stroke-width:4px
-    class A,B,C,D,F normal
-    class E featured
+    A["01 · Notice a problem"] --> B["02 · Model it"]
+    B --> C["03 · Build one change"]
+    C --> D["04 · Run the system"]
+    D --> E["05 · Inspect the result"]
+    E --> F["06 · Explain the evidence"]
 ```
 
-Each lesson should help you answer: What problem are we solving? What changes? Which Workshop project owns each part? What result should I expect? What does that result actually prove?
+This is the learning progression used by the center, not a claim about the architecture of a Workshop runtime.
 
-Follow the course-level [Learning Journey](docs/LEARNING_JOURNEY.md) to see how the worked problems build from a visible scene toward capability, data, and host boundaries.
+## Enter a real lab
 
-The progression diagram is an authored teaching framework, not a project architecture or runtime trace.
+🧪 **[Launch the FSM_API + FSM_UserIO Behavior Lab →](https://trentbest.github.io/TheSingularityWorkshop.Learning/demo/)** — change agent inputs, advance a shared processing group, and inspect real state transitions. Follow the [worked problem from model to proof](docs/PROBLEM_TO_PROOF.md), browse the [technology atlas](docs/TECHNOLOGY_ATLAS.md), or explore the [Frontier Lab](https://trentbest.github.io/TheSingularityWorkshop.Learning/frontier.html).
 
-## Featured lesson: state that stays within bounds
+## Standards and sources
 
-See how a finite state machine keeps a value between endpoints, reverses direction at each boundary, records the result, and passes the final state to GUI.SVG for a picture.
+Learning pages teach by solving a problem and link to project repositories for deeper API and implementation reading. Documentation follows the [FSM_COS documentation standard](https://github.com/TrentBest/TheSingularityWorkshop.FSM_COS/blob/master/DOCUMENTATION_STANDARD.md).
 
-[**Follow the worked problem from model to proof →**](docs/PROBLEM_TO_PROOF.md)
-
-The source recipe is [FSM-driven bounded oscillator](https://github.com/TrentBest/TheSingularityWorkshop.GUI/blob/development/samples/demonstrations/recipes/07-fsm-driven-oscillator.md). Its CI run and generated artifacts are [here](https://github.com/TrentBest/TheSingularityWorkshop.GUI/actions/runs/40961583029).
-
-## Choose your next problem
-
-- **Model changing behavior:** [Control behavior with state machines](docs/LEARNING_PATHS.md#control-behavior-with-state-machines)
-- **Assemble reusable capabilities:** [Compose capabilities into a runtime](docs/LEARNING_PATHS.md#compose-capabilities-into-a-runtime)
-- **Describe and send requests:** [Follow the REST operation walkthrough](docs/REST_CAPABILITY.md)
-- **Turn recorded results into a picture:** [Follow a Physics run record into GUI.SVG](docs/TRACE_TO_TRAJECTORY.md)
-- **Debug an unexpected result:** [Find the first mismatch across a workflow](docs/DEBUG_A_RESULT.md)
-- **Create something people can experience:** [Author and present an Experience](docs/LEARNING_PATHS.md#author-and-present-an-experience)
-- **Make meaning and interaction visible:** [Model, render, and interact](docs/LEARNING_PATHS.md#model-render-and-interact)
-- **Browse visual problem examples:** [Visual Lab](docs/VISUAL_LAB.md)
-- **Explore the project landscape:** [Functional Map](docs/FUNCTIONAL_MAP.md)
-
-## How to use this center
-
-1. Start with a goal or challenge, not a repository name.
-2. Follow one lesson from input/problem through model, execution, visible result, and checks.
-3. Change a parameter and predict what should change.
-4. Use the linked project docs for exact setup, APIs, security, limitations, and current implementation status.
-
-The learning pages are the guide; the linked repositories remain the authority for implementation. Code and diagrams are labeled as verified, source-checked, or conceptual so you can see the evidence behind each claim.
-
-## 🟪 Learning center guides
-
-- [Start Here](docs/START_HERE.md)
-- [Learning Journey](docs/LEARNING_JOURNEY.md)
-- [Problem to Proof](docs/PROBLEM_TO_PROOF.md)
-- [Run Record to Trajectory Picture](docs/TRACE_TO_TRAJECTORY.md)
-- [Debug a Result](docs/DEBUG_A_RESULT.md)
-- [REST Capability](docs/REST_CAPABILITY.md)
-- [Visual Lab](docs/VISUAL_LAB.md)
-- [Learning Paths](docs/LEARNING_PATHS.md)
-- [Functional Map](docs/FUNCTIONAL_MAP.md)
-- [Shared Vocabulary](docs/GLOSSARY.md)
-- [Editorial Standard](docs/EDITORIAL_STANDARD.md)
-
----
-
-## 🔗 Project links
-
-- [Workshop public repositories](https://github.com/TrentBest?tab=repositories)
-- [FSM_COS documentation standard](https://github.com/TrentBest/TheSingularityWorkshop.FSM_COS/blob/master/DOCUMENTATION_STANDARD.md)
+- [Learning plans](docs/plans/INDEX.md)
+- [Functional map](docs/FUNCTIONAL_MAP.md)
+- [Learning journey](docs/LEARNING_JOURNEY.md)
+- [FSM_API source](https://github.com/TrentBest/FSM_API)
+- [FSM_UserIO source](https://github.com/TrentBest/FSM_UserIO)
+- [WebPage city and campus source](https://github.com/TrentBest/WebPage/tree/development)
