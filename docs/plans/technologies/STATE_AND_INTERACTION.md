@@ -6,6 +6,25 @@
 
 `State vocabulary → transitions → update owner → input signal → visible feedback`
 
+This progression separates the behavior model from the input and presentation boundaries.
+
+**Progress map:** State vocabulary → Transitions → Update owner → Input signal → Feedback
+
+```mermaid
+flowchart LR
+ A["State vocabulary"] --> B
+ B["Transitions"] --> C
+ C["Update owner"] --> D
+ D["Input signal"] --> E
+ E["Feedback"]
+ classDef trail fill:#14283b,stroke:#49677d,color:#eef6ff,stroke-width:2px
+ classDef evidence fill:#123e43,stroke:#66e0be,color:#f3fffc,stroke-width:3px
+ class A,B,C,D trail
+ class E evidence
+```
+
+
+
 1. Start with [FSM_API](https://github.com/TrentBest/FSM_API): define a small set of states, transition conditions, and context.
 2. Trace who calls update and how the host owns the run loop.
 3. Add [FSM_UserIO](https://github.com/TrentBest/FSM_UserIO) when the FSM input/output boundary is part of your problem.
