@@ -21,7 +21,7 @@ Start with the job you want to do, then follow the relevant Workshop technology.
 
 [![GUI.SVG fox and sheepdog scene on a 10×10 grid](https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.GUI/development/docs/assets/fox-sheepdog-10x10.svg)](https://github.com/TrentBest/TheSingularityWorkshop.GUI/blob/development/samples/FoxSheepdogPlane/Program.cs)
 
-*GUI.SVG turns a scene model into a vector image. This animated fox-and-sheepdog scene is illustrative choreography; it is not driven by a live FSM_API execution trace. The [worked oscillator lesson](docs/PROBLEM_TO_PROOF.md) shows an evidence-backed path from actual state changes to a rendered snapshot.*
+*GUI.SVG turns semantic scenes and computed data into vector images. Start with the [live FSM_API exercise in the Workshop WebApp](https://lemon-ground-09f542010.1.azurestaticapps.net/fsm-api), then follow the [worked oscillator lesson](docs/PROBLEM_TO_PROOF.md) from state changes through a rendered snapshot.*
 
 ## Learn by solving
 
