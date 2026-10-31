@@ -37,6 +37,14 @@ jobs:
           ref: development
           path: visualize-source
 
+      - name: Check out the WebPage city and campus catalogs
+        id: webpage
+        uses: actions/checkout@v4
+        with:
+          repository: TrentBest/WebPage
+          ref: development
+          path: webpage-source
+
       - name: Check out the FSM_UserIO semantic boundary
         id: userio
         uses: actions/checkout@v4
@@ -59,8 +67,8 @@ jobs:
           cmp _site/data/first-order-room-reflection.run.json physics-source/docs/experiments/first-order-room-reflection.run.json
           printf '%s\n' '${{ steps.physics.outputs.commit }}' > _site/data/physics-source-commit.txt
 
-      - name: Generate the arrival cavern through Visualize
-        run: dotnet run --project tools/ArrivalVisualize/ArrivalVisualize.csproj --configuration Release -- _site/data/arrival-scene.svg
+      - name: Generate the city and campus maps through Visualize
+        run: dotnet run --project tools/CampusVisualize/CampusVisualize.csproj --configuration Release -- _site/data/city-map.svg _site/data/campus-map.svg _site/data/city-places.json _site/data/campus-buildings.json webpage-source/TheSingularityWorkshop/Workshop/Spatial/SingularityCityCatalog.cs webpage-source/TheSingularityWorkshop/Workshop/Spatial/SingularityCampusCatalog.cs
 
       - name: Install .NET 10 for the browser showcase
         uses: actions/setup-dotnet@v4
@@ -75,6 +83,7 @@ jobs:
         run: |
           mkdir -p _site/demo _site/data
           cp physics-source/docs/experiments/first-order-room-reflection.svg _site/data/first-order-room-reflection.svg
+          printf '%s\\n' '${{ steps.webpage.outputs.commit }}' > _site/data/webpage-source-commit.txt
           printf '%s\n' '${{ steps.visualize.outputs.commit }}' > _site/data/visualize-source-commit.txt
           cp index.html _site/index.html
           cp frontier.html _site/frontier.html
