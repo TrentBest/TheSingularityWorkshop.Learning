@@ -9,7 +9,7 @@
         <a class="brand" href="https://trentbest.github.io/TheSingularityWorkshop.Learning/" aria-label="Return to the Learning Center">
             <img src="https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.Visualize/development/docs/assets/moniker.svg" alt="The Singularity Workshop" />
         </a>
-        <div class="host-badge"><span class="live-dot"></span> FSM_API · running in this browser</div>
+        <div class="host-badge"><span class="live-dot"></span> FSM_UserIO → FSM_API · live interaction</div>
     </header>
 
     <section class="userio-trace" aria-labelledby="userio-trace-title">
@@ -17,6 +17,7 @@
             <span class="eyebrow">FSM_UserIO · semantic interaction</span>
             <h2 id="userio-trace-title">Your choices, carried as meaning.</h2>
             <p>The passage’s browser surface maps actions to <code>SemanticIntent</code>. This .NET app reads those same intents, then applies its own policy before anything executes.</p>
+            <a class="userio-source-link" href="https://github.com/TrentBest/FSM_UserIO">Read the FSM_UserIO boundary ↗</a>
         </div>
         <div class="userio-live-signal"><span>Latest live intent</span><code>@(_lastIntent?.Name ?? "No signal yet")</code></div>
         <div class="userio-intent-list" aria-live="polite">
@@ -28,7 +29,12 @@
             {
                 @foreach (var intent in _arrivalIntents.TakeLast(6))
                 {
-                    <span class="userio-intent"><code>@intent.Name</code>@if (intent.ProtocolId is ulong protocolId) { <small>@protocolId</small> }</span>
+                    <span class="userio-intent"><code>@intent.Name</code>
+                        @if (intent.ProtocolId is ulong protocolId)
+                        {
+                            <small>@protocolId</small>
+                        }
+                    </span>
                 }
             }
         </div>
