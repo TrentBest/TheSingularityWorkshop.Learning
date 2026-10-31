@@ -1,9 +1,16 @@
 @page "/"
 @implements IDisposable
 @inject IJSRuntime JS
+@inject NavigationManager Navigation
 
 <PageTitle>FSM_API Behavior Lab · The Singularity Workshop</PageTitle>
 
+@if (IsCampusExperience)
+{
+    <CampusExperience />
+}
+else
+{
 <div class="app-shell">
     <header class="masthead">
         <a class="brand" href="https://trentbest.github.io/TheSingularityWorkshop.Learning/" aria-label="Return to the Learning Center">
@@ -195,7 +202,10 @@
     <footer><a href="https://trentbest.github.io/TheSingularityWorkshop.Learning/">Learning Center</a><span> · </span><a href="https://github.com/TrentBest/FSM_API">FSM_API source</a><span> · </span><a href="https://github.com/TrentBest/TheSingularityWorkshop.Learning">Learning Center repository</a></footer>
 </div>
 
+}
+
 @code {
+    private bool IsCampusExperience => new Uri(Navigation.Uri).Query.Contains("experience=campus", StringComparison.OrdinalIgnoreCase);
     private const string ProcessingGroup = "LearningCenter.SentinelSquad";
     private const string DefinitionName = "LearningCenter.SentinelBehavior";
     private int _tick;
@@ -217,7 +227,7 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (!firstRender)
+        if (IsCampusExperience || !firstRender)
             return;
 
         try
@@ -251,6 +261,7 @@
 
     protected override void OnInitialized()
     {
+        if (IsCampusExperience) return;
         FSM_API.Create.CreateFiniteStateMachine(DefinitionName, processRate: 1, processingGroup: ProcessingGroup)
             .State("Patrol",
                 onEnter: context => Enter(context, "Patrol"),
