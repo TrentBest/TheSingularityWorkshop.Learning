@@ -36,13 +36,14 @@ window.learningCampusInput = (() => {
     function onPointerUp(event) { if (event.pointerType === "touch") touchX = null; }
     function frame(now) {
         raf = requestAnimationFrame(frame);
-        if (!dotnet || !active || now - lastFrame < 65) return;
+        if (!dotnet || !active || (lastFrame !== 0 && now - lastFrame < 16)) return;
+        const deltaSeconds = lastFrame === 0 ? 1 / 60 : Math.min((now - lastFrame) / 1000, 0.05);
         lastFrame = now;
         const forward = (keys.has("w") || keys.has("arrowup") ? 1 : 0) - (keys.has("s") || keys.has("arrowdown") ? 1 : 0);
         const strafe = (keys.has("d") || keys.has("arrowright") ? 1 : 0) - (keys.has("a") || keys.has("arrowleft") ? 1 : 0);
         const look = lookDelta;
         lookDelta = 0;
-        dotnet.invokeMethodAsync("OnCampusFrame", forward, strafe, look).catch(() => {});
+        dotnet.invokeMethodAsync("OnCampusFrame", forward, strafe, look, deltaSeconds).catch(() => {});
     }
     function bindTouch() {
         document.querySelectorAll("[data-walk]").forEach(button => {
