@@ -4,6 +4,24 @@
 
 **Route:** name application concepts → connect them structurally → cross the service boundary → decide what the response means.
 
+This map emphasizes where application meaning crosses into an external service and returns.
+
+**Progress map:** Name meaning → Connect structure → Call endpoint → Interpret response
+
+```mermaid
+flowchart LR
+ A["Name meaning"] --> B
+ B["Connect structure"] --> C
+ C["Call endpoint"] --> D
+ D["Interpret response"]
+ classDef trail fill:#14283b,stroke:#49677d,color:#eef6ff,stroke-width:2px
+ classDef evidence fill:#123e43,stroke:#66e0be,color:#f3fffc,stroke-width:3px
+ class A,B,C trail
+ class D evidence
+```
+
+
+
 ## Your route
 
 1. **Keep meaning local.** Start with [ProtocolAi](https://github.com/TrentBest/TheSingularityWorkshop.ProtocolAi) to learn the application-owned vocabulary and deterministic address-space approach.
