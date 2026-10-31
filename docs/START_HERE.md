@@ -38,6 +38,7 @@ See the [Learning Journey](LEARNING_JOURNEY.md) for the recommended progression 
 - **Request a capability and its prerequisites.** Start with the [composition path](LEARNING_PATHS.md#compose-capabilities-into-a-runtime).
 - **Describe and send an API operation.** Start with the [REST path](LEARNING_PATHS.md#describe-and-send-a-rest-capability).
 - **Make a picture from actual simulation output.** Follow the [run-record-to-trajectory lesson](TRACE_TO_TRAJECTORY.md).
+- **Find where a result went wrong.** Use [Debug a Result by Finding the First Divergence](DEBUG_A_RESULT.md).
 - **Build an authored experience and choose how to present it.** Start with the [Experience path](LEARNING_PATHS.md#author-and-present-an-experience).
 - **Understand how meaning, motion, visuals, and input fit together.** Start with the [world and interaction path](LEARNING_PATHS.md#model-render-and-interact).
 
