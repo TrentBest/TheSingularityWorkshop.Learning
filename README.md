@@ -11,7 +11,11 @@
 
 A practical learning center for building with The Singularity Workshop. The guides are organized around problems to solve and workflows to follow; linked project repositories hold the deeper API, setup, and implementation references.
 
-🧭 **[Open the interactive learning explorer →](https://trentbest.github.io/TheSingularityWorkshop.Learning/)** — follow a visual path, experiment with a small model, and choose a problem to solve. The Markdown guides below remain the deeper walkthroughs.
+🧭 **[Open the interactive learning explorer →](https://trentbest.github.io/TheSingularityWorkshop.Learning/)** — choose a plan by the application you want to build or the Workshop technology you want to learn. Each path has its own guided page and deeper project links.
+
+## Choose a targeted learning plan
+
+Start with the job you want to do, then follow the relevant Workshop technology. The [plan catalog](docs/plans/INDEX.md) groups six application missions and seven technology routes; each opens a focused learning page with progression steps and checkpoints.
 
 ## A problem made visible
 
