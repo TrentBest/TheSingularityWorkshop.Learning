@@ -4,6 +4,24 @@
 
 **Route:** define the behavior → connect inputs → present the state → inspect the result.
 
+This map follows the path of one interaction, from an explicit behavior model to observable feedback.
+
+**Progress map:** Define states → Connect inputs → Choose runtime → Show feedback
+
+```mermaid
+flowchart LR
+ A["Define states"] --> B
+ B["Connect inputs"] --> C
+ C["Choose runtime"] --> D
+ D["Show feedback"]
+ classDef trail fill:#14283b,stroke:#49677d,color:#eef6ff,stroke-width:2px
+ classDef evidence fill:#123e43,stroke:#66e0be,color:#f3fffc,stroke-width:3px
+ class A,B,C trail
+ class D evidence
+```
+
+
+
 ## Your route
 
 1. **Name the modes.** Start with a small state vocabulary and the conditions that change it. Work through the [FSM_API quickstart](https://github.com/TrentBest/FSM_API).
