@@ -2,7 +2,7 @@
 @inject IJSRuntime JS
 
 <div class="campus-world" tabindex="0" @onclick="FocusWorld" aria-label="First-person Singularity University campus. Use W A S D to walk, mouse to look, E to inspect a learning space, M for a map.">
-    <div class="render-surface">@((MarkupString)_sceneSvg)</div>
+    <div class="render-surface"><canvas id="campus-gpu-canvas" aria-label="Singularity University rendered on the GPU"></canvas></div>
     <div class="scene-grade"></div>
     <header class="hud-top">
         <a href="./" class="exit">↗ Exit to the FSM lab</a>
@@ -91,7 +91,7 @@
 <style>
 html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:100%;height:100%;margin:0;overflow:hidden;background:#101820}
 .campus-world{position:fixed;inset:0;overflow:hidden;touch-action:none;background:#15232e;color:#f3f1e7;font:14px/1.45 system-ui,"Segoe UI",sans-serif;outline:0;isolation:isolate;user-select:none}
-.render-surface{position:absolute;inset:0;background:#15232e}.render-surface svg{width:100%;height:100%;display:block;object-fit:cover}
+.render-surface{position:absolute;inset:0;background:#15232e}.render-surface canvas{width:100%;height:100%;display:block}
 .scene-grade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,#10192366 0%,transparent 19%,transparent 71%,#1019239c 100%),radial-gradient(ellipse at center,transparent 46%,#09111767 100%);mix-blend-mode:multiply}
 .hud-top{position:absolute;z-index:2;top:0;left:0;right:0;padding:17px 22px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;background:linear-gradient(#0b141bd9,transparent);pointer-events:none}
 .hud-top>*{pointer-events:auto}.exit{justify-self:start;color:#d4ded5;text-decoration:none;font-size:.78rem;font-weight:750;opacity:.82}.exit:hover{color:#fff}.school-mark{display:flex;gap:10px;align-items:center;font-size:.73rem;letter-spacing:.12em;font-weight:900}.school-mark small{display:block;margin-top:2px;color:#b1beb4;font-size:.55rem;letter-spacing:.09em}.crest{width:36px;height:36px;display:grid;place-items:center;border-radius:10px;background:linear-gradient(145deg,#8fe3a5,#ffd277);color:#17271d;letter-spacing:0;font-size:1rem}.hud-right{justify-self:end;display:flex;align-items:center;gap:10px}.world-clock{font:750 .8rem ui-monospace,Consolas,monospace;color:#f5df9d}.hud-button{border:1px solid #d4e1d73e;border-radius:999px;background:#08111699;color:#ecf4e9;padding:7px 12px;font:800 .7rem system-ui;cursor:pointer}
@@ -107,13 +107,13 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
 
 @code {
     private const string SessionKey = "tsw.fsm-userio.trace.v1";
-    private readonly SvgVisualizerBackend _svgBackend = new(_ => { }, 1280, 720, "#23333a");
+    private CampusWebGpuBackend? _gpuBackend;
+    private Visualizer? _visualizer;
     private readonly VisualizerResourceCatalog _resources = new();
     private readonly List<FaceTriangle> _triangles = [];
     private readonly List<Building> _buildings = [];
     private readonly HashSet<string> _enrolled = new(StringComparer.Ordinal);
     private DotNetObjectReference<CampusExperience>? _self;
-    private string _sceneSvg = "";
     private string _nearbyLabel = "";
     private string _ambientLine = "WORKSHOPS OPEN";
     private string _toast = "";
@@ -148,7 +148,9 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
         {
             var json = await JS.InvokeAsync<string>("learningCampusInput.fetchCatalog");
             LoadCatalog(json);
-            RenderScene();
+            _gpuBackend = new CampusWebGpuBackend(JS);
+            _visualizer = new Visualizer(_gpuBackend, _resources);
+            await RenderScene();
             await JS.InvokeVoidAsync("learningCampusInput.attach", _self);
             StateHasChanged();
         }
@@ -226,6 +228,17 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
             for (var window = -1; window <= 1; window++)
                 AddBox(b.X + window * Math.Min(1.3f, b.Width * .23f) - .2f, 2.55f, doorZ, .4f, .68f, .1f, "#92bec0", "#f4d68a");
         }
+
+        // Seven campus visitors are static geometry in this first GPU proof.
+        for (var i = 0; i < 7; i++)
+        {
+            var angle = i * 1.7f;
+            var x = MathF.Sin(angle) * (3.2f + (i % 3) * 1.1f);
+            var z = -7f + MathF.Cos(angle * .7f) * (2.4f + (i % 2));
+            var color = new[] { "#d99465", "#76b6c1", "#99c47a", "#b7a0d2" }[i % 4];
+            AddBox(x - .22f, .05f, z - .18f, .44f, 1.15f, .36f, color, "#d8bc8b");
+            AddBox(x - .18f, 1.2f, z - .16f, .36f, .38f, .32f, "#dfc59a", "#fff0c7");
+        }
     }
 
     private void AddTree(float x, float z, string trunk, string leaves)
@@ -251,37 +264,38 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
     private void AddTriangle(Vector3 a, Vector3 b, Vector3 c, string color) =>
         _triangles.Add(new FaceTriangle(a, b, c, NormalizeHex(color)));
 
-    private void RenderScene()
+    private async Task RenderScene()
     {
-        var all = new List<FaceTriangle>(_triangles.Count + 120);
-        all.AddRange(_triangles);
-        AddStudents(all, (float)DateTime.UtcNow.TimeOfDay.TotalSeconds);
+        var vertices = new List<VisualizerVertex>(_triangles.Count * 3);
+        var indices = new List<uint>(_triangles.Count * 3);
+        foreach (var triangle in _triangles)
+        {
+            var normal = Vector3.Normalize(Vector3.Cross(triangle.B - triangle.A, triangle.C - triangle.A));
+            var color = LinearColor(triangle.Color);
+            var first = (uint)vertices.Count;
+            vertices.Add(new VisualizerVertex(triangle.A, normal, Vector2.Zero, color));
+            vertices.Add(new VisualizerVertex(triangle.B, normal, Vector2.Zero, color));
+            vertices.Add(new VisualizerVertex(triangle.C, normal, Vector2.Zero, color));
+            indices.Add(first);
+            indices.Add(first + 1);
+            indices.Add(first + 2);
+        }
+
+        var geometryId = new VisualizerResourceId(1);
+        var materialId = new VisualizerResourceId(2);
+        _resources.SetGeometry(geometryId, new VisualizerGeometry(1, vertices, indices));
+        _resources.SetMaterial(materialId, new VisualizerMaterial(1, Vector4.One));
+
         var camera = new Vector3(_playerX, 1.68f, _playerZ);
         var forward = new Vector3(MathF.Sin(_yaw), 0, -MathF.Cos(_yaw));
         var view = Matrix4x4.CreateLookAt(camera, camera + forward, Vector3.UnitY);
         var projection = Matrix4x4.CreatePerspectiveFieldOfView(MathF.PI / 3f, 16f / 9f, .12f, 100f);
-        var visible = all.Select((triangle, index) =>
-        {
-            var center = (triangle.A + triangle.B + triangle.C) / 3f;
-            var depth = Vector3.Transform(center, view).Z;
-            return (Triangle: triangle, Index: index, Depth: depth);
-        }).Where(item => item.Depth < -.12f && InFrontOfCamera(item.Triangle, view, projection))
-          .OrderBy(item => item.Depth).ToArray();
-        var vertices = new List<VisualizerVertex>(visible.Length * 3);
-        var indices = new List<uint>(visible.Length * 3);
-        var commands = new List<VisualizerDrawCommand>(visible.Length);
-        for (var i = 0; i < visible.Length; i++)
-        {
-            var tri = visible[i].Triangle;
-            var colorId = MaterialId(tri.Color);
-            var first = vertices.Count;
-            vertices.Add(Vertex(tri.A)); vertices.Add(Vertex(tri.B)); vertices.Add(Vertex(tri.C));
-            indices.Add((uint)first); indices.Add((uint)(first + 1)); indices.Add((uint)(first + 2));
-            commands.Add(new VisualizerDrawCommand(new VisualizerResourceId(1), colorId, Matrix4x4.Identity, 3, i * 3, 0, VisualizerRepresentation.Near));
-        }
-        _resources.SetGeometry(new VisualizerResourceId(1), new VisualizerGeometry(1, vertices, indices));
-        var frame = new VisualizerFrame(new VisualizerView(camera, view, projection), commands);
-        _sceneSvg = _svgBackend.BuildSvg(frame, _resources).Replace("<svg ", "<svg preserveAspectRatio=\"xMidYMid slice\" ", StringComparison.Ordinal);
+        var command = new VisualizerDrawCommand(
+            geometryId, materialId, Matrix4x4.Identity, indices.Count, 0, 0,
+            VisualizerRepresentation.Near);
+        var frame = new VisualizerFrame(new VisualizerView(camera, view, projection), [command]);
+        await _visualizer!.RenderAsync(frame);
+
         _campusClock = DateTime.Now.ToString("HH:mm", CultureInfo.InvariantCulture);
         UpdateNearby();
         if (_waypoint is not null && WaypointDistance <= 4)
@@ -352,7 +366,7 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
         _started = true;
         RecordIntent(new SemanticIntent("Campus.Arrival.Begin"));
         _toast = "Welcome to Singularity University. The quad is open.";
-        RenderScene();
+        await RenderScene();
     }
 
     private async Task FocusWorld()
@@ -393,7 +407,7 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
         if (now - _lastMove < TimeSpan.FromMilliseconds(62) && Math.Abs(look) < .01f && move.LengthSquared() < .01f)
             return;
         _lastMove = now;
-        RenderScene();
+        await RenderScene();
         await InvokeAsync(StateHasChanged);
     }
 
@@ -469,18 +483,6 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
     private void EnterLab() => JS.InvokeVoidAsync("learningCampusInput.openLab");
     private void CloseBuilding() => _selectedBuilding = null;
 
-    private static VisualizerVertex Vertex(Vector3 point) =>
-        new(point, Vector3.UnitZ, Vector2.Zero, Vector4.One);
-
-    private VisualizerResourceId MaterialId(string hex)
-    {
-        var key = NormalizeHex(hex);
-        var id = new VisualizerResourceId(100UL + (uint)StringComparer.Ordinal.GetHashCode(key));
-        if (!_resources.TryGetMaterial(id, out _))
-            _resources.SetMaterial(id, new VisualizerMaterial(1, LinearColor(key)));
-        return id;
-    }
-
     private static Vector4 LinearColor(string hex)
     {
         float Channel(int start)
@@ -499,10 +501,11 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
         return "#" + string.Concat(channels.Select(value => value.ToString("X2", CultureInfo.InvariantCulture)));
     }
 
-    public ValueTask DisposeAsync()
+    public async ValueTask DisposeAsync()
     {
         _self?.Dispose();
-        return _svgBackend.DisposeAsync();
+        if (_visualizer is not null)
+            await _visualizer.DisposeAsync();
     }
 
     private sealed record FaceTriangle(Vector3 A, Vector3 B, Vector3 C, string Color);
