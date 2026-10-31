@@ -5,6 +5,7 @@ window.learningCampusInput = (() => {
     let lookDelta = 0;
     let active = false;
     let lastFrame = 0;
+    let touchX = null;
     let raf = 0;
 
     function keyName(event) {
@@ -26,6 +27,13 @@ window.learningCampusInput = (() => {
         if (document.pointerLockElement === document.querySelector(".campus-world"))
             lookDelta += event.movementX;
     }
+    function onPointerDown(event) { if (event.pointerType === "touch" && !event.target.closest("[data-walk]")) touchX = event.clientX; }
+    function onPointerMove(event) {
+        if (event.pointerType !== "touch" || touchX === null || event.target.closest("[data-walk]")) return;
+        lookDelta += event.clientX - touchX;
+        touchX = event.clientX;
+    }
+    function onPointerUp(event) { if (event.pointerType === "touch") touchX = null; }
     function frame(now) {
         raf = requestAnimationFrame(frame);
         if (!dotnet || !active || now - lastFrame < 65) return;
@@ -58,6 +66,10 @@ window.learningCampusInput = (() => {
             window.addEventListener("keydown", onKeyDown, { passive: false });
             window.addEventListener("keyup", onKeyUp);
             window.addEventListener("mousemove", onMouseMove);
+            window.addEventListener("pointerdown", onPointerDown, { passive: true });
+            window.addEventListener("pointermove", onPointerMove, { passive: true });
+            window.addEventListener("pointerup", onPointerUp, { passive: true });
+            window.addEventListener("pointercancel", onPointerUp, { passive: true });
             bindTouch();
             cancelAnimationFrame(raf);
             raf = requestAnimationFrame(frame);
