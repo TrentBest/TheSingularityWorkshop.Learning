@@ -7,6 +7,10 @@ This page groups projects by the job a learner may want to do. It is an orientat
 
 For an outcome-based route, see [Learning Paths](LEARNING_PATHS.md). For a concrete worked problem, follow [From Problem to Proof](PROBLEM_TO_PROOF.md). For a data-driven visualization lesson, follow [From Run Record to Trajectory Picture](TRACE_TO_TRAJECTORY.md). If an output is wrong, [trace the first divergence](DEBUG_A_RESULT.md). Each project link leads to its own deeper reading.
 
+## Pick a learning route
+
+The [targeted plan catalog](plans/INDEX.md) offers two views of the Workshop: choose by the application outcome you want, or by the technology area you want to understand. Each plan links to owning repositories for deeper reading and marks the boundaries between separate projects.
+
 ## The composition loop
 
 The clearest documented Workshop workflow begins with a host requesting a composition:
