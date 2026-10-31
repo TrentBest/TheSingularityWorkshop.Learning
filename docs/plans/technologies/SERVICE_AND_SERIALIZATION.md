@@ -37,7 +37,7 @@ Which object describes the operation? Which values belong to this request? Which
 
 ### Choose a deeper route
 
-- [Describe a REST capability application plan](../applications/AI_ENABLED_APPLICATIONS.md)
+- [Service integration application plan](../applications/SERVICE_INTEGRATIONS.md)
 - [Debug a result by finding the first divergence](../../DEBUG_A_RESULT.md)
 
 **Scope:** a description is not a network call. Serialization is a representation boundary; it does not guarantee remote storage, transport, or semantic agreement.
