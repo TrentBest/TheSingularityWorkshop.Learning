@@ -6,6 +6,24 @@
 
 `Authored Experience → declared capabilities → selected host → platform manifestation`
 
+The Experience is authored content; the host owns execution and manifestation.
+
+**Progress map:** Experience → Capabilities → Host → Manifestation
+
+```mermaid
+flowchart LR
+ A["Experience"] --> B
+ B["Capabilities"] --> C
+ C["Host"] --> D
+ D["Manifestation"]
+ classDef trail fill:#14283b,stroke:#49677d,color:#eef6ff,stroke-width:2px
+ classDef evidence fill:#123e43,stroke:#66e0be,color:#f3fffc,stroke-width:3px
+ class A,B,C trail
+ class D evidence
+```
+
+
+
 1. Begin with [Experiences](https://github.com/TrentBest/TheSingularityWorkshop.Experiences): inspect how Experience artifacts remain separate from their hosts.
 2. Compare the [WebPage proving ground](https://github.com/TrentBest/WebPage), the [WebApp project](https://github.com/TrentBest/TheSingularityWorkshop.WebApp), [AnyApp](https://github.com/TrentBest/AnyApp), and [MyVR](https://github.com/TrentBest/TheSingularityWorkshop.MyVR) through their current documentation.
 3. Use [GUI](https://github.com/TrentBest/TheSingularityWorkshop.GUI) to explore visual presentation concerns.
