@@ -10,7 +10,7 @@
         <div class="hud-right"><span class="world-clock">@_campusClock</span><button class="hud-button" @onclick:stopPropagation="true" @onclick="ToggleMap">M · MAP</button></div>
     </header>
     <div class="crosshair" aria-hidden="true"><i></i><b></b></div>
-    <div class="walk-readout"><span class="live-dot"></span> CAMPUS ACTIVE <span class="readout-divider">/</span> @_ambientLine</div>
+    <div class="walk-readout"><span class="live-dot"></span> CAMPUS ACTIVE <span class="readout-divider">/</span> VISUALIZE · WEBGPU <span class="readout-divider">/</span> @_ambientLine</div>
     @if (_waypoint is not null)
     {
         <div class="waypoint-readout">✦ ROUTE SET · @_waypoint.Name · @WaypointDistance m</div>
@@ -29,7 +29,7 @@
             <h1>Step inside.</h1>
             <p>Walk the quad. Follow the sound of activity. Find a workshop that catches your eye.</p>
             <button class="enter-button" @onclick="Begin">Enter the campus <span>↗</span></button>
-            <div class="arrival-note">FIRST-PERSON WALK · VISUALIZE PERSPECTIVE FRAMES · NO INSTALL</div>
+            <div class="arrival-note">VISUALIZE API → WEBGPU · INDEXED GPU DRAW · DEPTH TESTED</div>
         </div>
     }
 
@@ -311,39 +311,6 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
             _toast = "You reached " + _waypoint.Name + ". Look for its highlighted entrance.";
             _waypoint = null;
         }
-    }
-
-    private static bool InFrontOfCamera(FaceTriangle triangle, Matrix4x4 view, Matrix4x4 projection)
-    {
-        var points = new[] { triangle.A, triangle.B, triangle.C }
-            .Select(point => Vector4.Transform(new Vector4(point, 1), view * projection))
-            .ToArray();
-        if (points.Any(point => !float.IsFinite(point.W) || point.W <= .12f))
-            return false;
-        var xs = points.Select(point => point.X / point.W).ToArray();
-        var ys = points.Select(point => point.Y / point.W).ToArray();
-        return xs.Max() >= -1.25f && xs.Min() <= 1.25f && ys.Max() >= -1.25f && ys.Min() <= 1.25f;
-    }
-
-    private void AddStudents(List<FaceTriangle> scene, float time)
-    {
-        for (var i = 0; i < 7; i++)
-        {
-            var angle = time * (.12f + i * .008f) + i * 1.7f;
-            var x = MathF.Sin(angle) * (3.2f + (i % 3) * 1.1f);
-            var z = -7f + MathF.Cos(angle * .7f) * (2.4f + (i % 2));
-            var color = new[] { "#d99465", "#76b6c1", "#99c47a", "#b7a0d2" }[i % 4];
-            AddBoxTo(scene, x - .22f, .05f, z - .18f, .44f, 1.15f, .36f, color, "#d8bc8b");
-            AddBoxTo(scene, x - .18f, 1.2f, z - .16f, .36f, .38f, .32f, "#dfc59a", "#fff0c7");
-        }
-    }
-
-    private void AddBoxTo(List<FaceTriangle> target, float x, float y, float z, float sx, float sy, float sz, string body, string accent)
-    {
-        var before = _triangles.Count;
-        AddBox(x, y, z, sx, sy, sz, body, accent);
-        target.AddRange(_triangles.Skip(before));
-        _triangles.RemoveRange(before, _triangles.Count - before);
     }
 
     private void UpdateNearby()
