@@ -11,6 +11,10 @@
     </header>
     <div class="crosshair" aria-hidden="true"><i></i><b></b></div>
     <div class="walk-readout"><span class="live-dot"></span> CAMPUS ACTIVE <span class="readout-divider">/</span> @_ambientLine</div>
+    @if (_waypoint is not null)
+    {
+        <div class="waypoint-readout">✦ ROUTE SET · @_waypoint.Name · @WaypointDistance m</div>
+    }
     @if (!string.IsNullOrWhiteSpace(_nearbyLabel))
     {
         <div class="nearby"><span class="nearby-key">E</span><span><b>@_nearbyLabel</b><small>Press E to explore this learning space</small></span></div>
@@ -91,7 +95,7 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
 .hud-top{position:absolute;z-index:2;top:0;left:0;right:0;padding:17px 22px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;background:linear-gradient(#0b141bd9,transparent);pointer-events:none}
 .hud-top>*{pointer-events:auto}.exit{justify-self:start;color:#d4ded5;text-decoration:none;font-size:.78rem;font-weight:750;opacity:.82}.exit:hover{color:#fff}.school-mark{display:flex;gap:10px;align-items:center;font-size:.73rem;letter-spacing:.12em;font-weight:900}.school-mark small{display:block;margin-top:2px;color:#b1beb4;font-size:.55rem;letter-spacing:.09em}.crest{width:36px;height:36px;display:grid;place-items:center;border-radius:10px;background:linear-gradient(145deg,#8fe3a5,#ffd277);color:#17271d;letter-spacing:0;font-size:1rem}.hud-right{justify-self:end;display:flex;align-items:center;gap:10px}.world-clock{font:750 .8rem ui-monospace,Consolas,monospace;color:#f5df9d}.hud-button{border:1px solid #d4e1d73e;border-radius:999px;background:#08111699;color:#ecf4e9;padding:7px 12px;font:800 .7rem system-ui;cursor:pointer}
 .crosshair{position:absolute;left:50%;top:50%;width:18px;height:18px;transform:translate(-50%,-50%);opacity:.82;pointer-events:none}.crosshair i,.crosshair b{position:absolute;background:#fff4d8;box-shadow:0 0 5px #101820}.crosshair i{width:2px;height:14px;left:8px;top:2px}.crosshair b{height:2px;width:14px;left:2px;top:8px}
-.walk-readout{position:absolute;left:23px;top:77px;color:#e1ebdf;font-size:.66rem;letter-spacing:.12em;text-shadow:0 1px 7px #000}.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#9be4ae;box-shadow:0 0 12px #9be4ae;margin-right:6px}.readout-divider{color:#a28d69;margin:0 6px}
+.waypoint-readout{position:absolute;right:23px;top:77px;color:#ffe6a4;font-size:.66rem;letter-spacing:.1em;text-shadow:0 1px 7px #000}.walk-readout{position:absolute;left:23px;top:77px;color:#e1ebdf;font-size:.66rem;letter-spacing:.12em;text-shadow:0 1px 7px #000}.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#9be4ae;box-shadow:0 0 12px #9be4ae;margin-right:6px}.readout-divider{color:#a28d69;margin:0 6px}
 .controls-hint{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);display:flex;align-items:center;gap:6px;color:#e2e5d7;font-size:.62rem;font-weight:850;letter-spacing:.11em;text-shadow:0 1px 8px #000;white-space:nowrap}.controls-hint span{color:#d7b66e;margin:0 3px}kbd{font:800 .62rem ui-monospace,monospace;border:1px solid #f4eac06b;background:#10191dbb;border-radius:5px;padding:4px 6px;color:#fff1bf}
 .nearby{position:absolute;left:50%;bottom:66px;transform:translateX(-50%);display:flex;align-items:center;gap:11px;padding:10px 14px;border-radius:13px;background:#10191ddd;border:1px solid #f1d48a70;box-shadow:0 7px 35px #0008;min-width:270px}.nearby-key{font-weight:900;color:#1d251d;background:#f0cf77;border-radius:7px;padding:8px 11px}.nearby b,.nearby small{display:block}.nearby b{font-size:.83rem}.nearby small{font-size:.68rem;color:#b8c3b5;margin-top:2px}
 .arrival-panel{position:absolute;z-index:4;left:50%;top:50%;transform:translate(-50%,-44%);width:min(540px,calc(100% - 34px));padding:30px 32px 24px;border:1px solid #d8e3d344;border-radius:22px;background:linear-gradient(145deg,#17262de8,#0c151bea);box-shadow:0 25px 100px #000b;backdrop-filter:blur(16px);text-align:center}.arrival-eyebrow,.door-kicker,.map-kicker{font-size:.65rem;letter-spacing:.17em;font-weight:900;color:#a7e2a9}.arrival-panel h1{font-size:clamp(2.8rem,8vw,5.2rem);line-height:.9;letter-spacing:-.07em;margin:.28em 0}.arrival-panel p{color:#c2ccc0;max-width:42ch;margin:13px auto 20px;font-size:1rem}.enter-button,.enroll-button,.lab-button{width:100%;border:0;border-radius:999px;background:#a4e5a9;color:#15251b;padding:13px 17px;font-weight:900;cursor:pointer}.enter-button span,.enroll-button span{float:right}.enter-button:hover,.enroll-button:hover{background:#c8f4be}.arrival-note{margin-top:15px;color:#98a99c;font-size:.57rem;letter-spacing:.12em}
@@ -114,6 +118,8 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
     private string _toast = "";
     private string _campusClock = "09:18";
     private Building? _selectedBuilding;
+    private Building? _waypoint;
+    private int WaypointDistance => _waypoint is null ? 0 : (int)MathF.Round(Vector2.Distance(new Vector2(_playerX, _playerZ), new Vector2(_waypoint.X, _waypoint.Z)));
     private bool _started;
     private bool _mapOpen;
     private float _playerX;
@@ -277,6 +283,11 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
         _sceneSvg = _svgBackend.BuildSvg(frame, _resources).Replace("<svg ", "<svg preserveAspectRatio=\"xMidYMid slice\" ", StringComparison.Ordinal);
         _campusClock = DateTime.Now.ToString("HH:mm", CultureInfo.InvariantCulture);
         UpdateNearby();
+        if (_waypoint is not null && WaypointDistance <= 4)
+        {
+            _toast = "You reached " + _waypoint.Name + ". Look for its highlighted entrance.";
+            _waypoint = null;
+        }
     }
 
     private static bool InFrontOfCamera(FaceTriangle triangle, Matrix4x4 view, Matrix4x4 projection)
@@ -443,15 +454,10 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
     {
         var building = _buildings.FirstOrDefault(item => item.Id == buildingId);
         if (building is null) return;
-        var doorZ = building.Z + building.Depth / 2 + 4.5f;
-        var dx = _playerX - building.X;
-        var dz = _playerZ - doorZ;
-        _yaw = MathF.Atan2(-dx, dz);
-        _playerX = building.X;
-        _playerZ = doorZ;
+        _waypoint = building;
         _mapOpen = false;
-        RecordIntent(new SemanticIntent("Campus.Transit.To." + building.Id));
-        RenderScene();
+        RecordIntent(new SemanticIntent("Campus.Route.Set." + building.Id));
+        _toast = "Route set to " + building.Name + ". Follow the campus paths.";
     }
 
     private void EnterLab() => JS.InvokeVoidAsync("learningCampusInput.openLab");
