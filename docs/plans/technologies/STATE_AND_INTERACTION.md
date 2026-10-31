@@ -4,6 +4,10 @@
 
 ## Learning progression
 
+🧪 **[Open the live FSM_API Behavior Lab →](https://trentbest.github.io/TheSingularityWorkshop.Learning/demo/)** — use target detection, distance, and health signals to drive three real FSM_API instances through one shared definition.
+
+## Learning progression
+
 `State vocabulary → transitions → update owner → input signal → visible feedback`
 
 This progression separates the behavior model from the input and presentation boundaries.
