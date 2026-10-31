@@ -75,6 +75,7 @@ The learning pages are the guide; the linked repositories remain the authority f
 - [Learning Journey](docs/LEARNING_JOURNEY.md)
 - [Problem to Proof](docs/PROBLEM_TO_PROOF.md)
 - [Run Record to Trajectory Picture](docs/TRACE_TO_TRAJECTORY.md)
+- [Debug a Result](docs/DEBUG_A_RESULT.md)
 - [REST Capability](docs/REST_CAPABILITY.md)
 - [Visual Lab](docs/VISUAL_LAB.md)
 - [Learning Paths](docs/LEARNING_PATHS.md)
