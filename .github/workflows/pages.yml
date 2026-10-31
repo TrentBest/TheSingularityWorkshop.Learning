@@ -29,12 +29,22 @@ jobs:
           ref: development
           path: physics-source
 
-      - name: Install .NET 8 and 10
+      - name: Install .NET 8 for the Physics model
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: |
-            8.0.x
-            10.0.x
+          dotnet-version: 8.0.x
+
+      - name: Compute the acoustic run from Physics source
+        shell: bash
+        run: |
+          mkdir -p _site/data
+          dotnet run --project physics-source/tools/FirstOrderRoomReflectionRunRecordGenerator/FirstOrderRoomReflectionRunRecordGenerator.csproj --configuration Release -- _site/data/first-order-room-reflection.run.json
+          printf '%s\\n' '${{ steps.physics.outputs.commit }}' > _site/data/physics-source-commit.txt
+
+      - name: Install .NET 10 for the browser showcase
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
 
       - name: Build the browser showcase
         run: dotnet publish apps/FsmApiShowcase/FsmApiShowcase.csproj --configuration Release
