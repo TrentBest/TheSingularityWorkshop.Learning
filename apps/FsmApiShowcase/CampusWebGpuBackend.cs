@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Numerics;
 using Microsoft.JSInterop;
+using TheSingularityWorkshop.Visualize;
 
 namespace TheSingularityWorkshop.Learning.FsmApiShowcase;
 
@@ -8,16 +9,33 @@ namespace TheSingularityWorkshop.Learning.FsmApiShowcase;
 /// Browser-hosted Visualize backend that submits VisualizerFrame resources to WebGPU.
 /// The browser owns the WebGPU device; this adapter owns frame/resource translation.
 /// </summary>
-public sealed class CampusWebGpuBackend(IJSRuntime js) : IVisualizerBackend
+public sealed class CampusWebGpuBackend : IVisualizerBackend
 {
+    private readonly IJSRuntime _js;
     private readonly Dictionary<ulong, ulong> _geometryRevisions = [];
     private long _frameNumber;
     private bool _disposed;
+    private bool _initialized;
 
-    public VisualizerCapabilities Capabilities { get; } =
-        new("Visualize Campus WebGPU", "WebGPU", supportsCompute: false,
+    public CampusWebGpuBackend(IJSRuntime js)
+    {
+        _js = js;
+        Capabilities = new("Visualize Campus WebGPU", "WebGPU", supportsCompute: false,
+            supportsInstancing: false, supportsIndirectDrawing: false,
+            supportsPresentationSurface: false);
+    }
+
+    public VisualizerCapabilities Capabilities { get; private set; }
+
+    public async Task InitializeAsync(string canvasId, CancellationToken cancellationToken = default)
+    {
+        ObjectDisposedException.ThrowIf(_disposed, this);
+        await _js.InvokeVoidAsync("learningCampusGpu.initializeCanvas", cancellationToken, canvasId);
+        _initialized = true;
+        Capabilities = new("Visualize Campus WebGPU", "WebGPU", supportsCompute: false,
             supportsInstancing: false, supportsIndirectDrawing: false,
             supportsPresentationSurface: true);
+    }
 
     public async ValueTask<VisualizerFrameResult> RenderAsync(
         VisualizerFrame frame,
@@ -25,6 +43,8 @@ public sealed class CampusWebGpuBackend(IJSRuntime js) : IVisualizerBackend
         CancellationToken cancellationToken = default)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
+        if (!_initialized)
+            throw new InvalidOperationException("Initialize the WebGPU canvas before submitting Visualizer frames.");
         ArgumentNullException.ThrowIfNull(frame);
         ArgumentNullException.ThrowIfNull(resources);
         var timer = Stopwatch.StartNew();
@@ -85,7 +105,7 @@ public sealed class CampusWebGpuBackend(IJSRuntime js) : IVisualizerBackend
         }
 
         var payload = new { geometries, draws };
-        await js.InvokeVoidAsync("learningCampusGpu.renderFrame", cancellationToken, "campus-gpu-canvas", payload);
+        await _js.InvokeVoidAsync("learningCampusGpu.renderFrame", cancellationToken, "campus-gpu-canvas", payload);
         foreach (var id in geometryIds)
         {
             if (resources.TryGetGeometry(id, out var geometry) && geometry is not null)
@@ -106,7 +126,7 @@ public sealed class CampusWebGpuBackend(IJSRuntime js) : IVisualizerBackend
         _disposed = true;
         try
         {
-            await js.InvokeVoidAsync("learningCampusGpu.dispose");
+            await _js.InvokeVoidAsync("learningCampusGpu.dispose");
         }
         catch (JSDisconnectedException) { }
         catch (InvalidOperationException) { }
