@@ -24,7 +24,7 @@ That controlled experiment uses a 10 m × 10 m × 10 m room, one source, one lis
 | Direct | 6.3246 m | 18.4389 ms | 63.9794 dB SPL |
 | One reflection | 10.1980 m | 29.7319 ms | 53.8091 dB SPL |
 
-The **Hear the path pulse** control synthesizes two short noise pulses in the browser. Their scheduled arrivals and relative gain come from those committed Physics outputs. This makes the delay and level comparison audible without claiming the Physics package created the waveform.
+During a Pages build, the workflow checks out the Physics development source, runs its C# room-reflection record generator, and records the exact Physics commit used. The **Hear the path pulse** control synthesizes two short noise pulses in the browser. Their scheduled arrivals and relative gain come from that freshly computed Physics output. This makes the delay and level comparison audible without claiming the Physics package created the waveform.
 
 ### Evidence boundary
 
