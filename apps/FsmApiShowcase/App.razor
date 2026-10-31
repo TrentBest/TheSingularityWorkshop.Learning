@@ -3,7 +3,14 @@
 @inject IJSRuntime JS
 @inject NavigationManager Navigation
 
-<PageTitle>FSM_API Behavior Lab · The Singularity Workshop</PageTitle>
+@if (IsCampusExperience)
+{
+    <PageTitle>Singularity University · First-Person Campus</PageTitle>
+}
+else
+{
+    <PageTitle>FSM_API Behavior Lab · The Singularity Workshop</PageTitle>
+}
 
 @if (IsCampusExperience)
 {
