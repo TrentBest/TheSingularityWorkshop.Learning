@@ -54,6 +54,7 @@ The source recipe is [FSM-driven bounded oscillator](https://github.com/TrentBes
 - **Assemble reusable capabilities:** [Compose capabilities into a runtime](docs/LEARNING_PATHS.md#compose-capabilities-into-a-runtime)
 - **Describe and send requests:** [Follow the REST operation walkthrough](docs/REST_CAPABILITY.md)
 - **Turn recorded results into a picture:** [Follow a Physics run record into GUI.SVG](docs/TRACE_TO_TRAJECTORY.md)
+- **Debug an unexpected result:** [Find the first mismatch across a workflow](docs/DEBUG_A_RESULT.md)
 - **Create something people can experience:** [Author and present an Experience](docs/LEARNING_PATHS.md#author-and-present-an-experience)
 - **Make meaning and interaction visible:** [Model, render, and interact](docs/LEARNING_PATHS.md#model-render-and-interact)
 - **Browse visual problem examples:** [Visual Lab](docs/VISUAL_LAB.md)
