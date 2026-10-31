@@ -11,3 +11,5 @@
 .userio-empty{color:#91a8b7;font-size:.82rem}
 .userio-live-signal{grid-column:1/-1;display:flex;justify-content:space-between;gap:12px;padding-top:10px;border-top:1px solid #ffffff15;color:#90a9b8;font: .72rem var(--mono)}
 @media(max-width:760px){.userio-trace{grid-template-columns:1fr;padding:16px}.userio-live-signal{grid-column:auto}}
+
+.userio-source-link{display:inline-block;margin-top:12px;font-size:.78rem;font-weight:800;color:var(--cyan)}
