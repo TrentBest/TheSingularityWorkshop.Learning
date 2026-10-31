@@ -29,13 +29,15 @@ The Pages workflow checks out WebPage's `development` branch. It runs `tools/Cam
 
 The tool parses catalog IDs, names, positions, sizes, and style hints, then uses Visualize's SVG backend to produce city and campus map artifacts plus JSON. These are used for the optional orientation map and as source-backed layout input.
 
-The main experience is different: the Blazor WebAssembly host loads the generated campus catalog, creates low-poly mesh geometry and materials through Visualize resource contracts, constructs a `VisualizerFrame` with a first-person view and perspective projection, sorts the opaque triangles for the SVG backend's documented painter-order limitation, and rebuilds the frame as the camera moves. The display is still the CPU-side static SVG backend, but each frame represents the user's changing view of the world. This is a lightweight first-person walk, not a production GPU renderer or a depth-tested game engine.
+The main experience is different: the Blazor WebAssembly host loads the generated campus catalog, creates one indexed low-poly mesh through Visualize resource contracts, and submits first-person VisualizerFrames through Visualizer.RenderAsync. The campus host implements Visualize's IVisualizerBackend using the browser's WebGPU API: the mesh is uploaded into GPU buffers by resource revision, while camera and projection data update per frame. The WebGPU pipeline performs indexed drawing with a depth buffer and directional vertex lighting. It does not use Three.js or another scene engine.
+
+This is an executable GPU backend proof connected to Visualize's public frame/resource/backend contracts. Its current scope is intentionally small: one campus mesh and camera, with no instancing, compute pass, indirect drawing, GPU timer query, device-loss recovery, or live Renderer horizon scheduling. CI compiles the WebAssembly host; this alone does not certify runtime support on a particular browser/device or establish a performance result. The host requires browser WebGPU over HTTPS and reports an explicit message if WebGPU cannot initialize; it does not silently fall back to SVG.
 
 ## The boundary between source and experience
 
 The WebPage catalog currently marks `city-university` / University Quarter as a future district. This Learning Center is a browser-based educational prototype inspired by those cataloged places. It does not claim that the entire Singularity City runtime or a finished university has been composed and deployed.
 
-The campus catalog layout and named places come from WebPage. Student movement and ambient campus prompts are a local deterministic presentation simulation, not observations of real users or a live crowd simulation. The renderer has no depth buffer; the current scene uses painter ordering and low-poly surfaces.
+The campus catalog layout and named places come from WebPage. Student movement and ambient campus prompts are a local deterministic presentation simulation, not observations of real users or a live crowd simulation. The WebGPU campus renderer depth-tests its low-poly surfaces. The optional map remains a generated SVG artifact.
 
 The existing Education page in WebPage describes shared lessons, lesson blocks, teacher overlays, learner workspaces, and question/recognition flows. Those are useful learning-design patterns. They should be cited as concepts from that host, not represented as capabilities of this static Pages prototype.
 
