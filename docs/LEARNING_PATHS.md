@@ -5,7 +5,7 @@
 
 Choose a path by the problem you need to solve. Each path moves from a goal to a model, through a runnable example where one exists, and toward a visible result and checks. Project links are there for the deeper explanation and exact contract, not as a reading checklist.
 
-The recommended first lesson is [From Problem to Proof](PROBLEM_TO_PROOF.md): keep a changing value within bounds, reverse at the endpoints, record its behavior, and visualize the computed result. To browse more worked visual examples, see the [Visual Lab](VISUAL_LAB.md).
+The recommended first lesson is [From Problem to Proof](PROBLEM_TO_PROOF.md): keep a changing value within bounds, reverse at the endpoints, record its behavior, and visualize the computed result. To browse more worked visual examples, see the [Visual Lab](VISUAL_LAB.md). When a result is wrong, follow [Debug a Result by Finding the First Divergence](DEBUG_A_RESULT.md) to locate the first mismatching handoff.
 
 ## Control behavior with state machines
 
