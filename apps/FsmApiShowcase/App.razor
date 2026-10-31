@@ -1,5 +1,6 @@
 @page "/"
 @implements IDisposable
+@inject IJSRuntime JS
 
 <PageTitle>FSM_API Behavior Lab · The Singularity Workshop</PageTitle>
 
@@ -10,6 +11,28 @@
         </a>
         <div class="host-badge"><span class="live-dot"></span> FSM_API · running in this browser</div>
     </header>
+
+    <section class="userio-trace" aria-labelledby="userio-trace-title">
+        <div class="userio-trace-heading">
+            <span class="eyebrow">FSM_UserIO · semantic interaction</span>
+            <h2 id="userio-trace-title">Your choices, carried as meaning.</h2>
+            <p>The passage’s browser surface maps actions to <code>SemanticIntent</code>. This .NET app reads those same intents, then applies its own policy before anything executes.</p>
+        </div>
+        <div class="userio-live-signal"><span>Latest live intent</span><code>@(_lastIntent?.Name ?? "No signal yet")</code></div>
+        <div class="userio-intent-list" aria-live="polite">
+            @if (_arrivalIntents.Count == 0)
+            {
+                <span class="userio-empty">Visit the Learning Center first, then return here to see your interaction trail.</span>
+            }
+            else
+            {
+                @foreach (var intent in _arrivalIntents.TakeLast(6))
+                {
+                    <span class="userio-intent"><code>@intent.Name</code>@if (intent.ProtocolId is ulong protocolId) { <small>@protocolId</small> }</span>
+                }
+            }
+        </div>
+    </section>
 
     <main>
         <section class="hero">
@@ -153,6 +176,8 @@
     private const string ProcessingGroup = "LearningCenter.SentinelSquad";
     private const string DefinitionName = "LearningCenter.SentinelBehavior";
     private int _tick;
+    private readonly List<SemanticIntent> _arrivalIntents = [];
+    private SemanticIntent? _lastIntent;
     private int _selectedId = 1;
     private readonly List<AgentContext> _agents = [];
     private AgentContext SelectedAgent => _agents.First(agent => agent.Id == _selectedId);
@@ -165,6 +190,29 @@
         new("Flee", "health below 26", 310, 195),
         new("Disabled", "health depleted", 560, 195)
     ];
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+            return;
+
+        try
+        {
+            var trace = await JS.InvokeAsync<string?>("learningUserIo.readTrace");
+            if (!string.IsNullOrWhiteSpace(trace))
+                _arrivalIntents.AddRange(JsonSerializer.Deserialize<List<SemanticIntent>>(trace) ?? []);
+        }
+        catch (JSException)
+        {
+            // The interaction trail is an optional, same-tab learning aid.
+        }
+        catch (JsonException)
+        {
+            // A malformed stored trail must never prevent the FSM_API lab from running.
+        }
+
+        StateHasChanged();
+    }
 
     protected override void OnInitialized()
     {
@@ -238,7 +286,8 @@
 
     private void SetTarget(AgentContext agent, bool visible)
     {
-        if (agent.Handle.CurrentState == "Disabled")
+        var intent = new SemanticIntent(visible ? "Target.Detected" : "Target.Lost");
+        if (!TryAcceptIntent(agent, intent))
             return;
         agent.TargetVisible = visible;
         AddEvent(agent, visible ? "Signal · target detected" : "Signal · target lost");
@@ -246,7 +295,7 @@
 
     private void ApproachTarget(AgentContext agent)
     {
-        if (agent.Handle.CurrentState == "Disabled")
+        if (!TryAcceptIntent(agent, new SemanticIntent("Target.Approach")))
             return;
         agent.Distance = Math.Max(0, agent.Distance - 3.5);
         AddEvent(agent, "Signal · moved closer to target");
@@ -254,7 +303,7 @@
 
     private void TakeDamage(AgentContext agent)
     {
-        if (agent.Handle.CurrentState == "Disabled")
+        if (!TryAcceptIntent(agent, new SemanticIntent("Agent.Damaged")))
             return;
         agent.Health = Math.Max(0, agent.Health - 35);
         AddEvent(agent, "Signal · took 35 damage");
@@ -262,10 +311,23 @@
 
     private void Recover(AgentContext agent)
     {
-        if (agent.Handle.CurrentState == "Disabled")
+        if (!TryAcceptIntent(agent, new SemanticIntent("Agent.Recovered")))
             return;
         agent.Health = Math.Min(100, agent.Health + 40);
         AddEvent(agent, "Signal · recovered 40 health");
+    }
+
+    private bool TryAcceptIntent(AgentContext agent, SemanticIntent intent)
+    {
+        _lastIntent = intent;
+        if (agent.Handle.CurrentState == "Disabled")
+        {
+            AddEvent(agent, $"Host policy · rejected {intent.Name}");
+            return false;
+        }
+
+        AddEvent(agent, $"FSM_UserIO · {intent.Name}");
+        return true;
     }
 
     private void SelectAgent(int id) => _selectedId = id;
