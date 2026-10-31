@@ -94,6 +94,17 @@ The recommended first lesson is [From Problem to Proof](PROBLEM_TO_PROOF.md): ke
 - Start with [Profiles](https://github.com/TrentBest/TheSingularityWorkshop.Profiles) for observer-specific representations of an entity.
 - Browse [Economy](https://github.com/TrentBest/TheSingularityWorkshop.Economy), [CreatorNetwork](https://github.com/TrentBest/TheSingularityWorkshop.CreatorNetwork), [Foundry](https://github.com/TrentBest/TheSingularityWorkshop.Foundry), and [DataWarehouse](https://github.com/TrentBest/TheSingularityWorkshop.DataWarehouse). Use their current documentation to establish each project's exact supported tasks.
 
+## Debug a result by finding the first divergence
+
+**Problem:** the final image, value, or response is wrong, and several projects participate in producing it.
+
+1. Record the smallest repeatable input and expected result.
+2. Compare each handoff from inputs through data/state, representation, and output.
+3. Fix the first mismatch in the project that owns that boundary.
+4. Recheck that handoff and one downstream result.
+
+Follow [the troubleshooting walkthrough](DEBUG_A_RESULT.md) for an oscillator and recorded trajectory, including the evidence each example does and does not establish.
+
 ## Follow the same learning rhythm
 
 For any path:
