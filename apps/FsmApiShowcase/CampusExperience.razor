@@ -151,6 +151,7 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
             LoadCatalog(json);
             BuildVisualizerGeometry();
             _gpuBackend = new CampusWebGpuBackend(JS);
+            await _gpuBackend.InitializeAsync("campus-gpu-canvas");
             _visualizer = new Visualizer(_gpuBackend, _resources);
             await RenderScene();
             await JS.InvokeVoidAsync("learningCampusInput.attach", _self);
