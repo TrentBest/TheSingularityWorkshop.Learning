@@ -113,7 +113,6 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
     private string _ambientLine = "WORKSHOPS OPEN";
     private string _toast = "";
     private string _campusClock = "09:18";
-    private string _mapMessage = "";
     private Building? _selectedBuilding;
     private bool _started;
     private bool _mapOpen;
@@ -179,7 +178,6 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
     private void BuildWorldMesh()
     {
         _triangles.Clear();
-        AddQuad(new(-42, 0, -45), new(42, 0, -45), new(42, 0, 36), new(-42, 0, 36), "#39453d");
         for (var x = -36; x < 36; x += 6)
             for (var z = -42; z < 34; z += 6)
             {
@@ -408,7 +406,6 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
             return;
         }
         _enrolled.Add(courseId);
-        _selectedBuilding = _selectedBuilding;
         RecordIntent(intent);
         _toast = "Course added to your learning day.";
     }
@@ -453,7 +450,7 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
     private VisualizerResourceId MaterialId(string hex)
     {
         var key = NormalizeHex(hex);
-        var id = new VisualizerResourceId((ulong)(100 + Math.Abs(StringComparer.Ordinal.GetHashCode(key) % 100000)));
+        var id = new VisualizerResourceId(100UL + (uint)StringComparer.Ordinal.GetHashCode(key));
         if (!_resources.TryGetMaterial(id, out _))
             _resources.SetMaterial(id, new VisualizerMaterial(1, LinearColor(key)));
         return id;
@@ -477,7 +474,6 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
         return "#" + string.Concat(channels.Select(value => value.ToString("X2", CultureInfo.InvariantCulture)));
     }
 
-    private static void AddStudents(List<FaceTriangle> scene, float time) { }
     public ValueTask DisposeAsync()
     {
         _self?.Dispose();
