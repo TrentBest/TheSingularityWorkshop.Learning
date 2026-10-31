@@ -6,6 +6,25 @@
 
 `Capability contract → host catalog + request → resolve/validate closure → RuntimeAssembly → host-owned execution`
 
+The final handoff returns control to the host for application execution.
+
+**Progress map:** Contract → Catalog + request → Resolve closure → RuntimeAssembly → Host execution
+
+```mermaid
+flowchart LR
+ A["Contract"] --> B
+ B["Catalog + request"] --> C
+ C["Resolve closure"] --> D
+ D["RuntimeAssembly"] --> E
+ E["Host execution"]
+ classDef trail fill:#14283b,stroke:#49677d,color:#eef6ff,stroke-width:2px
+ classDef evidence fill:#123e43,stroke:#66e0be,color:#f3fffc,stroke-width:3px
+ class A,B,C,D trail
+ class E evidence
+```
+
+
+
 1. Read the [MicroBundleDomain contract](https://github.com/TrentBest/TheSingularityWorkshop.MicroBundleDomain).
 2. Follow the [FSM_COS learning guide](https://github.com/TrentBest/TheSingularityWorkshop.FSM_COS/blob/master/docs/LEARNING_GUIDE.md) and its [minimal consumer](https://github.com/TrentBest/TheSingularityWorkshop.FSM_COS/tree/master/samples/FSM_COS.MinimalConsumer).
 3. Learn the host boundary through [Consuming MicroBundles](https://github.com/TrentBest/TheSingularityWorkshop.FSM_COS/blob/master/docs/CONSUMING_MICROBUNDLES.md).
