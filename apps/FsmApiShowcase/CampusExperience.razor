@@ -111,6 +111,7 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
     private Visualizer? _visualizer;
     private readonly VisualizerResourceCatalog _resources = new();
     private readonly List<FaceTriangle> _triangles = [];
+    private int _indexCount;
     private readonly List<Building> _buildings = [];
     private readonly HashSet<string> _enrolled = new(StringComparer.Ordinal);
     private DotNetObjectReference<CampusExperience>? _self;
@@ -148,6 +149,7 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
         {
             var json = await JS.InvokeAsync<string>("learningCampusInput.fetchCatalog");
             LoadCatalog(json);
+            BuildVisualizerGeometry();
             _gpuBackend = new CampusWebGpuBackend(JS);
             _visualizer = new Visualizer(_gpuBackend, _resources);
             await RenderScene();
@@ -241,6 +243,28 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
         }
     }
 
+    private void BuildVisualizerGeometry()
+    {
+        var vertices = new List<VisualizerVertex>(_triangles.Count * 3);
+        var indices = new List<uint>(_triangles.Count * 3);
+        foreach (var triangle in _triangles)
+        {
+            var normal = Vector3.Normalize(Vector3.Cross(triangle.B - triangle.A, triangle.C - triangle.A));
+            var color = LinearColor(triangle.Color);
+            var first = (uint)vertices.Count;
+            vertices.Add(new VisualizerVertex(triangle.A, normal, Vector2.Zero, color));
+            vertices.Add(new VisualizerVertex(triangle.B, normal, Vector2.Zero, color));
+            vertices.Add(new VisualizerVertex(triangle.C, normal, Vector2.Zero, color));
+            indices.Add(first);
+            indices.Add(first + 1);
+            indices.Add(first + 2);
+        }
+
+        _indexCount = indices.Count;
+        _resources.SetGeometry(new VisualizerResourceId(1), new VisualizerGeometry(1, vertices, indices));
+        _resources.SetMaterial(new VisualizerResourceId(2), new VisualizerMaterial(1, Vector4.One));
+    }
+
     private void AddTree(float x, float z, string trunk, string leaves)
     {
         AddBox(x - .25f, .02f, z - .25f, .5f, 2.6f, .5f, trunk, "#a58654");
@@ -266,32 +290,16 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
 
     private async Task RenderScene()
     {
-        var vertices = new List<VisualizerVertex>(_triangles.Count * 3);
-        var indices = new List<uint>(_triangles.Count * 3);
-        foreach (var triangle in _triangles)
-        {
-            var normal = Vector3.Normalize(Vector3.Cross(triangle.B - triangle.A, triangle.C - triangle.A));
-            var color = LinearColor(triangle.Color);
-            var first = (uint)vertices.Count;
-            vertices.Add(new VisualizerVertex(triangle.A, normal, Vector2.Zero, color));
-            vertices.Add(new VisualizerVertex(triangle.B, normal, Vector2.Zero, color));
-            vertices.Add(new VisualizerVertex(triangle.C, normal, Vector2.Zero, color));
-            indices.Add(first);
-            indices.Add(first + 1);
-            indices.Add(first + 2);
-        }
-
         var geometryId = new VisualizerResourceId(1);
         var materialId = new VisualizerResourceId(2);
-        _resources.SetGeometry(geometryId, new VisualizerGeometry(1, vertices, indices));
-        _resources.SetMaterial(materialId, new VisualizerMaterial(1, Vector4.One));
 
         var camera = new Vector3(_playerX, 1.68f, _playerZ);
         var forward = new Vector3(MathF.Sin(_yaw), 0, -MathF.Cos(_yaw));
         var view = Matrix4x4.CreateLookAt(camera, camera + forward, Vector3.UnitY);
-        var projection = Matrix4x4.CreatePerspectiveFieldOfView(MathF.PI / 3f, 16f / 9f, .12f, 100f);
+        var aspect = await JS.InvokeAsync<float>("learningCampusGpu.getAspect", "campus-gpu-canvas");
+        var projection = Matrix4x4.CreatePerspectiveFieldOfView(MathF.PI / 3f, Math.Max(.2f, aspect), .12f, 100f);
         var command = new VisualizerDrawCommand(
-            geometryId, materialId, Matrix4x4.Identity, indices.Count, 0, 0,
+            geometryId, materialId, Matrix4x4.Identity, _indexCount, 0, 0,
             VisualizerRepresentation.Near);
         var frame = new VisualizerFrame(new VisualizerView(camera, view, projection), [command]);
         await _visualizer!.RenderAsync(frame);
