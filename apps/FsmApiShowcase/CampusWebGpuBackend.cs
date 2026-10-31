@@ -10,6 +10,7 @@ namespace TheSingularityWorkshop.Learning.FsmApiShowcase;
 /// </summary>
 public sealed class CampusWebGpuBackend(IJSRuntime js) : IVisualizerBackend
 {
+    private readonly Dictionary<ulong, ulong> _geometryRevisions = [];
     private long _frameNumber;
     private bool _disposed;
 
@@ -34,6 +35,9 @@ public sealed class CampusWebGpuBackend(IJSRuntime js) : IVisualizerBackend
         {
             if (!resources.TryGetGeometry(id, out var geometry) || geometry is null)
                 throw new InvalidOperationException($"Missing geometry resource {id.Value}.");
+            if (_geometryRevisions.TryGetValue(id.Value, out var uploadedRevision) && uploadedRevision == geometry.Revision)
+                continue;
+
             var vertices = new float[geometry.Vertices.Count * 12];
             for (var i = 0; i < geometry.Vertices.Count; i++)
             {
@@ -82,6 +86,11 @@ public sealed class CampusWebGpuBackend(IJSRuntime js) : IVisualizerBackend
 
         var payload = new { geometries, draws };
         await js.InvokeVoidAsync("learningCampusGpu.renderFrame", cancellationToken, "campus-gpu-canvas", payload);
+        foreach (var id in geometryIds)
+        {
+            if (resources.TryGetGeometry(id, out var geometry) && geometry is not null)
+                _geometryRevisions[id.Value] = geometry.Revision;
+        }
         timer.Stop();
         return new VisualizerFrameResult(
             Interlocked.Increment(ref _frameNumber),
