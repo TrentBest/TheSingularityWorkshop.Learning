@@ -5,7 +5,7 @@
 
 **Learn the Workshop by living in the problem.**
 
-The Learning Center is a browser-based university prototype set inside the vision of Singularity City. Explore the city map, step into a campus based on WebPage's own campus catalog, see the day unfold, and enroll in short problem-solving courses.
+The Learning Center is a browser-based university prototype set inside the vision of Singularity City. Enter a full-screen, first-person campus. Walk its low-poly quad, find a workshop door, inspect a course, and enroll without leaving the scene.
 
 🧭 **[Enter Singularity University →](https://trentbest.github.io/TheSingularityWorkshop.Learning/)**
 
@@ -13,13 +13,11 @@ The Learning Center is a browser-based university prototype set inside the visio
 
 Each course asks you to do something concrete: give meaning to a click, build a scene from a model, compose a capability, hear a reflected path, design a learner activity, or diagnose a mismatch. Course cards point to the relevant Workshop repositories and current learning guides for deeper reading.
 
-Enrollment is a same-browser session demonstration. It becomes a semantic intent that the FSM_UserIO-powered FSM_API showcase reads when it opens. It does not create a persistent student account or registration.
+Campus movement and learning actions are routed through FSM_UserIO `SemanticIntent`s. Enrollment is held for this browser session; it does not create a persistent student account.
 
 ## A living campus, with clear evidence
 
-GitHub Pages checks out the WebPage development branch and generates city and campus SVG maps through TheSingularityWorkshop.Visualize from `SingularityCityCatalog` and `SingularityCampusCatalog`. The city catalog describes University Quarter as future; the Learning Center presents an educational campus prototype based on the source catalog, not as an already-composed Singularity City runtime.
-
-The moving campus activity feed and schedule are local presentation simulations. For implementation status, source links, and the boundary between catalog concepts and running systems, see the [University experience notes](docs/SINGULARITY_UNIVERSITY.md).
+The Pages build checks out WebPage and generates city/campus references from its actual catalogs. In the first-person experience, the Blazor host rebuilds `VisualizerFrame`s with a perspective camera as the learner moves; Visualize's SVG backend turns those frames into the living view. The city catalog marks University Quarter as future, so the campus remains a learning prototype based on source-backed places, not a claim that Singularity City is fully composed. For implementation status, source links, and the boundary between catalog concepts and running systems, see the [University experience notes](docs/SINGULARITY_UNIVERSITY.md).
 
 ## Learn by solving
 
