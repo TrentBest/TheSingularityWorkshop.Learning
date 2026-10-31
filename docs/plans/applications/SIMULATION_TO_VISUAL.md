@@ -4,6 +4,24 @@
 
 **Route:** run a model → capture evidence → map evidence to a scene → render a view.
 
+The rendered view is the end of the evidence path; it does not replace the captured run.
+
+**Progress map:** Run model → Capture evidence → Map to scene → Render view
+
+```mermaid
+flowchart LR
+ A["Run model"] --> B
+ B["Capture evidence"] --> C
+ C["Map to scene"] --> D
+ D["Render view"]
+ classDef trail fill:#14283b,stroke:#49677d,color:#eef6ff,stroke-width:2px
+ classDef evidence fill:#123e43,stroke:#66e0be,color:#f3fffc,stroke-width:3px
+ class A,B,C trail
+ class D evidence
+```
+
+
+
 ## Your route
 
 1. **Choose a concrete question.** Start from an output you want to explain, such as a trajectory, a changing value, or a spatial distribution.
