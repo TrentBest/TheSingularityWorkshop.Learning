@@ -17,7 +17,7 @@ Campus movement and learning actions are routed through FSM_UserIO `SemanticInte
 
 ## A living campus, with clear evidence
 
-The Pages build checks out WebPage and generates city/campus references from its actual catalogs. In the first-person experience, the Blazor host submits VisualizerFrames through Visualize's Visualizer.RenderAsync API to a browser WebGPU backend. It uploads the indexed campus mesh by resource revision and redraws it with a perspective camera and depth testing as the learner moves. The city catalog marks University Quarter as future, so the campus remains a learning prototype based on source-backed places, not a claim that Singularity City is fully composed. For implementation status, source links, and the boundary between catalog concepts and running systems, see the [University experience notes](docs/SINGULARITY_UNIVERSITY.md).
+The Pages build checks out WebPage and generates city/campus references from its actual catalogs. In the first-person experience, the Blazor host submits VisualizerFrames through Visualize's Visualizer.RenderAsync API to a browser WebGPU backend. It uploads the indexed campus mesh by resource revision and redraws it with a perspective camera and depth testing as the learner moves. The city catalog marks University Quarter as future, so the campus remains a learning prototype based on source-backed places, not a claim that Singularity City is fully composed. For the GPU backend's data flow, verified scope, and current limitations, see the [Campus WebGPU proof](docs/CAMPUS_GPU_RENDERER.md) and [University experience notes](docs/SINGULARITY_UNIVERSITY.md).
 
 ## Learn by solving
 
