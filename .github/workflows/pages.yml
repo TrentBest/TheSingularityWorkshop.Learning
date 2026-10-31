@@ -67,7 +67,7 @@ jobs:
         run: |
           mkdir -p _site/demo _site/data
           cp physics-source/docs/experiments/first-order-room-reflection.svg _site/data/first-order-room-reflection.svg
-          printf '%s\\n' '${{ steps.visualize.outputs.commit }}' > _site/data/visualize-source-commit.txt
+          printf '%s\n' '${{ steps.visualize.outputs.commit }}' > _site/data/visualize-source-commit.txt
           cp index.html _site/index.html
           cp frontier.html _site/frontier.html
           cp -R apps/FsmApiShowcase/bin/Release/net10.0/publish/wwwroot/. _site/demo/
