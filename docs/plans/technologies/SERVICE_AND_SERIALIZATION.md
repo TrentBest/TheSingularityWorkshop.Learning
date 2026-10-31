@@ -6,6 +6,25 @@
 
 `Operation contract → per-call binding → transport → response interpretation → representation boundary`
 
+This path separates what is reusable from what belongs to one request and one response.
+
+**Progress map:** Operation → Bind values → Transport → Interpret response → Represent data
+
+```mermaid
+flowchart LR
+ A["Operation"] --> B
+ B["Bind values"] --> C
+ C["Transport"] --> D
+ D["Interpret response"] --> E
+ E["Represent data"]
+ classDef trail fill:#14283b,stroke:#49677d,color:#eef6ff,stroke-width:2px
+ classDef evidence fill:#123e43,stroke:#66e0be,color:#f3fffc,stroke-width:3px
+ class A,B,C,D trail
+ class E evidence
+```
+
+
+
 1. Use [FSM_REST](https://github.com/TrentBest/TheSingularityWorkshop.FSM_REST) for the REST capability and transport substrate.
 2. Follow the [REST operation walkthrough](../../REST_CAPABILITY.md): distinguish operation metadata, concrete values, transport behavior, and application interpretation.
 3. Read the repository’s [REST MicroBundle guide](https://github.com/TrentBest/TheSingularityWorkshop.FSM_REST/blob/master/docs/MICROBUNDLE.md) to follow its composition view.
