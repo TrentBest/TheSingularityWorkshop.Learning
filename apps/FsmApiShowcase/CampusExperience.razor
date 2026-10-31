@@ -351,7 +351,7 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
     }
 
     [JSInvokable]
-    public async Task OnCampusFrame(float forward, float strafe, float look)
+    public async Task OnCampusFrame(float forward, float strafe, float look, float deltaSeconds)
     {
         if (!_started && (forward != 0 || strafe != 0 || Math.Abs(look) > .01f))
         {
@@ -365,7 +365,7 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
         var move = direction * forward + side * strafe;
         if (move.LengthSquared() > 1)
             move = Vector2.Normalize(move);
-        var step = move * .38f;
+        var step = move * (5.8f * Math.Clamp(deltaSeconds, 0f, .05f));
         var nextX = _playerX + step.X;
         var nextZ = _playerZ + step.Y;
         if (!_buildings.Any(item => Math.Abs(nextX - item.X) < item.Width / 2 + .55f && Math.Abs(nextZ - item.Z) < item.Depth / 2 + .55f))
