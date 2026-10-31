@@ -141,6 +141,18 @@ struct VertexOutput {
         });
     }
 
+    async function initializeCanvas(canvasId) {
+        if (device) return;
+        const target = document.getElementById(canvasId);
+        if (!target) throw new Error("The campus GPU canvas is missing.");
+        try {
+            await initialize(target);
+        } catch (error) {
+            dispose();
+            throw error;
+        }
+    }
+
     async function renderFrame(canvasId, payload) {
         if (!device) {
             const target = document.getElementById(canvasId);
@@ -206,5 +218,5 @@ struct VertexOutput {
         frameNumber = 0;
     }
 
-    return { renderFrame, getAspect, dispose };
+    return { initializeCanvas, renderFrame, getAspect, dispose };
 })();
