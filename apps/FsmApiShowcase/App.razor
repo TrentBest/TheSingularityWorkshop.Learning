@@ -1,0 +1,359 @@
+@page "/"
+@implements IDisposable
+
+<PageTitle>FSM_API Behavior Lab · The Singularity Workshop</PageTitle>
+
+<div class="app-shell">
+    <header class="masthead">
+        <a class="brand" href="https://trentbest.github.io/TheSingularityWorkshop.Learning/" aria-label="Return to the Learning Center">
+            <img src="https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.Visualize/development/docs/assets/moniker.svg" alt="The Singularity Workshop" />
+        </a>
+        <div class="host-badge"><span class="live-dot"></span> FSM_API · running in this browser</div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-copy">
+                <div class="eyebrow">Behavior, in motion</div>
+                <h1>One blueprint.<br /><em>Three living agents.</em></h1>
+                <p class="lede">Send a signal. Tick the group. Watch the real FSM_API handles move through a shared behavior definition—each with its own context, health, and target.</p>
+                <div class="hero-facts">
+                    <span><b>01</b> define once</span><span><b>02</b> instantiate many</span><span><b>03</b> inspect each transition</span>
+                </div>
+            </div>
+            <div class="hero-orbit" aria-hidden="true">
+                <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+                <div class="core-mark">FSM<br /><span>API</span></div>
+                <span class="orbit-agent agent-a">S</span><span class="orbit-agent agent-b">G</span><span class="orbit-agent agent-c">D</span>
+                <span class="orbit-caption">one definition · independent contexts</span>
+            </div>
+        </section>
+
+        <section class="lab">
+            <div class="lab-heading">
+                <div><div class="eyebrow">01 / Watch the behavior</div><h2>What should the agent do next?</h2></div>
+                <div class="tick-console"><span class="tick-label">PROCESSING GROUP</span><code>SentinelSquad</code><span class="tick-count">tick @_tick.ToString("D2", CultureInfo.InvariantCulture)</span></div>
+            </div>
+            <p class="section-intro">Choose an agent, change its context, then advance the shared processing group. Each click calls <code>FSM_API.Interaction.Update</code>; all three live instances get their turn.</p>
+
+            <div class="workbench">
+                <div class="map-panel panel">
+                    <div class="panel-top"><div><span class="eyebrow">The shared definition</span><h3>Sentinel behavior map</h3></div><span class="source-chip">FSM_API · live states</span></div>
+                    <svg class="state-map" viewBox="0 0 800 320" role="img" aria-label="Patrol can transition to Chase or Flee. Chase can move to Attack, Patrol, or Flee. Attack can move to Chase, Patrol, or Flee. Flee can recover to Patrol or Chase. Any active state can become Disabled when health reaches zero.">
+                        <defs>
+                            <marker id="arrow" markerWidth="8" markerHeight="8" refX="6.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#68859c" /></marker>
+                            <marker id="arrow-danger" markerWidth="8" markerHeight="8" refX="6.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#fb7185" /></marker>
+                        </defs>
+                        <path class="edge" marker-end="url(#arrow)" d="M240 97 H310" />
+                        <path class="edge" marker-end="url(#arrow)" d="M490 97 H560" />
+                        <path class="edge" marker-end="url(#arrow)" d="M310 119 C280 169 260 210 310 230" />
+                        <path class="edge" marker-end="url(#arrow)" d="M400 135 V195" />
+                        <path class="edge" marker-end="url(#arrow)" d="M650 135 C650 174 520 196 490 230" />
+                        <path class="edge recovery" marker-end="url(#arrow)" d="M310 247 C245 289 150 289 150 135" />
+                        <path class="edge recovery" marker-end="url(#arrow)" d="M400 195 V135" />
+                        <path class="edge danger" marker-end="url(#arrow-danger)" d="M150 135 C220 304 520 304 600 270" />
+                        <path class="edge danger" marker-end="url(#arrow-danger)" d="M400 135 C445 224 520 245 560 248" />
+                        <path class="edge danger" marker-end="url(#arrow-danger)" d="M650 135 V195" />
+                        <text class="edge-label" x="257" y="83">target seen</text>
+                        <text class="edge-label" x="505" y="83">range ≤ 2</text>
+                        <text class="edge-label" x="416" y="174">low health</text>
+                        <text class="edge-label danger-label" x="411" y="300">health = 0</text>
+                        @foreach (var node in _stateNodes)
+                        {
+                            <g class="state-node @(SelectedAgent?.Handle.CurrentState == node.Name ? "selected" : "")" transform="translate(@node.X @node.Y)">
+                                <rect width="180" height="76" rx="18" />
+                                <text class="node-name" x="18" y="31">@node.Name</text>
+                                <text class="node-sub" x="18" y="53">@node.Description</text>
+                                @if (node.Name == "Disabled")
+                                {
+                                    <circle class="node-symbol danger-symbol" cx="157" cy="22" r="5" />
+                                }
+                                else
+                                {
+                                    <circle class="node-symbol" cx="157" cy="22" r="5" />
+                                }
+                            </g>
+                        }
+                    </svg>
+                    <div class="map-legend"><span><i class="legend-dot behavior"></i> behavior transition</span><span><i class="legend-dot recovery"></i> recovery route</span><span><i class="legend-dot danger"></i> terminal guard</span></div>
+                </div>
+
+                <aside class="control-panel panel">
+                    <div class="panel-top"><div><span class="eyebrow">02 / Send a signal</span><h3>@SelectedAgent.Name</h3></div><span class="agent-role">@SelectedAgent.Role</span></div>
+                    <p class="context-caption">These values belong to this agent’s <code>IStateContext</code>.</p>
+                    <div class="agent-context">
+                        <div class="metric-row"><span>Health</span><strong>@SelectedAgent.Health%</strong></div>
+                        <div class="meter health-meter"><span style="width: @(SelectedAgent.Health)%"></span></div>
+                        <div class="metric-row distance-row"><span>Target distance</span><strong>@SelectedAgent.Distance.ToString("0.0", CultureInfo.InvariantCulture)</strong></div>
+                        <div class="meter distance-meter"><span style="width: @DistancePercent(SelectedAgent)%"></span></div>
+                        <div class="fact-row"><span>Target detected</span><strong class="@(SelectedAgent.TargetVisible ? "fact-yes" : "fact-no")">@(SelectedAgent.TargetVisible ? "YES" : "NO")</strong></div>
+                        <div class="fact-row"><span>Current state</span><strong class="state-pill @StateClass(SelectedAgent.Handle.CurrentState)">@SelectedAgent.Handle.CurrentState</strong></div>
+                    </div>
+                    <div class="signal-buttons">
+                        <button class="signal-button" @onclick="() => SetTarget(SelectedAgent, true)"><span>◎</span> Spot target</button>
+                        <button class="signal-button" @onclick="() => ApproachTarget(SelectedAgent)"><span>⌖</span> Close distance</button>
+                        <button class="signal-button warning" @onclick="() => TakeDamage(SelectedAgent)"><span>✳</span> Take damage</button>
+                        <button class="signal-button" @onclick="() => SetTarget(SelectedAgent, false)"><span>◌</span> Lose target</button>
+                        <button class="signal-button recovery-button" @onclick="() => Recover(SelectedAgent)"><span>↗</span> Recover</button>
+                    </div>
+                    <div class="command-row">
+                        <button class="tick-button" @onclick="TickGroup">Tick the whole group <span>→</span></button>
+                        <button class="reset-button" @onclick="ResetMission">Reset</button>
+                    </div>
+                    <p class="ownership-note">Signals change context. <strong>The FSM_API update evaluates the state and transition rules.</strong></p>
+                </aside>
+            </div>
+
+            <div class="agents-heading"><div><div class="eyebrow">03 / One definition · independent handles</div><h3>Meet the squad</h3></div><p>Select a card to send signals to that context.</p></div>
+            <div class="agent-grid">
+                @foreach (var agent in _agents)
+                {
+                    <button class="agent-card @(agent.Id == _selectedId ? "chosen" : "")" style="--agent-color:@agent.Color" @onclick="() => SelectAgent(agent.Id)" aria-pressed="@(agent.Id == _selectedId)">
+                        <span class="agent-avatar">@agent.Mark</span>
+                        <span class="agent-card-main"><span class="agent-name">@agent.Name <small>@agent.Role</small></span><strong class="state-pill @StateClass(agent.Handle.CurrentState)">@agent.Handle.CurrentState</strong><span class="agent-stats">HP @agent.Health · RANGE @agent.Distance.ToString("0.0", CultureInfo.InvariantCulture)</span></span>
+                        <span class="agent-chevron">↗</span>
+                    </button>
+                }
+            </div>
+        </section>
+
+        <section class="evidence-section">
+            <div class="evidence-head"><div><div class="eyebrow">04 / Inspect the evidence</div><h2>What just happened?</h2></div><span class="event-count">@SelectedAgent.Events.Count recent events · @SelectedAgent.TransitionCount transitions</span></div>
+            <div class="event-stream" aria-live="polite">
+                @foreach (var item in SelectedAgent.Events)
+                {
+                    <div class="event-line"><span class="event-tick">T@item.Tick.ToString("D2", CultureInfo.InvariantCulture)</span><span class="event-agent">@SelectedAgent.Mark</span><span>@item.Message</span></div>
+                }
+            </div>
+        </section>
+
+        <section class="handoff-strip">
+            <article><span>01</span><h3>Definition</h3><p>Five state actions and guarded transitions are built once with <code>FSMBuilder</code>.</p></article>
+            <article><span>02</span><h3>Context</h3><p>Each agent has its own facts through <code>IStateContext</code>.</p></article>
+            <article><span>03</span><h3>Handle</h3><p>Each <code>FSMHandle</code> binds one context to the shared definition.</p></article>
+            <article><span>04</span><h3>Processing group</h3><p>One explicit group update advances the squad; process rate 1 means each tick is observed.</p></article>
+        </section>
+
+        <section class="next-reading">
+            <div><div class="eyebrow">Keep exploring</div><h2>Now read the machinery.</h2><p>The FSM_API guide explains the same blueprint, instance, state, context, and processing-group ideas in depth.</p></div>
+            <div class="reading-links">
+                <a href="https://github.com/TrentBest/FSM_API/blob/master/Documentation/User%20Guide/01_Core_Concepts.md">01 · Core Concepts <span>↗</span></a>
+                <a href="https://github.com/TrentBest/FSM_API/blob/master/Documentation/User%20Guide/04_FSM_Builder_Deep_Dive.md">04 · FSMBuilder Deep Dive <span>↗</span></a>
+                <a href="https://github.com/TrentBest/FSM_API/blob/master/Documentation/User%20Guide/09_Common_Use_Cases.md">09 · Common Use Cases &amp; NPC AI <span>↗</span></a>
+                <a href="https://github.com/TrentBest/FSM_API/blob/master/Documentation/User%20Guide/08_Performance_Tips.md">08 · Performance Tips <span>↗</span></a>
+                <a href="https://github.com/TrentBest/TheSingularityWorkshop.Learning/blob/main/docs/plans/technologies/STATE_AND_INTERACTION.md">Continue the technology plan <span>↗</span></a>
+            </div>
+        </section>
+    </main>
+
+    <footer><a href="https://trentbest.github.io/TheSingularityWorkshop.Learning/">Learning Center</a><span> · </span><a href="https://github.com/TrentBest/FSM_API">FSM_API source</a><span> · </span><a href="https://github.com/TrentBest/TheSingularityWorkshop.Learning">Learning Center repository</a></footer>
+</div>
+
+@code {
+    private const string ProcessingGroup = "LearningCenter.SentinelSquad";
+    private const string DefinitionName = "LearningCenter.SentinelBehavior";
+    private int _tick;
+    private int _selectedId = 1;
+    private readonly List<AgentContext> _agents = [];
+    private AgentContext SelectedAgent => _agents.First(agent => agent.Id == _selectedId);
+
+    private static readonly StateNode[] _stateNodes =
+    [
+        new("Patrol", "scan for a target", 60, 59),
+        new("Chase", "close the distance", 310, 59),
+        new("Attack", "target in range", 560, 59),
+        new("Flee", "health below 26", 310, 195),
+        new("Disabled", "health depleted", 560, 195)
+    ];
+
+    protected override void OnInitialized()
+    {
+        FSM_API.Create.CreateFiniteStateMachine(DefinitionName, processRate: 1, processingGroup: ProcessingGroup)
+            .State("Patrol",
+                onEnter: context => Enter(context, "Patrol"),
+                onUpdate: context => ((AgentContext)context).PatrolTicks++,
+                onExit: context => Exit(context, "Patrol"))
+            .State("Chase",
+                onEnter: context => Enter(context, "Chase"),
+                onUpdate: context =>
+                {
+                    var agent = (AgentContext)context;
+                    agent.ChaseTicks++;
+                    agent.Distance = Math.Max(0, agent.Distance - 1.2);
+                    AddEvent(agent, "Chasing · distance reduced");
+                },
+                onExit: context => Exit(context, "Chase"))
+            .State("Attack",
+                onEnter: context => Enter(context, "Attack"),
+                onUpdate: context =>
+                {
+                    var agent = (AgentContext)context;
+                    agent.AttackTicks++;
+                    AddEvent(agent, "Attack action · target remains in range");
+                },
+                onExit: context => Exit(context, "Attack"))
+            .State("Flee",
+                onEnter: context => Enter(context, "Flee"),
+                onUpdate: context =>
+                {
+                    var agent = (AgentContext)context;
+                    agent.FleeTicks++;
+                    agent.Distance = Math.Min(12, agent.Distance + 0.7);
+                    AddEvent(agent, "Fleeing · creating distance");
+                },
+                onExit: context => Exit(context, "Flee"))
+            .State("Disabled",
+                onEnter: context => Enter(context, "Disabled"),
+                onUpdate: context => ((AgentContext)context).DisabledTicks++,
+                onExit: context => Exit(context, "Disabled"))
+            .WithInitialState("Patrol")
+            .Transition("Patrol", "Disabled", context => ((AgentContext)context).Health <= 0)
+            .Transition("Patrol", "Flee", context => ((AgentContext)context).Health <= 25)
+            .Transition("Patrol", "Chase", context => ((AgentContext)context).TargetVisible)
+            .Transition("Chase", "Disabled", context => ((AgentContext)context).Health <= 0)
+            .Transition("Chase", "Flee", context => ((AgentContext)context).Health <= 25)
+            .Transition("Chase", "Patrol", context => !((AgentContext)context).TargetVisible)
+            .Transition("Chase", "Attack", context => ((AgentContext)context).Distance <= 2)
+            .Transition("Attack", "Disabled", context => ((AgentContext)context).Health <= 0)
+            .Transition("Attack", "Flee", context => ((AgentContext)context).Health <= 25)
+            .Transition("Attack", "Patrol", context => !((AgentContext)context).TargetVisible)
+            .Transition("Attack", "Chase", context => ((AgentContext)context).Distance > 2)
+            .Transition("Flee", "Disabled", context => ((AgentContext)context).Health <= 0)
+            .Transition("Flee", "Patrol", context => ((AgentContext)context).Health > 25 && !((AgentContext)context).TargetVisible)
+            .Transition("Flee", "Chase", context => ((AgentContext)context).Health > 25 && ((AgentContext)context).TargetVisible)
+            .BuildDefinition();
+
+        ResetMission();
+    }
+
+    private void TickGroup()
+    {
+        FSM_API.Interaction.Update(ProcessingGroup);
+        _tick++;
+        foreach (var agent in _agents)
+            AddEvent(agent, $"Processing group tick {_tick}");
+    }
+
+    private void SetTarget(AgentContext agent, bool visible)
+    {
+        if (agent.Handle.CurrentState == "Disabled")
+            return;
+        agent.TargetVisible = visible;
+        AddEvent(agent, visible ? "Signal · target detected" : "Signal · target lost");
+    }
+
+    private void ApproachTarget(AgentContext agent)
+    {
+        if (agent.Handle.CurrentState == "Disabled")
+            return;
+        agent.Distance = Math.Max(0, agent.Distance - 3.5);
+        AddEvent(agent, "Signal · moved closer to target");
+    }
+
+    private void TakeDamage(AgentContext agent)
+    {
+        if (agent.Handle.CurrentState == "Disabled")
+            return;
+        agent.Health = Math.Max(0, agent.Health - 35);
+        AddEvent(agent, "Signal · took 35 damage");
+    }
+
+    private void Recover(AgentContext agent)
+    {
+        if (agent.Handle.CurrentState == "Disabled")
+            return;
+        agent.Health = Math.Min(100, agent.Health + 40);
+        AddEvent(agent, "Signal · recovered 40 health");
+    }
+
+    private void SelectAgent(int id) => _selectedId = id;
+
+    private void ResetMission()
+    {
+        foreach (var agent in _agents)
+            FSM_API.Interaction.DestroyInstance(agent.Handle);
+        _agents.Clear();
+        _tick = 0;
+
+        _agents.Add(CreateAgent(1, "Sparrow", "SCOUT", "S", "#66e0be", 8.5));
+        _agents.Add(CreateAgent(2, "Bulwark", "GUARD", "B", "#71c9ff", 6.0));
+        _agents.Add(CreateAgent(3, "Kestrel", "DRONE", "K", "#ffd27d", 10.0));
+        _selectedId = 1;
+    }
+
+    private static AgentContext CreateAgent(int id, string name, string role, string mark, string color, double distance)
+    {
+        var agent = new AgentContext(id, name, role, mark, color, distance);
+        agent.Handle = FSM_API.Create.CreateInstance(DefinitionName, agent, ProcessingGroup);
+        return agent;
+    }
+
+    private static void Enter(IStateContext context, string state)
+    {
+        var agent = (AgentContext)context;
+        agent.TransitionCount++;
+        AddEvent(agent, $"onEnter · {state}");
+    }
+
+    private static void Exit(IStateContext context, string state) =>
+        AddEvent((AgentContext)context, $"onExit · {state}");
+
+    private static void AddEvent(AgentContext agent, string message)
+    {
+        agent.Events.Insert(0, new EventEntry(agent.TickCount, message));
+        if (agent.Events.Count > 8)
+            agent.Events.RemoveAt(agent.Events.Count - 1);
+    }
+
+    private string StateClass(string state) => state.ToLowerInvariant();
+    private int DistancePercent(AgentContext agent) => (int)Math.Round((agent.Distance / 12) * 100);
+
+    public void Dispose()
+    {
+        foreach (var agent in _agents)
+        {
+            if (agent.Handle is not null)
+            {
+                FSM_API.Interaction.DestroyInstance(agent.Handle);
+                agent.IsValid = false;
+            }
+        }
+    }
+
+    private sealed class AgentContext : IStateContext
+    {
+        public AgentContext(int id, string name, string role, string mark, string color, double distance)
+        {
+            Id = id;
+            Name = name;
+            Role = role;
+            Mark = mark;
+            Color = color;
+            Distance = distance;
+            Events = [];
+            IsValid = true;
+        }
+
+        public int Id { get; }
+        public string Name { get; set; }
+        public string Role { get; }
+        public string Mark { get; }
+        public string Color { get; }
+        public bool IsValid { get; set; }
+        public bool TargetVisible { get; set; }
+        public int Health { get; set; } = 100;
+        public double Distance { get; set; }
+        public int TickCount => _tick;
+        public int TransitionCount { get; set; }
+        public int PatrolTicks { get; set; }
+        public int ChaseTicks { get; set; }
+        public int AttackTicks { get; set; }
+        public int FleeTicks { get; set; }
+        public int DisabledTicks { get; set; }
+        public FSMHandle Handle { get; set; } = default!;
+        public List<EventEntry> Events { get; }
+    }
+
+    private sealed record EventEntry(int Tick, string Message);
+    private sealed record StateNode(string Name, string Description, int X, int Y);
+}
