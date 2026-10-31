@@ -185,6 +185,11 @@ struct VertexOutput {
         frameNumber++;
     }
 
+    function getAspect(canvasId) {
+        const target = document.getElementById(canvasId);
+        return target && target.clientHeight > 0 ? target.clientWidth / target.clientHeight : 16 / 9;
+    }
+
     function dispose() {
         observer?.disconnect();
         observer = null;
@@ -201,5 +206,5 @@ struct VertexOutput {
         frameNumber = 0;
     }
 
-    return { renderFrame, dispose };
+    return { renderFrame, getAspect, dispose };
 })();
