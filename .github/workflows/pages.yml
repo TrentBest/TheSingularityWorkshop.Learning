@@ -2,7 +2,7 @@ name: Build and deploy the Learning Center experiences
 
 on:
   push:
-    branches: [main]
+    branches: [master, development]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -99,7 +99,7 @@ jobs:
           path: _site
 
   deploy:
-    if: github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
     needs: build
     runs-on: ubuntu-latest
     permissions:
