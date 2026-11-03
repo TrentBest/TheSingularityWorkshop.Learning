@@ -1,3 +1,6 @@
+<!-- The Singularity Workshop moniker -->
+<p align="center"><a href="https://github.com/TrentBest"><img src="https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.Visualize/development/docs/assets/moniker.svg" alt="The Singularity Workshop — animated moniker" width="720" /></a></p>
+
 # Build an AI-enabled application path
 
 > **Mission:** let an application keep ownership of its meaning while it communicates with an AI-capable service.
@@ -44,3 +47,6 @@ flowchart LR
 **Plan boundary:** these project names do not imply a bundled model or inference engine. Follow the individual project docs for included transports, provider support, and maturity.
 
 **Next:** [Learn the AI application stack](../technologies/AI_APPLICATION_STACK.md) · [browse all application plans](../INDEX.md#choose-by-what-youre-building)
+
+<!-- THE SINGULARITY WORKSHOP FOOTER -->
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
