@@ -94,3 +94,6 @@ Change the bound page number from `1` to `2`. Before sending, predict which part
 For the exact project contract and additional examples, read the [FSM_REST README](https://github.com/TrentBest/TheSingularityWorkshop.FSM_REST) and [REST capability model](https://github.com/TrentBest/TheSingularityWorkshop.FSM_REST/blob/master/docs/REFLECTION.md). For composition with MicroBundles, see [REST MicroBundles](https://github.com/TrentBest/TheSingularityWorkshop.FSM_REST/blob/master/docs/MICROBUNDLE.md).
 
 **Evidence:** source-checked against FSM_REST `master` on 2026-10-30; this learning-center author did not execute the code. The example values are adapted from the repository's documented snippets.
+
+<!-- THE SINGULARITY WORKSHOP FOOTER -->
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
