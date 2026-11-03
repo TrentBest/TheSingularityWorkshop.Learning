@@ -126,3 +126,6 @@ For any path:
 6. Change one input, predict what changes, then try it.
 
 A picture can make a result easier to understand, but it does not prove which code produced it. Keep source, trace, generated artifact, and runtime observation distinct.
+
+<!-- THE SINGULARITY WORKSHOP FOOTER -->
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
