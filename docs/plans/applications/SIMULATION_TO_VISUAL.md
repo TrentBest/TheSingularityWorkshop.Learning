@@ -1,3 +1,6 @@
+<!-- The Singularity Workshop moniker -->
+<p align="center"><a href="https://github.com/TrentBest"><img src="https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.Visualize/development/docs/assets/moniker.svg" alt="The Singularity Workshop — animated moniker" width="720" /></a></p>
+
 # Turn simulation results into a visual explanation
 
 > **Mission:** make a computed result inspectable, so a person can see how the outcome emerged from the run.
@@ -44,3 +47,6 @@ flowchart LR
 **Plan boundary:** a renderer presents data; it does not produce the simulation evidence. Check each project’s maturity and supported inputs before choosing an integration.
 
 **Next:** [Learn visual systems](../technologies/VISUAL_SYSTEMS.md) · [browse all application plans](../INDEX.md#choose-by-what-youre-building)
+
+<!-- THE SINGULARITY WORKSHOP FOOTER -->
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
