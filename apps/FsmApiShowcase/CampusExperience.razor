@@ -111,7 +111,9 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
     private Visualizer? _visualizer;
     private readonly VisualizerResourceCatalog _resources = new();
     private readonly List<FaceTriangle> _triangles = [];
+    private readonly List<VisualizerInstance> _treeInstances = [];
     private int _indexCount;
+    private int _treeIndexCount;
     private readonly List<Building> _buildings = [];
     private readonly HashSet<string> _enrolled = new(StringComparer.Ordinal);
     private DotNetObjectReference<CampusExperience>? _self;
@@ -214,12 +216,13 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
             AddBox(x - .18f, 0, z - .18f, .36f, 2.2f, .36f, "#62513a", "#ffd277");
             AddBox(x - .34f, 2.1f, z - .34f, .68f, .4f, .68f, "#f3bc61", "#fff0b8");
         }
+        _treeInstances.Clear();
         for (var i = 0; i < 18; i++)
         {
             var side = i % 2 == 0 ? -1 : 1;
             var z = -38 + i / 2 * 4.5f + (i % 3) * 1.4f;
             var x = side * (11f + (i % 4) * 2.1f);
-            AddTree(x, z, "#39724c", "#64a65a");
+            _treeInstances.Add(new VisualizerInstance(Matrix4x4.CreateTranslation(x, 0, z), Vector4.One));
         }
 
         foreach (var b in _buildings)
@@ -246,9 +249,28 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
 
     private void BuildVisualizerGeometry()
     {
-        var vertices = new List<VisualizerVertex>(_triangles.Count * 3);
-        var indices = new List<uint>(_triangles.Count * 3);
-        foreach (var triangle in _triangles)
+        var campusGeometry = CreateGeometry(1, _triangles);
+        _indexCount = campusGeometry.Indices.Count;
+        _resources.SetGeometry(new VisualizerResourceId(1), campusGeometry);
+
+        // One reusable tree mesh is drawn eighteen times through Visualize's instance contract.
+        var treeTriangles = new List<FaceTriangle>();
+        AddBox(treeTriangles, -.25f, .02f, -.25f, .5f, 2.6f, .5f, "#39724c", "#a58654");
+        AddBox(treeTriangles, -1.15f, 2.1f, -1.15f, 2.3f, 2.2f, 2.3f, "#64a65a", "#8dc872");
+        AddBox(treeTriangles, -.72f, 3.6f, -.72f, 1.44f, 1.5f, 1.44f, "#559b5a", "#b0db75");
+        var treeGeometry = CreateGeometry(1, treeTriangles);
+        _treeIndexCount = treeGeometry.Indices.Count;
+        _resources.SetGeometry(new VisualizerResourceId(3), treeGeometry);
+        _resources.SetInstances(new VisualizerResourceId(4), new VisualizerInstanceBuffer(1, _treeInstances));
+
+        _resources.SetMaterial(new VisualizerResourceId(2), new VisualizerMaterial(1, Vector4.One));
+    }
+
+    private static VisualizerGeometry CreateGeometry(ulong revision, IReadOnlyList<FaceTriangle> triangles)
+    {
+        var vertices = new List<VisualizerVertex>(triangles.Count * 3);
+        var indices = new List<uint>(triangles.Count * 3);
+        foreach (var triangle in triangles)
         {
             var normal = Vector3.Normalize(Vector3.Cross(triangle.B - triangle.A, triangle.C - triangle.A));
             var color = LinearColor(triangle.Color);
@@ -260,34 +282,34 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
             indices.Add(first + 1);
             indices.Add(first + 2);
         }
-
-        _indexCount = indices.Count;
-        _resources.SetGeometry(new VisualizerResourceId(1), new VisualizerGeometry(1, vertices, indices));
-        _resources.SetMaterial(new VisualizerResourceId(2), new VisualizerMaterial(1, Vector4.One));
+        return new VisualizerGeometry(revision, vertices, indices);
     }
 
-    private void AddTree(float x, float z, string trunk, string leaves)
-    {
-        AddBox(x - .25f, .02f, z - .25f, .5f, 2.6f, .5f, trunk, "#a58654");
-        AddBox(x - 1.15f, 2.1f, z - 1.15f, 2.3f, 2.2f, 2.3f, leaves, "#8dc872");
-        AddBox(x - .72f, 3.6f, z - .72f, 1.44f, 1.5f, 1.44f, "#559b5a", "#b0db75");
-    }
+    private void AddBox(float x, float y, float z, float sx, float sy, float sz, string body, string accent) =>
+        AddBox(_triangles, x, y, z, sx, sy, sz, body, accent);
 
-    private void AddBox(float x, float y, float z, float sx, float sy, float sz, string body, string accent)
+    private static void AddBox(List<FaceTriangle> target, float x, float y, float z, float sx, float sy, float sz, string body, string accent)
     {
         var a = new Vector3(x, y, z); var b = new Vector3(x + sx, y, z); var c = new Vector3(x + sx, y + sy, z); var d = new Vector3(x, y + sy, z);
         var e = new Vector3(x, y, z + sz); var f = new Vector3(x + sx, y, z + sz); var g = new Vector3(x + sx, y + sy, z + sz); var h = new Vector3(x, y + sy, z + sz);
-        AddQuad(a, b, c, d, Shade(body, 1.12f)); AddQuad(f, e, h, g, Shade(body, .72f));
-        AddQuad(e, a, d, h, body); AddQuad(b, f, g, c, Shade(body, .84f));
-        AddQuad(d, c, g, h, accent); AddQuad(e, f, b, a, Shade(body, .68f));
+        AddQuad(target, a, b, c, d, Shade(body, 1.12f)); AddQuad(target, f, e, h, g, Shade(body, .72f));
+        AddQuad(target, e, a, d, h, body); AddQuad(target, b, f, g, c, Shade(body, .84f));
+        AddQuad(target, d, c, g, h, accent); AddQuad(target, e, f, b, a, Shade(body, .68f));
     }
 
-    private void AddQuad(Vector3 a, Vector3 b, Vector3 c, Vector3 d, string color)
+    private void AddQuad(Vector3 a, Vector3 b, Vector3 c, Vector3 d, string color) =>
+        AddQuad(_triangles, a, b, c, d, color);
+
+    private static void AddQuad(List<FaceTriangle> target, Vector3 a, Vector3 b, Vector3 c, Vector3 d, string color)
     {
-        AddTriangle(a, b, c, color); AddTriangle(a, c, d, color);
+        AddTriangle(target, a, b, c, color); AddTriangle(target, a, c, d, color);
     }
+
     private void AddTriangle(Vector3 a, Vector3 b, Vector3 c, string color) =>
-        _triangles.Add(new FaceTriangle(a, b, c, NormalizeHex(color)));
+        AddTriangle(_triangles, a, b, c, color);
+
+    private static void AddTriangle(List<FaceTriangle> target, Vector3 a, Vector3 b, Vector3 c, string color) =>
+        target.Add(new FaceTriangle(a, b, c, NormalizeHex(color)));
 
     private async Task RenderScene()
     {
@@ -299,10 +321,14 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
         var view = Matrix4x4.CreateLookAt(camera, camera + forward, Vector3.UnitY);
         var aspect = await JS.InvokeAsync<float>("learningCampusGpu.getAspect", "campus-gpu-canvas");
         var projection = Matrix4x4.CreatePerspectiveFieldOfView(MathF.PI / 3f, Math.Max(.2f, aspect), .12f, 100f);
-        var command = new VisualizerDrawCommand(
-            geometryId, materialId, Matrix4x4.Identity, _indexCount, 0, 0,
-            VisualizerRepresentation.Near);
-        var frame = new VisualizerFrame(new VisualizerView(camera, view, projection), [command]);
+        var commands = new List<VisualizerDrawCommand>
+        {
+            new(geometryId, materialId, Matrix4x4.Identity, _indexCount, 0, 0,
+                VisualizerRepresentation.Near),
+            new(new VisualizerResourceId(3), materialId, Matrix4x4.Identity, _treeIndexCount, 0, 0,
+                VisualizerRepresentation.Near, new VisualizerResourceId(4), _treeInstances.Count)
+        };
+        var frame = new VisualizerFrame(new VisualizerView(camera, view, projection), commands);
         await _visualizer!.RenderAsync(frame);
 
         _campusClock = DateTime.Now.ToString("HH:mm", CultureInfo.InvariantCulture);
