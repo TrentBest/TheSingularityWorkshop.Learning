@@ -79,3 +79,6 @@ Follow [From Run Record to Trajectory Picture](TRACE_TO_TRAJECTORY.md). Physics 
 5. Scale the same provenance discipline to a point set or a parameterized field.
 
 Browse the [GUI.SVG recipe gallery](https://github.com/TrentBest/TheSingularityWorkshop.GUI/blob/development/samples/demonstrations/GALLERY.md) for the package-by-package examples. Follow each recipe for exact setup, code, source revisions, and evidence.
+
+<!-- THE SINGULARITY WORKSHOP FOOTER -->
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
