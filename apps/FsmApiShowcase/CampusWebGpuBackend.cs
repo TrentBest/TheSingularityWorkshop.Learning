@@ -2,7 +2,6 @@ using System.Diagnostics;
 using System.Numerics;
 using Microsoft.JSInterop;
 using TheSingularityWorkshop.Visualize;
-using TheSingularityWorkshop.Visualize.GPU;
 
 namespace TheSingularityWorkshop.Learning.FsmApiShowcase;
 
@@ -51,12 +50,52 @@ public sealed class CampusWebGpuBackend : IVisualizerBackend
         ArgumentNullException.ThrowIfNull(resources);
         var timer = Stopwatch.StartNew();
 
-        var resolved = VisualizerFrameResolver.Resolve(frame, resources);
-        var geometryIds = resolved.Select(item => item.Command.Geometry).Distinct().ToArray();
+        var geometrySnapshots = new Dictionary<VisualizerResourceId, VisualizerGeometry>();
+        var instanceSnapshots = new Dictionary<VisualizerResourceId, VisualizerInstanceBuffer>();
+        var materialSnapshots = new Dictionary<VisualizerResourceId, VisualizerMaterial>();
+
+        foreach (var command in frame.Commands)
+        {
+            if (!geometrySnapshots.ContainsKey(command.Geometry))
+            {
+                if (!resources.TryGetGeometry(command.Geometry, out var geometry) || geometry is null)
+                    throw new InvalidOperationException($"Missing geometry resource {command.Geometry.Value}.");
+                geometrySnapshots.Add(command.Geometry, geometry);
+            }
+
+            if (!materialSnapshots.ContainsKey(command.Material))
+            {
+                if (!resources.TryGetMaterial(command.Material, out var material) || material is null)
+                    throw new InvalidOperationException($"Missing material resource {command.Material.Value}.");
+                materialSnapshots.Add(command.Material, material);
+            }
+
+            if (command.Instances.IsValid && !instanceSnapshots.ContainsKey(command.Instances))
+            {
+                if (!resources.TryGetInstances(command.Instances, out var snapshot) || snapshot is null)
+                    throw new InvalidOperationException($"Missing instance data resource {command.Instances.Value}.");
+                instanceSnapshots.Add(command.Instances, snapshot);
+            }
+
+            if (command.Instances.IsValid)
+            {
+                var snapshot = instanceSnapshots[command.Instances];
+                if (command.FirstInstance > snapshot.Instances.Count ||
+                    command.InstanceCount > snapshot.Instances.Count - command.FirstInstance)
+                {
+                    throw new InvalidOperationException(
+                        $"Draw command instance range [{command.FirstInstance}, " +
+                        $"{(long)command.FirstInstance + command.InstanceCount}) exceeds instance resource " +
+                        $"{command.Instances.Value} count {snapshot.Instances.Count}.");
+                }
+            }
+        }
+
+        var geometryIds = geometrySnapshots.Keys.ToArray();
         var geometries = new List<object>(geometryIds.Length);
         foreach (var id in geometryIds)
         {
-            var geometry = resolved.First(item => item.Command.Geometry == id).Geometry;
+            var geometry = geometrySnapshots[id];
             if (_geometryRevisions.TryGetValue(id.Value, out var uploadedRevision) && uploadedRevision == geometry.Revision)
                 continue;
 
@@ -88,12 +127,11 @@ public sealed class CampusWebGpuBackend : IVisualizerBackend
             });
         }
 
-        var instanceIds = resolved.Where(item => item.Instances is not null)
-            .Select(item => item.Command.Instances).Distinct().ToArray();
+        var instanceIds = instanceSnapshots.Keys.ToArray();
         var instances = new List<object>(instanceIds.Length);
         foreach (var id in instanceIds)
         {
-            var snapshot = resolved.First(item => item.Command.Instances == id).Instances!;
+            var snapshot = instanceSnapshots[id];
             if (_instanceRevisions.TryGetValue(id.Value, out var uploadedRevision) && uploadedRevision == snapshot.Revision)
                 continue;
 
@@ -110,11 +148,10 @@ public sealed class CampusWebGpuBackend : IVisualizerBackend
             instances.Add(new { id = id.Value, revision = snapshot.Revision, data });
         }
 
-        var draws = new List<object>(resolved.Count);
-        foreach (var item in resolved)
+        var draws = new List<object>(frame.Commands.Count);
+        foreach (var command in frame.Commands)
         {
-            var command = item.Command;
-            var material = item.Material;
+            var material = materialSnapshots[command.Material];
             draws.Add(new
             {
                 geometry = command.Geometry.Value,
@@ -131,10 +168,10 @@ public sealed class CampusWebGpuBackend : IVisualizerBackend
 
         var payload = new { geometries, instances, draws };
         await _js.InvokeVoidAsync("learningCampusGpu.renderFrame", cancellationToken, "campus-gpu-canvas", payload);
-        foreach (var item in resolved)
-            _geometryRevisions[item.Command.Geometry.Value] = item.Geometry.Revision;
-        foreach (var item in resolved.Where(item => item.Instances is not null))
-            _instanceRevisions[item.Command.Instances.Value] = item.Instances!.Revision;
+        foreach (var pair in geometrySnapshots)
+            _geometryRevisions[pair.Key.Value] = pair.Value.Revision;
+        foreach (var pair in instanceSnapshots)
+            _instanceRevisions[pair.Key.Value] = pair.Value.Revision;
         timer.Stop();
         return new VisualizerFrameResult(
             Interlocked.Increment(ref _frameNumber),
