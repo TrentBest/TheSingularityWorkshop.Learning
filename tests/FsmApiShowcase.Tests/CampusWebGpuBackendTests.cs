@@ -142,14 +142,20 @@ public sealed class CampusWebGpuBackendTests
             [command]);
     }
 
-    private static JsonDocument ReadLastPayload(RecordingJsRuntime js) =>
-        ReadPayload(js, js.Calls.Count - 1);
-
-    private static JsonDocument ReadPayload(RecordingJsRuntime js, int callIndex)
+    private static JsonDocument ReadLastPayload(RecordingJsRuntime js)
     {
-        var call = js.Calls.Where(x => x.Identifier == "learningCampusGpu.renderFrame").ElementAt(callIndex);
-        return JsonDocument.Parse(JsonSerializer.Serialize(call.Arguments![1]));
+        var call = js.Calls.Last(x => x.Identifier == "learningCampusGpu.renderFrame");
+        return ParsePayload(call);
     }
+
+    private static JsonDocument ReadPayload(RecordingJsRuntime js, int renderCallIndex)
+    {
+        var call = js.Calls.Where(x => x.Identifier == "learningCampusGpu.renderFrame").ElementAt(renderCallIndex);
+        return ParsePayload(call);
+    }
+
+    private static JsonDocument ParsePayload(JsCall call) =>
+        JsonDocument.Parse(JsonSerializer.Serialize(call.Arguments![1]));
 
     private sealed class RecordingJsRuntime : IJSRuntime
     {
