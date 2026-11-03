@@ -1,3 +1,6 @@
+<!-- The Singularity Workshop moniker -->
+<p align="center"><a href="https://github.com/TrentBest"><img src="https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.Visualize/development/docs/assets/moniker.svg" alt="The Singularity Workshop — animated moniker" width="720" /></a></p>
+
 # Technology path: data, identity, and simulation
 
 **Question:** how do I name a domain, capture a run, and preserve enough structure to explain its output?
@@ -42,3 +45,6 @@ Can you label each value as authored input, live state, captured observation, de
 - [Visual Systems](VISUAL_SYSTEMS.md)
 
 **Scope:** separate projects may use separate schemas and runtime assumptions. Read each owning repository before treating the concepts as a shared data model.
+
+<!-- THE SINGULARITY WORKSHOP FOOTER -->
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
