@@ -1,3 +1,6 @@
+<!-- The Singularity Workshop moniker -->
+<p align="center"><a href="https://github.com/TrentBest"><img src="https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.Visualize/development/docs/assets/moniker.svg" alt="The Singularity Workshop — animated moniker" width="720" /></a></p>
+
 # Singularity University: experience and evidence
 
 ## Purpose
@@ -66,3 +69,6 @@ Keep repository links as deeper reading, not as a substitute for the guided less
 - Replace the presentation-layer student loops with WebPage's composed city/education runtime when its host can be safely run in Pages.
 - Give each course a dedicated lesson page that lets a learner run or inspect the promised outcome.
 - Keep tracking what comes from a source catalog, what is generated in CI, what is simulated locally, and what is a future direction.
+
+<!-- THE SINGULARITY WORKSHOP FOOTER -->
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
