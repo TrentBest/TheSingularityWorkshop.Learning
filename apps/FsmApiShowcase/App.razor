@@ -138,23 +138,24 @@ else
                     <div class="map-legend"><span><i class="legend-dot behavior"></i> behavior transition</span><span><i class="legend-dot recovery"></i> recovery route</span><span><i class="legend-dot danger"></i> terminal guard</span></div>
                 </div>
 
+                @{ var selectedAgent = selectedAgent; }
                 <aside class="control-panel panel">
-                    <div class="panel-top"><div><span class="eyebrow">02 / Send a signal</span><h3>@SelectedAgent.Name</h3></div><span class="agent-role">@SelectedAgent.Role</span></div>
+                    <div class="panel-top"><div><span class="eyebrow">02 / Send a signal</span><h3>@selectedAgent.Name</h3></div><span class="agent-role">@selectedAgent.Role</span></div>
                     <p class="context-caption">These values belong to this agent’s <code>IStateContext</code>.</p>
                     <div class="agent-context">
-                        <div class="metric-row"><span>Health</span><strong>@SelectedAgent.Health%</strong></div>
-                        <div class="meter health-meter"><span style="width: @(SelectedAgent.Health)%"></span></div>
-                        <div class="metric-row distance-row"><span>Target distance</span><strong>@SelectedAgent.Distance.ToString("0.0", CultureInfo.InvariantCulture)</strong></div>
-                        <div class="meter distance-meter"><span style="width: @DistancePercent(SelectedAgent)%"></span></div>
-                        <div class="fact-row"><span>Target detected</span><strong class="@(SelectedAgent.TargetVisible ? "fact-yes" : "fact-no")">@(SelectedAgent.TargetVisible ? "YES" : "NO")</strong></div>
-                        <div class="fact-row"><span>Current state</span><strong class="state-pill @StateClass(SelectedAgent.Handle.CurrentState)">@SelectedAgent.Handle.CurrentState</strong></div>
+                        <div class="metric-row"><span>Health</span><strong>@selectedAgent.Health%</strong></div>
+                        <div class="meter health-meter"><span style="width: @(selectedAgent.Health)%"></span></div>
+                        <div class="metric-row distance-row"><span>Target distance</span><strong>@selectedAgent.Distance.ToString("0.0", CultureInfo.InvariantCulture)</strong></div>
+                        <div class="meter distance-meter"><span style="width: @DistancePercent(selectedAgent)%"></span></div>
+                        <div class="fact-row"><span>Target detected</span><strong class="@(selectedAgent.TargetVisible ? "fact-yes" : "fact-no")">@(selectedAgent.TargetVisible ? "YES" : "NO")</strong></div>
+                        <div class="fact-row"><span>Current state</span><strong class="state-pill @StateClass(selectedAgent.Handle.CurrentState)">@selectedAgent.Handle.CurrentState</strong></div>
                     </div>
                     <div class="signal-buttons">
-                        <button class="signal-button" @onclick="() => SetTarget(SelectedAgent, true)"><span>◎</span> Spot target</button>
-                        <button class="signal-button" @onclick="() => ApproachTarget(SelectedAgent)"><span>⌖</span> Close distance</button>
-                        <button class="signal-button warning" @onclick="() => TakeDamage(SelectedAgent)"><span>✳</span> Take damage</button>
-                        <button class="signal-button" @onclick="() => SetTarget(SelectedAgent, false)"><span>◌</span> Lose target</button>
-                        <button class="signal-button recovery-button" @onclick="() => Recover(SelectedAgent)"><span>↗</span> Recover</button>
+                        <button class="signal-button" @onclick="() => SetTarget(selectedAgent, true)"><span>◎</span> Spot target</button>
+                        <button class="signal-button" @onclick="() => ApproachTarget(selectedAgent)"><span>⌖</span> Close distance</button>
+                        <button class="signal-button warning" @onclick="() => TakeDamage(selectedAgent)"><span>✳</span> Take damage</button>
+                        <button class="signal-button" @onclick="() => SetTarget(selectedAgent, false)"><span>◌</span> Lose target</button>
+                        <button class="signal-button recovery-button" @onclick="() => Recover(selectedAgent)"><span>↗</span> Recover</button>
                     </div>
                     <div class="command-row">
                         <button class="tick-button" @onclick="TickGroup">Tick the whole group <span>→</span></button>
