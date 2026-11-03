@@ -19,11 +19,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the learning center
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Check out the Physics acoustic model
         id: physics
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: TrentBest/TheSingularityWorkshop.Physics
           ref: development
@@ -31,7 +31,7 @@ jobs:
 
       - name: Check out the Visualize presentation backend
         id: visualize
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: TrentBest/TheSingularityWorkshop.Visualize
           ref: development
@@ -39,7 +39,7 @@ jobs:
 
       - name: Check out the WebPage city and campus catalogs
         id: webpage
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: TrentBest/WebPage
           ref: development
@@ -47,14 +47,14 @@ jobs:
 
       - name: Check out the FSM_UserIO semantic boundary
         id: userio
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: TrentBest/FSM_UserIO
           ref: master
           path: fsm-userio-source
 
       - name: Install .NET 8 for the Physics, Visualize, and UserIO models
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 8.0.x
 
@@ -71,7 +71,7 @@ jobs:
         run: dotnet run --project tools/CampusVisualize/CampusVisualize.csproj --configuration Release -- _site/data/city-map.svg _site/data/campus-map.svg _site/data/city-places.json _site/data/campus-buildings.json webpage-source/TheSingularityWorkshop/Workshop/Spatial/SingularityCityCatalog.cs webpage-source/TheSingularityWorkshop/Workshop/Spatial/SingularityCampusCatalog.cs
 
       - name: Install .NET 10 for the browser showcase
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 10.0.x
 
@@ -94,7 +94,7 @@ jobs:
           grep -F '<base href="/TheSingularityWorkshop.Learning/demo/" />' _site/demo/index.html
 
       - name: Upload the static site
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
           path: _site
 
@@ -111,4 +111,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
