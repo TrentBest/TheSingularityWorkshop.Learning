@@ -45,6 +45,14 @@ jobs:
           ref: development
           path: webpage-source
 
+      - name: Check out the FSM_API development source
+        id: fsmapi
+        uses: actions/checkout@v6
+        with:
+          repository: TrentBest/FSM_API
+          ref: development
+          path: fsm-api-source
+
       - name: Check out the FSM_UserIO semantic boundary
         id: userio
         uses: actions/checkout@v6
