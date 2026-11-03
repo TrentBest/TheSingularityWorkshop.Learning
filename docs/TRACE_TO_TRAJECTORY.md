@@ -60,3 +60,6 @@ The linked GUI workflow passed and its artifact was visually reviewed in [run 39
 - **The consumer/checks** establish that the rendered markers correspond to the input record.
 
 For the exact source, reproducible commands, and verification boundaries, use the [GUI.SVG recipe](https://github.com/TrentBest/TheSingularityWorkshop.GUI/blob/development/samples/demonstrations/recipes/03-projectile-trajectory.md) and the [Physics experiment guide](https://github.com/TrentBest/TheSingularityWorkshop.Physics/blob/development/docs/experiments/projectile-trajectory.md). For a state-machine problem that produces a snapshot directly from computed state, continue with [From Problem to Proof](PROBLEM_TO_PROOF.md).
+
+<!-- THE SINGULARITY WORKSHOP FOOTER -->
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
