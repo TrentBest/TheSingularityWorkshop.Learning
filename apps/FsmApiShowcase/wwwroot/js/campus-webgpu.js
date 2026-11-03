@@ -4,7 +4,6 @@ window.learningCampusGpu = (() => {
     let canvas = null;
     let pipeline = null;
     let uniformBuffer = null;
-    let bindGroup = null;
     let depthTexture = null;
     let depthSize = "";
     let format = null;
@@ -19,7 +18,9 @@ struct FrameUniforms {
     mvp: mat4x4<f32>,
     materialColor: vec4<f32>,
 };
+struct InstanceData { transform: mat4x4<f32>, color: vec4<f32> };
 @group(0) @binding(0) var<uniform> frame: FrameUniforms;
+@group(0) @binding(1) var<storage, read> instanceData: array<InstanceData>;
 
 struct VertexInput {
     @location(0) position: vec3<f32>,
