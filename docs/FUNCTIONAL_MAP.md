@@ -126,3 +126,6 @@ For the last four projects, use their current repository README as the authority
 ## Sources and scope
 
 Project descriptions and the FSM_COS composition loop were checked against public repository documentation on 2026-10-30. The GUI.SVG oscillator recipe and fox sample were checked against the GUI repository's `development` branch and artifact records. This is a selected, learner-relevant map, not an inventory of every repository owned by The Singularity Workshop. Recheck each linked project before relying on current behavior.
+
+<!-- THE SINGULARITY WORKSHOP FOOTER -->
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
