@@ -83,3 +83,6 @@ Start with [Experiences](https://github.com/TrentBest/TheSingularityWorkshop.Exp
 ## What this course does and does not represent
 
 The sequence is a teaching order, not one deployed application. The state-machine, composition, REST, and Physics-to-SVG stops are distinct examples with separate owners and evidence. A new integration should be treated as a new problem: identify the contracts, write down the data handoffs, and verify each boundary.
+
+<!-- THE SINGULARITY WORKSHOP FOOTER -->
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
