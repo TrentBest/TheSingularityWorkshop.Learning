@@ -33,3 +33,6 @@ When learning any new Workshop project, ask:
 5. **What did the sample actually prove, and what did it leave to the host?**
 
 For longer project-specific definitions, use the authoritative links in the table.
+
+<!-- THE SINGULARITY WORKSHOP FOOTER -->
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
