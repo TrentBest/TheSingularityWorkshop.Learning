@@ -5,6 +5,17 @@
 
 This repository teaches people how to use Workshop technology. The [FSM_COS documentation standard](https://github.com/TrentBest/TheSingularityWorkshop.FSM_COS/blob/master/DOCUMENTATION_STANDARD.md) is the governing reference; this page applies its learner-facing principles to a multi-project guide.
 
+## Document frame and branding
+
+Every learner-facing Markdown guide and plan in this repository uses the same document frame:
+
+- Place the animated Workshop moniker at the beginning of the document, before its title.
+- Place the canonical Workshop footer PNG at the end of the document: `https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png`.
+- Do not substitute `Avatar.jpg`, a personal avatar, or the SVG moniker for the footer PNG. The SVG is the animated header moniker only.
+- Keep the footer image's alternative text as `The Singularity Workshop`.
+
+Apply this frame to new and existing guides, including the application and technology plan pages. A branding audit should check both the opening moniker and the exact footer asset.
+
 ## Build each guide around a learner's outcome
 
 Every new lesson should make these things clear:
@@ -66,4 +77,4 @@ A visual is part of the lesson, not decoration. It should answer a learner quest
 - **Conceptual:** explanatory model or proposal, not a confirmed implementation or runnable sample.
 
 <!-- THE SINGULARITY WORKSHOP FOOTER -->
-<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop avatar" width="200" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
