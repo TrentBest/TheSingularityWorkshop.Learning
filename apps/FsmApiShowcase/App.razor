@@ -18,6 +18,7 @@ else
 }
 else
 {
+@{ AgentContext selectedAgent = SelectedAgent; }
 <div class="app-shell">
     <header class="masthead">
         <a class="brand" href="https://trentbest.github.io/TheSingularityWorkshop.Learning/" aria-label="Return to the Learning Center">
@@ -138,7 +139,6 @@ else
                     <div class="map-legend"><span><i class="legend-dot behavior"></i> behavior transition</span><span><i class="legend-dot recovery"></i> recovery route</span><span><i class="legend-dot danger"></i> terminal guard</span></div>
                 </div>
 
-                @{ var selectedAgent = SelectedAgent; }
                 <aside class="control-panel panel">
                     <div class="panel-top"><div><span class="eyebrow">02 / Send a signal</span><h3>@selectedAgent.Name</h3></div><span class="agent-role">@selectedAgent.Role</span></div>
                     <p class="context-caption">These values belong to this agent’s <code>IStateContext</code>.</p>
@@ -179,11 +179,11 @@ else
         </section>
 
         <section class="evidence-section">
-            <div class="evidence-head"><div><div class="eyebrow">04 / Inspect the evidence</div><h2>What just happened?</h2></div><span class="event-count">@SelectedAgent.Events.Count recent events · @SelectedAgent.TransitionCount transitions</span></div>
+            <div class="evidence-head"><div><div class="eyebrow">04 / Inspect the evidence</div><h2>What just happened?</h2></div><span class="event-count">@selectedAgent.Events.Count recent events · @selectedAgent.TransitionCount transitions</span></div>
             <div class="event-stream" aria-live="polite">
-                @foreach (var item in SelectedAgent.Events)
+                @foreach (var item in selectedAgent.Events)
                 {
-                    <div class="event-line"><span class="event-tick">T@item.Tick.ToString("D2", CultureInfo.InvariantCulture)</span><span class="event-agent">@SelectedAgent.Mark</span><span>@item.Message</span></div>
+                    <div class="event-line"><span class="event-tick">T@item.Tick.ToString("D2", CultureInfo.InvariantCulture)</span><span class="event-agent">@selectedAgent.Mark</span><span>@item.Message</span></div>
                 }
             </div>
         </section>
