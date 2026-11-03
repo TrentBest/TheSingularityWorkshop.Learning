@@ -1,3 +1,6 @@
+<!-- The Singularity Workshop moniker -->
+<p align="center"><a href="https://github.com/TrentBest"><img src="https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.Visualize/development/docs/assets/moniker.svg" alt="The Singularity Workshop — animated moniker" width="720" /></a></p>
+
 # Frontier challenges: push the Workshop and measure the seams
 
 This is a set of experiments to run against real Workshop packages. The threshold examples below are starting hypotheses, not measured results. Record the package versions, host, inputs, run count, and raw trace before drawing a conclusion.
@@ -70,3 +73,6 @@ Choose budgets per use case. Do not present an arbitrary universal number as an 
 ## Evidence discipline
 
 No benchmark result is implied by this plan. The Workshop already has benchmark repositories for FSM_API, FSM_COS, Renderer, and DataWarehouse; use their existing setup where it applies and keep new results reproducible. A static browser lab can demonstrate browser-compatible packages and boundary behavior. Challenges requiring private credentials, persistent storage, a server, Unity, or VR must name that host requirement explicitly.
+
+<!-- THE SINGULARITY WORKSHOP FOOTER -->
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
