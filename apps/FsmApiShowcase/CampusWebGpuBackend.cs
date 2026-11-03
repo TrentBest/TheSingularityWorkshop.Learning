@@ -77,6 +77,24 @@ public sealed class CampusWebGpuBackend : IVisualizerBackend
                 instanceSnapshots.Add(command.Instances, snapshot);
             }
 
+            var geometrySnapshot = geometrySnapshots[command.Geometry];
+            if (command.FirstIndex > geometrySnapshot.Indices.Count ||
+                command.IndexCount > geometrySnapshot.Indices.Count - command.FirstIndex)
+            {
+                throw new InvalidOperationException(
+                    $"Draw command index range [{command.FirstIndex}, " +
+                    $"{(long)command.FirstIndex + command.IndexCount}) exceeds geometry resource " +
+                    $"{command.Geometry.Value} index count {geometrySnapshot.Indices.Count}.");
+            }
+            for (var indexOffset = command.FirstIndex; indexOffset < command.FirstIndex + command.IndexCount; indexOffset++)
+            {
+                var effectiveVertex = (long)geometrySnapshot.Indices[indexOffset] + command.BaseVertex;
+                if (effectiveVertex < 0 || effectiveVertex >= geometrySnapshot.Vertices.Count)
+                    throw new InvalidOperationException(
+                        $"Draw command index at offset {indexOffset} resolves to vertex {effectiveVertex}, " +
+                        $"outside geometry resource {command.Geometry.Value} vertex count {geometrySnapshot.Vertices.Count}.");
+            }
+
             if (command.Instances.IsValid)
             {
                 var snapshot = instanceSnapshots[command.Instances];
