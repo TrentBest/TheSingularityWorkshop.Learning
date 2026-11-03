@@ -101,3 +101,6 @@ The important progression is not “read a repository, then read another reposit
 6. Check ordinary cases and edge cases against explicit expectations.
 
 That pattern can guide the other [learning paths](LEARNING_PATHS.md). For exact APIs and limitations, return to the [FSM_API](https://github.com/TrentBest/FSM_API), [GUI.SVG adapter contract](https://github.com/TrentBest/TheSingularityWorkshop.GUI/blob/development/docs/SVG_ADAPTER.md), and [GUI implementation status](https://github.com/TrentBest/TheSingularityWorkshop.GUI/blob/development/docs/IMPLEMENTATION_STATUS.md).
+
+<!-- THE SINGULARITY WORKSHOP FOOTER -->
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
