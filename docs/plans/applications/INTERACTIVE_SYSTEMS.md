@@ -1,3 +1,6 @@
+<!-- The Singularity Workshop moniker -->
+<p align="center"><a href="https://github.com/TrentBest"><img src="https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.Visualize/development/docs/assets/moniker.svg" alt="The Singularity Workshop — animated moniker" width="720" /></a></p>
+
 # Build an interactive system
 
 > **Mission:** make a game, simulation, or responsive tool whose behavior stays understandable as inputs and modes multiply.
@@ -45,3 +48,6 @@ flowchart LR
 **Plan boundary:** these projects have distinct roles and versions; this route is a learning sequence, not a promise that every integration is already packaged together.
 
 **Next:** [Learn state machines and input as technologies](../technologies/STATE_AND_INTERACTION.md) · [browse all application plans](../INDEX.md#choose-by-what-youre-building)
+
+<!-- THE SINGULARITY WORKSHOP FOOTER -->
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
