@@ -221,7 +221,8 @@ else
     private SemanticIntent? _lastIntent;
     private int _selectedId = 1;
     private readonly List<AgentContext> _agents = [];
-    private AgentContext SelectedAgent => _agents.First(agent => agent.Id == _selectedId);
+    private AgentContext SelectedAgent => _agents.FirstOrDefault(agent => agent.Id == _selectedId)
+        ?? throw new InvalidOperationException("The selected agent must exist before rendering the behavior lab.");
 
     private static readonly StateNode[] _stateNodes =
     [
