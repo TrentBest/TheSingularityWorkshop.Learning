@@ -1,3 +1,6 @@
+<!-- The Singularity Workshop moniker -->
+<p align="center"><a href="https://github.com/TrentBest"><img src="https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.Visualize/development/docs/assets/moniker.svg" alt="The Singularity Workshop — animated moniker" width="720" /></a></p>
+
 # Build an application from capabilities
 
 > **Mission:** ask for one useful capability and assemble the prerequisites it declares, while keeping application execution with the host.
@@ -44,3 +47,6 @@ flowchart LR
 **Boundary:** FSM_COS resolves and validates a closure and returns a RuntimeAssembly. The host supplies the catalog and owns security policy, application execution, lifecycle, and presentation. A manifest alone is not a download or launch mechanism.
 
 **Next:** [Learn runtime composition](../technologies/RUNTIME_COMPOSITION.md) · [browse all application plans](../INDEX.md#choose-by-what-youre-building)
+
+<!-- THE SINGULARITY WORKSHOP FOOTER -->
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
