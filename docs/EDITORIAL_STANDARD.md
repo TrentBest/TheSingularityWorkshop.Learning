@@ -64,3 +64,6 @@ A visual is part of the lesson, not decoration. It should answer a learner quest
 - **Verified:** run successfully against the named version or commit.
 - **Source-checked:** compared with the named source/documentation revision but not executed by this learning-center author.
 - **Conceptual:** explanatory model or proposal, not a confirmed implementation or runnable sample.
+
+<!-- THE SINGULARITY WORKSHOP FOOTER -->
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop avatar" width="200" /></p>
