@@ -102,3 +102,6 @@ A clear troubleshooting note contains:
 - **Diagnostic flow:** authored, source-checked model of the boundaries linked above.
 - **Oscillator evidence:** upstream CI-verified and artifact-reviewed at the linked run; not rerun by this guide.
 - **Trajectory evidence:** follow the linked recipe for its source record, consumer checks, and current CI evidence.
+
+<!-- THE SINGULARITY WORKSHOP FOOTER -->
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
