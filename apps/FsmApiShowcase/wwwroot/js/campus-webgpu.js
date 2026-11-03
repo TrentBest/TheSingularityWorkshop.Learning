@@ -11,6 +11,8 @@ window.learningCampusGpu = (() => {
     let frameNumber = 0;
     let observer = null;
     const geometryCache = new Map();
+    const instanceCache = new Map();
+    let defaultInstanceBuffer = null;
 
     const shader = `
 struct FrameUniforms {
@@ -24,6 +26,7 @@ struct VertexInput {
     @location(1) normal: vec3<f32>,
     @location(2) uv: vec2<f32>,
     @location(3) color: vec4<f32>,
+    @builtin(instance_index) instanceIndex: u32,
 };
 struct VertexOutput {
     @builtin(position) clipPosition: vec4<f32>,
@@ -32,11 +35,12 @@ struct VertexOutput {
 };
 @vertex fn vertexMain(input: VertexInput) -> VertexOutput {
     var output: VertexOutput;
-    output.clipPosition = frame.mvp * vec4<f32>(input.position, 1.0);
+    let instance = instanceData[input.instanceIndex];
+    output.clipPosition = frame.mvp * instance.transform * vec4<f32>(input.position, 1.0);
     let normal = normalize(input.normal);
     let sun = normalize(vec3<f32>(-0.38, 0.82, -0.43));
     output.light = 0.28 + 0.72 * max(dot(normal, sun), 0.0);
-    output.color = input.color * frame.materialColor;
+    output.color = input.color * frame.materialColor * instance.color;
     return output;
 }
 @fragment fn fragmentMain(input: VertexOutput) -> @location(0) vec4<f32> {
@@ -79,10 +83,15 @@ struct VertexOutput {
             size: 256 * 64,
             usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST
         });
-        bindGroup = device.createBindGroup({
-            layout: pipeline.getBindGroupLayout(0),
-            entries: [{ binding: 0, resource: { buffer: uniformBuffer, offset: 0, size: 80 } }]
+        defaultInstanceBuffer = device.createBuffer({
+            label: "Visualize identity instance",
+            size: 80,
+            usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST
         });
+        device.queue.writeBuffer(defaultInstanceBuffer, 0, new Float32Array([
+            1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1,
+            1, 1, 1, 1
+        ]));
         observer = new ResizeObserver(resizeCanvas);
         observer.observe(canvas);
         resizeCanvas();
@@ -141,6 +150,22 @@ struct VertexOutput {
         });
     }
 
+    function uploadInstances(item) {
+        const key = String(item.id);
+        const cached = instanceCache.get(key);
+        if (cached?.revision === item.revision) return;
+        cached?.buffer.destroy();
+
+        const data = new Float32Array(item.data);
+        const buffer = device.createBuffer({
+            label: "Visualize instance data " + key,
+            size: Math.max(80, data.byteLength),
+            usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST
+        });
+        if (data.length) device.queue.writeBuffer(buffer, 0, data);
+        instanceCache.set(key, { revision: item.revision, buffer });
+    }
+
     async function initializeCanvas(canvasId) {
         if (device) return;
         const target = document.getElementById(canvasId);
@@ -160,6 +185,7 @@ struct VertexOutput {
             await initialize(target);
         }
         for (const geometry of payload.geometries) uploadGeometry(geometry);
+        for (const instances of payload.instances) uploadInstances(instances);
         resizeCanvas();
 
         const encoder = device.createCommandEncoder({ label: "Visualize campus frame" });
@@ -186,10 +212,21 @@ struct VertexOutput {
             uniform.set(draw.mvp, 0);
             uniform.set(draw.color, 16);
             device.queue.writeBuffer(uniformBuffer, drawIndex * 256, uniform);
-            pass.setBindGroup(0, bindGroup, [drawIndex * 256]);
+            const instanceBuffer = draw.instanceResource === 0
+                ? defaultInstanceBuffer
+                : instanceCache.get(String(draw.instanceResource))?.buffer;
+            if (!instanceBuffer) throw new Error("Visualize frame references an instance resource that was not uploaded.");
+            const drawBindGroup = device.createBindGroup({
+                layout: pipeline.getBindGroupLayout(0),
+                entries: [
+                    { binding: 0, resource: { buffer: uniformBuffer, offset: 0, size: 80 } },
+                    { binding: 1, resource: { buffer: instanceBuffer } }
+                ]
+            });
+            pass.setBindGroup(0, drawBindGroup, [drawIndex * 256]);
             pass.setVertexBuffer(0, geometry.vertexBuffer);
             pass.setIndexBuffer(geometry.indexBuffer, "uint32");
-            pass.drawIndexed(draw.indexCount, 1, draw.firstIndex, draw.baseVertex, 0);
+            pass.drawIndexed(draw.indexCount, draw.instanceCount, draw.firstIndex, draw.baseVertex, draw.firstInstance);
             drawIndex++;
         }
         pass.end();
@@ -210,10 +247,13 @@ struct VertexOutput {
             item.indexBuffer.destroy();
         }
         geometryCache.clear();
+        for (const item of instanceCache.values()) item.buffer.destroy();
+        instanceCache.clear();
+        defaultInstanceBuffer?.destroy();
         depthTexture?.destroy();
         uniformBuffer?.destroy();
         device?.destroy();
-        device = context = canvas = pipeline = uniformBuffer = bindGroup = depthTexture = null;
+        device = context = canvas = pipeline = uniformBuffer = depthTexture = defaultInstanceBuffer = null;
         depthSize = "";
         frameNumber = 0;
     }
