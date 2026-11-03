@@ -49,3 +49,6 @@ Not sure which projects are relevant? Use the [functional map](FUNCTIONAL_MAP.md
 Follow the [FSM-driven oscillator recipe](https://github.com/TrentBest/TheSingularityWorkshop.GUI/blob/development/samples/demonstrations/recipes/07-fsm-driven-oscillator.md) for its state diagram, checks, and boundaries. The GUI repository also documents [what GUI.SVG does](https://github.com/TrentBest/TheSingularityWorkshop.GUI/blob/development/docs/SVG_ADAPTER.md) and [what is implemented today](https://github.com/TrentBest/TheSingularityWorkshop.GUI/blob/development/docs/IMPLEMENTATION_STATUS.md).
 
 The GUI.SVG renderer converts a semantic `GuiNode` snapshot into SVG. It does not run the FSM, own an animation clock, or make the output interactive. The learning path keeps those responsibilities visible instead of letting the picture imply more than the code proves.
+
+<!-- THE SINGULARITY WORKSHOP FOOTER -->
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
