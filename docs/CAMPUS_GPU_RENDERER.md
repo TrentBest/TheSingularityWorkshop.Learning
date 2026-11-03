@@ -7,7 +7,7 @@
 
 The first-person campus uses Visualize's public Visualizer, VisualizerFrame, geometry/material resources, and IVisualizerBackend contracts. CampusWebGpuBackend is the browser host adapter. It translates Visualize geometry and draw commands to a WebGPU canvas surface; the WGSL pipeline performs indexed drawing with depth testing and directional lighting.
 
-The campus catalog is currently converted into a single indexed mesh. C# uploads each geometry revision once through the backend. The adapter also resolves Visualize instance resources and serializes each instance as an 80-byte record: a 4×4 transform (16 float32 values) followed by an RGBA tint (4 float32 values). The browser caches GPU storage buffers by resource ID and revision, binds the selected buffer per draw, and submits `instanceCount` / `firstInstance` to `drawIndexed`. Non-instanced commands use an identity-transform, white-tint instance record. Camera and projection uniforms change as the learner walks and looks around. The browser owns and disposes the WebGPU device and buffers; world meaning and campus/course state stay in the Blazor host.
+The campus catalog's buildings, paths, and plaza are submitted as indexed geometry. The repeated grove trees use one reusable tree mesh plus eighteen Visualize instance records, so the scene now exercises the public instance-buffer and draw-command contracts. C# uploads each geometry revision once through the backend. The adapter also resolves Visualize instance resources and serializes each instance as an 80-byte record: a 4×4 transform (16 float32 values) followed by an RGBA tint (4 float32 values). The browser caches GPU storage buffers by resource ID and revision, binds the selected buffer per draw, and submits `instanceCount` / `firstInstance` to `drawIndexed`. Non-instanced commands use an identity-transform, white-tint instance record. Camera and projection uniforms change as the learner walks and looks around. The browser owns and disposes the WebGPU device and buffers; world meaning and campus/course state stay in the Blazor host.
 
 There is no Three.js or external scene engine.
 
@@ -42,7 +42,7 @@ WebGPU buffers + WGSL pipeline + depth texture
 campus canvas
 ```
 
-Next proof points are focused tests for instance payload construction and revision changes, a repeated-geometry campus scene, browser/device capture, a compute-to-render pass, and device-loss recovery. Enable `supportsInstancing` only after the instance path has passed those tests and a real browser/device run; do not infer hardware validation from CI compilation.
+Focused adapter tests now cover instance payload packing, revision changes, missing resources, invalid instance ranges, and the non-instanced fallback; CI validation is pending. The repeated-geometry campus scene now submits eighteen tree instances against one mesh. Remaining proof points are successful CI execution, browser/device capture, a compute-to-render pass, and device-loss recovery. Enable `supportsInstancing` only after the instance path has passed those tests and a real browser/device run; do not infer hardware validation from CI compilation.
 
 <!-- THE SINGULARITY WORKSHOP FOOTER -->
 <p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
