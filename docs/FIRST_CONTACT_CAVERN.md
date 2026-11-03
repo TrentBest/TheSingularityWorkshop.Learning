@@ -1,3 +1,6 @@
+<!-- The Singularity Workshop moniker -->
+<p align="center"><a href="https://github.com/TrentBest"><img src="https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.Visualize/development/docs/assets/moniker.svg" alt="The Singularity Workshop — animated moniker" width="720" /></a></p>
+
 # First contact: the torch, the turn, the cavern
 
 **Purpose:** give a visitor a short, wordless first impression of the Workshop, then let them choose what to explore.
@@ -52,3 +55,6 @@ During a Pages build, the workflow checks out the Physics development source, ru
 The first seconds demonstrate composition, depth, light, movement, and a place to explore. The acoustic side vault makes one bounded Physics result tangible. The FSM_UserIO trace makes the visitor's route itself part of the lesson. The remaining paths lead to runnable systems and problem-focused plans.
 
 The arrival stays brief and skippable, with the useful choices immediately available once the cavern opens.
+
+<!-- THE SINGULARITY WORKSHOP FOOTER -->
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
