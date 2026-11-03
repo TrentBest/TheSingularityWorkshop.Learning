@@ -1,3 +1,6 @@
+<!-- The Singularity Workshop moniker -->
+<p align="center"><a href="https://github.com/TrentBest"><img src="https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.Visualize/development/docs/assets/moniker.svg" alt="The Singularity Workshop — animated moniker" width="720" /></a></p>
+
 # Technology path: service calls and serialization
 
 **Question:** how do I separate a reusable operation from one request and its response, and represent data at explicit boundaries?
@@ -41,3 +44,6 @@ Which object describes the operation? Which values belong to this request? Which
 - [Debug a result by finding the first divergence](../../DEBUG_A_RESULT.md)
 
 **Scope:** a description is not a network call. Serialization is a representation boundary; it does not guarantee remote storage, transport, or semantic agreement.
+
+<!-- THE SINGULARITY WORKSHOP FOOTER -->
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
