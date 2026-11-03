@@ -337,7 +337,7 @@ html:has(.campus-world),body:has(.campus-world),#app:has(.campus-world){width:10
         _ => new("🏛️", "Explore the University", "Walk among living Workshop spaces.", "Find a door, follow your curiosity, and try a course.", "https://github.com/TrentBest/TheSingularityWorkshop.Learning")
     };
 
-    private void Begin()
+    private async Task Begin()
     {
         _started = true;
         RecordIntent(new SemanticIntent("Campus.Arrival.Begin"));
