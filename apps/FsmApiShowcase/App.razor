@@ -138,7 +138,7 @@ else
                     <div class="map-legend"><span><i class="legend-dot behavior"></i> behavior transition</span><span><i class="legend-dot recovery"></i> recovery route</span><span><i class="legend-dot danger"></i> terminal guard</span></div>
                 </div>
 
-                @{ var selectedAgent = selectedAgent; }
+                @{ var selectedAgent = SelectedAgent; }
                 <aside class="control-panel panel">
                     <div class="panel-top"><div><span class="eyebrow">02 / Send a signal</span><h3>@selectedAgent.Name</h3></div><span class="agent-role">@selectedAgent.Role</span></div>
                     <p class="context-caption">These values belong to this agent’s <code>IStateContext</code>.</p>
