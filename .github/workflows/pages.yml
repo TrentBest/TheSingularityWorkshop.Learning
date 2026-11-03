@@ -83,6 +83,9 @@ jobs:
         with:
           dotnet-version: 10.0.x
 
+      - name: Test the browser WebGPU adapter
+        run: dotnet test tests/FsmApiShowcase.Tests/FsmApiShowcase.Tests.csproj --configuration Release
+
       - name: Build the browser showcase
         run: dotnet publish apps/FsmApiShowcase/FsmApiShowcase.csproj --configuration Release
 
