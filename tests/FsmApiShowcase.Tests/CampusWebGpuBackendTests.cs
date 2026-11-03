@@ -52,7 +52,7 @@ public sealed class CampusWebGpuBackendTests
         var frame = CreateFrame(InstanceId, 1);
 
         await backend.RenderAsync(frame, resources);
-        using (var first = ReadPayload(js, 1))
+        using (var first = ReadPayload(js, 0))
         {
             Assert.Equal(1, first.RootElement.GetProperty("instances").GetArrayLength());
             Assert.Equal(1UL, first.RootElement.GetProperty("instances")[0].GetProperty("revision").GetUInt64());
