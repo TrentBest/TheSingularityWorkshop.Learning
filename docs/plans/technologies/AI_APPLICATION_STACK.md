@@ -1,3 +1,6 @@
+<!-- The Singularity Workshop moniker -->
+<p align="center"><a href="https://github.com/TrentBest"><img src="https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.Visualize/development/docs/assets/moniker.svg" alt="The Singularity Workshop — animated moniker" width="720" /></a></p>
+
 # Technology path: AI-facing application layers
 
 **Question:** how can an application preserve its own meaning across structured composition and an AI-capable service boundary?
@@ -41,3 +44,6 @@ For each step, name the owning package and the evidence that it performed that j
 - [HeadlessAi](https://github.com/TrentBest/TheSingularityWorkshop.HeadlessAi)
 
 **Scope:** the stack is a learning map across separate repositories. It does not imply a bundled model, inference engine, provider, or production service.
+
+<!-- THE SINGULARITY WORKSHOP FOOTER -->
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
