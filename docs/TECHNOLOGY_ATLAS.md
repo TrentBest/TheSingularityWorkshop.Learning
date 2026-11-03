@@ -1,3 +1,6 @@
+<!-- The Singularity Workshop moniker -->
+<p align="center"><a href="https://github.com/TrentBest"><img src="https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.Visualize/development/docs/assets/moniker.svg" alt="The Singularity Workshop — animated moniker" width="720" /></a></p>
+
 # Workshop technology atlas
 
 > This is a learning map, not a substitute for project documentation. Choose a problem, follow the package trail, then open the owning repository for implementation details.
@@ -101,3 +104,6 @@ This map covers the public Workshop package and adjacent project repositories fo
 - [Open the interactive frontier planner](https://trentbest.github.io/TheSingularityWorkshop.Learning/frontier.html)
 - [Choose a challenge and define a measurable failure condition](FRONTIER_CHALLENGES.md)
 - [Return to the Learning Center](../README.md)
+
+<!-- THE SINGULARITY WORKSHOP FOOTER -->
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
