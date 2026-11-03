@@ -1,3 +1,6 @@
+<!-- The Singularity Workshop moniker -->
+<p align="center"><a href="https://github.com/TrentBest"><img src="https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.Visualize/development/docs/assets/moniker.svg" alt="The Singularity Workshop — animated moniker" width="720" /></a></p>
+
 # Technology path: GUI, rendering, and visual output
 
 **Question:** how do I turn meaning or computed data into something a person can inspect?
@@ -40,3 +43,6 @@ Can you point from a rendered mark back to its semantic node or source data?
 - [Visual Lab](../../VISUAL_LAB.md)
 
 **Scope:** visual output is a manifestation of data or scene semantics; a renderer does not automatically own behavior or a simulation clock.
+
+<!-- THE SINGULARITY WORKSHOP FOOTER -->
+<p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
