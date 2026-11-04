@@ -9,6 +9,17 @@ The Learning Center is a browser-based university prototype set inside the visio
 
 🧭 **[Enter Singularity University →](https://trentbest.github.io/TheSingularityWorkshop.Learning/)**
 
+## Test the campus on your devices
+
+Use the hosted campus link below on either device:
+
+- **Desktop:** [Open the campus experience](https://trentbest.github.io/TheSingularityWorkshop.Learning/)
+- **Phone:** [Open the campus experience](https://trentbest.github.io/TheSingularityWorkshop.Learning/) in your mobile browser; rotate to landscape for the widest view.
+
+For the WebGPU renderer proof, use a browser/device with WebGPU enabled. On desktop, Chrome or Edge is the recommended first check. On a phone, use a current browser that exposes WebGPU on that device; availability depends on the phone, operating system, and browser. If the experience loads but the campus does not render, report the device model, OS, browser/version, and any on-screen error.
+
+**Build status:** these links open the currently published GitHub Pages site. The latest `development` build has passed CI, but it has not been deployed; the hosted site may not yet contain the new eighteen-tree instancing proof. Updating the live test link to that build requires an explicitly approved Pages deployment.
+
 ## Start with a problem
 
 Each course asks you to do something concrete: give meaning to a click, build a scene from a model, compose a capability, hear a reflected path, design a learner activity, or diagnose a mismatch. Course cards point to the relevant Workshop repositories and current learning guides for deeper reading.
