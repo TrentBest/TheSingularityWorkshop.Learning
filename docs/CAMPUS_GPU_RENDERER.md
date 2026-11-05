@@ -17,7 +17,7 @@ This is the first executable GPU backend proof attached to the Visualize contrac
 
 - WebGPU presentation surface: supported when the browser exposes navigator.gpu.
 - Indexed triangle rendering and depth buffer: implemented.
-- GPU instance-buffer upload, revision-based cache invalidation, and indexed instanced-draw submission: implemented in the adapter/shader; `supportsInstancing` remains false until focused payload/cache tests and browser/device execution are verified. The five focused adapter tests passed in workflow #162; browser/device execution is still outstanding.
+- GPU instance-buffer upload, revision-based cache invalidation, and indexed instanced-draw submission: implemented in the adapter/shader. The five focused adapter tests passed in workflow #162; `supportsInstancing` remains false pending a real browser/device run of the repeated-geometry campus scene.
 - GPU compute, indirect drawing, and timer queries: not implemented in this proof.
 - Renderer Event Horizon scheduling and distant representation reuse: not yet connected.
 - Device/driver runtime validation: dependent on the learner's browser and hardware; CI compilation does not prove a hardware run.
@@ -42,7 +42,7 @@ WebGPU buffers + WGSL pipeline + depth texture
 campus canvas
 ```
 
-Focused adapter tests cover instance payload packing, revision changes, missing resources, invalid instance ranges, and the non-instanced fallback. All five passed in workflow [#162](https://github.com/TrentBest/TheSingularityWorkshop.Learning/actions/runs/41724908736); the browser showcase also built and the static-site artifact was uploaded. The deploy job was skipped. The repeated-geometry campus scene submits eighteen tree instances against one mesh. Remaining proof points are a browser/device capture, a compute-to-render pass, and device-loss recovery. Enable `supportsInstancing` only after the instance path has passed those tests and a real browser/device run; do not infer hardware validation from CI compilation.
+Focused adapter tests cover instance payload packing, revision changes, missing resources, invalid instance ranges, and the non-instanced fallback. All five passed in workflow [#162](https://github.com/TrentBest/TheSingularityWorkshop.Learning/actions/runs/41724908736); the browser showcase also built and the static-site artifact was uploaded. The deploy job was skipped. The repeated-geometry campus scene submits eighteen tree instances against one mesh. The remaining instance-proof gate is a browser/device capture; do not infer hardware validation from CI compilation. Compute-to-render and device-loss recovery remain separate future experiments.
 
 <!-- THE SINGULARITY WORKSHOP FOOTER -->
 <p align="center"><img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop" width="200" /></p>
