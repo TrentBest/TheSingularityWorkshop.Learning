@@ -1,0 +1,17 @@
+{
+  "repository": "TrentBest/TheSingularityWorkshop.Learning",
+  "policy": "exactly-master-and-development",
+  "required_branches": [
+    "development",
+    "master"
+  ],
+  "actual_branches": [
+    "development",
+    "master"
+  ],
+  "branch_count": 2,
+  "status": "COMPLIANT",
+  "evaluated_at": "2026-11-05T04:38:56Z",
+  "workflow_run": "https://github.com/TrentBest/TheSingularityWorkshop.Learning/actions/runs/41969079608",
+  "triggering_commit": "12d695ab2d5c99e2e4f022d49063ca5865b22ea7"
+}
