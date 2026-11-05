@@ -3,6 +3,7 @@
 
 # ✳️ Singularity University
 
+[![Sith Policy](assets/sith-policy.svg)](https://github.com/TrentBest/TheSingularityWorkshop.Learning/actions/workflows/sith-policy.yml)
 **Learn the Workshop by living in the problem.**
 
 The Learning Center is a browser-based university prototype set inside the vision of Singularity City. Enter a full-screen, first-person campus. Walk its low-poly quad, find a workshop door, inspect a course, and enroll without leaving the scene.
