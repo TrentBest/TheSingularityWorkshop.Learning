@@ -18,7 +18,7 @@ Use the hosted campus link below on either device:
 
 For the WebGPU renderer proof, use a browser/device with WebGPU enabled. On desktop, Chrome or Edge is the recommended first check. On a phone, use a current browser that exposes WebGPU on that device; availability depends on the phone, operating system, and browser. If the experience loads but the campus does not render, report the device model, OS, browser/version, and any on-screen error.
 
-**Build status:** these links open the currently published GitHub Pages site. The latest `development` build has passed CI, but it has not been deployed; the hosted site may not yet contain the new eighteen-tree instancing proof. Updating the live test link to that build requires an explicitly approved Pages deployment.
+**Build status:** GitHub Actions builds and deploys the `development` branch to this Pages site. `master` remains the stable reference branch and does not deploy automatically. The hosted campus is therefore the active development test surface; browser/device validation of the eighteen-tree instancing proof is still required.
 
 ## Start with a problem
 
