@@ -64,7 +64,7 @@ jobs:
       - name: Install .NET 8 for the Physics, Visualize, and UserIO models
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: 8.0.x
+          dotnet-version: 10.0.x
 
       - name: Compute the acoustic run from Physics source
         shell: bash
