@@ -95,7 +95,7 @@ else
                 <div><div class="eyebrow">01 / Watch the behavior</div><h2>What should the agent do next?</h2></div>
                 <div class="tick-console"><span class="tick-label">PROCESSING GROUP</span><code>SentinelSquad</code><span class="tick-count">tick @_tick.ToString("D2", CultureInfo.InvariantCulture)</span></div>
             </div>
-            <p class="section-intro">Choose an agent, change its context, then advance the shared processing group. Each click calls <code>FSM_API.FsmApi.Interact.Update</code>; all three live instances get their turn.</p>
+            <p class="section-intro">Choose an agent, change its context, then advance the shared processing group. Each click calls <code>global::FSM_API.FsmApi.Interact.Update</code>; all three live instances get their turn.</p>
 
             <div class="workbench">
                 <div class="map-panel panel">
@@ -271,7 +271,7 @@ else
     protected override void OnInitialized()
     {
         if (IsCampusExperience) return;
-        FSM_API.FsmApi.Create.CreateFiniteStateMachine(DefinitionName, processRate: 1, processingGroup: ProcessingGroup)
+        global::FSM_API.FsmApi.Create.CreateFiniteStateMachine(DefinitionName, processRate: 1, processingGroup: ProcessingGroup)
             .State("Patrol",
                 onEnter: context => Enter(context, "Patrol"),
                 onUpdate: context => ((AgentContext)context).PatrolTicks++,
@@ -334,7 +334,7 @@ else
         _tick++;
         foreach (var agent in _agents)
             agent.TickCount = _tick;
-        FSM_API.FsmApi.Interact.Update(ProcessingGroup);
+        global::FSM_API.FsmApi.Interact.Update(ProcessingGroup);
         foreach (var agent in _agents)
             AddEvent(agent, $"Processing group tick {_tick}");
     }
@@ -390,7 +390,7 @@ else
     private void ResetMission()
     {
         foreach (var agent in _agents)
-            FSM_API.FsmApi.Interact.DestroyInstance(agent.Handle);
+            global::FSM_API.FsmApi.Interact.DestroyInstance(agent.Handle);
         _agents.Clear();
         _tick = 0;
 
@@ -403,7 +403,7 @@ else
     private static AgentContext CreateAgent(int id, string name, string role, string mark, string color, double distance)
     {
         var agent = new AgentContext(id, name, role, mark, color, distance);
-        agent.Handle = FSM_API.FsmApi.Create.CreateInstance(DefinitionName, agent, ProcessingGroup);
+        agent.Handle = global::FSM_API.FsmApi.Create.CreateInstance(DefinitionName, agent, ProcessingGroup);
         return agent;
     }
 
@@ -433,7 +433,7 @@ else
         {
             if (agent.Handle is not null)
             {
-                FSM_API.FsmApi.Interact.DestroyInstance(agent.Handle);
+                global::FSM_API.FsmApi.Interact.DestroyInstance(agent.Handle);
                 agent.IsValid = false;
             }
         }
