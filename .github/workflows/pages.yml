@@ -98,6 +98,8 @@ jobs:
           printf '%s\n' '${{ steps.visualize.outputs.commit }}' > _site/data/visualize-source-commit.txt
           cp index.html _site/index.html
           cp frontier.html _site/frontier.html
+          cp capabilities.html _site/capabilities.html
+          cp data/capabilities.json _site/data/capabilities.json
           cp -R apps/FsmApiShowcase/bin/Release/net10.0/publish/wwwroot/. _site/demo/
           sed -i 's|<base href="/" />|<base href="/TheSingularityWorkshop.Learning/demo/" />|' _site/demo/index.html
           touch _site/.nojekyll
