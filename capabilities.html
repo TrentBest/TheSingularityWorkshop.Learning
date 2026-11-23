@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07111e"><meta name="description" content="Explore the Singularity Workshop capability map: meaning, owning package, evidence, examples, source, tests, and unverified boundaries.">
+<title>Capability Atlas · Singularity University</title>
+<style>
+:root{color-scheme:dark;--bg:#07111e;--panel:#102235;--panel2:#142d42;--line:#29475e;--text:#edf7ff;--muted:#a9bfd0;--mint:#66e0be;--cyan:#71c9ff;--gold:#ffd27d;--rose:#fb7185;--violet:#c4b5fd;--max:1320px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 82% -10%,#1a3a50 0,transparent 42rem),var(--bg);color:var(--text);font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:var(--cyan);text-underline-offset:3px}a:hover{color:#c7eaff}button,input{font:inherit}.wrap{width:min(calc(100% - 36px),var(--max));margin:auto}
+header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 0;border-bottom:1px solid #ffffff20}header img{width:min(220px,38vw)}nav{display:flex;gap:18px;flex-wrap:wrap}nav a{color:var(--muted);font-size:.9rem;text-decoration:none}
+.hero{padding:54px 0 32px;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end}.eyebrow{color:var(--mint);font-size:.72rem;font-weight:850;letter-spacing:.16em;text-transform:uppercase}.hero h1{font-size:clamp(2.6rem,6vw,5rem);line-height:.96;letter-spacing:-.06em;margin:.25em 0}.hero p{max-width:76ch;color:var(--muted);font-size:1.05rem}.stats{display:flex;gap:10px;flex-wrap:wrap}.stat{min-width:100px;border:1px solid var(--line);border-radius:15px;background:#102235;padding:12px 15px}.stat strong{display:block;font-size:1.6rem;line-height:1.2;color:var(--mint)}.stat span{font-size:.75rem;color:var(--muted)}
+.rule{border:1px solid #ffd27d40;background:#ffd27d0c;border-radius:14px;padding:13px 16px;color:#e8d8b5;font-size:.9rem;margin:0 0 26px}.rule strong{color:var(--gold)}
+.controls{position:sticky;top:0;z-index:5;background:#081522ed;backdrop-filter:blur(16px);border-block:1px solid #ffffff18;padding:12px 0}.controlrow{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.search{flex:1 1 240px;min-width:190px;border:1px solid var(--line);border-radius:999px;background:#102235;color:var(--text);padding:10px 15px;outline:none}.search:focus{border-color:var(--mint);box-shadow:0 0 0 3px #66e0be20}.filter{border:1px solid var(--line);border-radius:999px;background:#102235;color:var(--muted);padding:8px 13px;cursor:pointer}.filter[aria-pressed=true]{background:var(--mint);border-color:var(--mint);color:#062019;font-weight:800}
+.layout{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(330px,.92fr);gap:18px;padding:22px 0 58px;align-items:start}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.cap{display:block;width:100%;text-align:left;color:var(--text);border:1px solid var(--line);border-radius:17px;padding:16px;background:linear-gradient(145deg,var(--panel2),var(--panel));cursor:pointer;transition:border-color .18s,transform .18s,box-shadow .18s}.cap:hover,.cap[aria-pressed=true]{border-color:var(--mint);transform:translateY(-2px);box-shadow:0 12px 32px #0004}.cap[hidden]{display:none}.cap-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.area{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);font-weight:850}.status{font-size:.66rem;font-weight:800;letter-spacing:.02em;border:1px solid var(--line);border-radius:999px;padding:4px 8px;color:var(--mint);background:#66e0be0c}.status.proposed{color:var(--gold);border-color:#ffd27d55;background:#ffd27d0b}.status.pages-build{color:var(--violet);border-color:#c4b5fd55;background:#c4b5fd0b}.status.documented{color:var(--cyan)}.cap h2{font-size:1.12rem;line-height:1.22;margin:12px 0 7px}.cap p{margin:0;color:var(--muted);font-size:.86rem}.owner{margin-top:13px;padding-top:10px;border-top:1px solid #ffffff15;color:#c9dbe8;font-size:.77rem}.owner b{color:var(--mint);font-weight:750}
+.inspector{position:sticky;top:80px;border:1px solid var(--line);border-radius:21px;background:#0e1e2c;padding:22px;min-height:420px}.inspector h2{font-size:1.8rem;line-height:1.08;letter-spacing:-.03em;margin:8px 0}.inspector p{color:var(--muted)}.inspector h3{font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:var(--mint);margin:22px 0 6px}.inspector .ownerline{color:#d7e7f2;font-size:.88rem}.evidence{border-left:3px solid var(--cyan);padding:9px 12px;background:#71c9ff0c;border-radius:0 10px 10px 0;color:#d4e6f3;font-size:.88rem}.boundary{border-left:3px solid var(--gold);padding:9px 12px;background:#ffd27d0c;border-radius:0 10px 10px 0;color:#e8d8b5;font-size:.88rem}.links{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}.links a{display:inline-block;border:1px solid var(--line);border-radius:10px;padding:7px 10px;text-decoration:none;font-size:.82rem;font-weight:750}.empty{grid-column:1/-1;border:1px dashed var(--line);border-radius:16px;padding:28px;color:var(--muted);text-align:center}.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:.8rem;margin:0 0 12px}.legend span{display:inline-flex;align-items:center;gap:6px}.dot{width:8px;height:8px;border-radius:50%;background:var(--mint)}.dot.gold{background:var(--gold)}.dot.violet{background:var(--violet)}.dot.cyan{background:var(--cyan)}
+footer{border-top:1px solid #ffffff20;padding:25px 0 42px;color:var(--muted);font-size:.85rem}footer img{width:160px;display:block;margin:16px auto 0}
+@media(max-width:920px){.layout{grid-template-columns:1fr}.inspector{position:relative;top:auto;min-height:0}.hero{grid-template-columns:1fr}.stats{justify-content:flex-start}}
+@media(max-width:600px){.cards{grid-template-columns:1fr}.wrap{width:min(calc(100% - 26px),var(--max))}.hero{padding-top:36px}header{align-items:flex-start;flex-direction:column}.stat{min-width:88px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style></head><body>
+<header class="wrap"><a href="./" aria-label="Singularity University home"><img src="https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.Visualize/development/docs/assets/moniker.svg" alt="The Singularity Workshop"></a><nav><a href="./">Campus</a><a href="./demo/">Behavior lab</a><a href="./frontier.html">Frontier Lab</a><a href="https://github.com/TrentBest/TheSingularityWorkshop.Learning">Repository</a></nav></header>
+<main class="wrap">
+<section class="hero"><div><div class="eyebrow">Singularity University · Workshop map</div><h1>Capability<br>Atlas.</h1><p>Follow a capability from its meaning to the repository that owns it. Inspect the implementation, named tests, and a worked example. The status tells you what the evidence actually supports—not what a project name might suggest.</p></div><div class="stats" aria-label="Catalog summary"><div class="stat"><strong id="total-count">—</strong><span>capabilities</span></div><div class="stat"><strong id="source-count">—</strong><span>with source + tests</span></div><div class="stat"><strong id="proposed-count">—</strong><span>proposed / unverified</span></div></div></section>
+<p class="rule"><strong>Evidence rule.</strong> A source link means the owning repository contains an implementation surface. A test link means a named test suite or test file exists. Neither badge claims a fresh CI run, a published package, a production integration, or browser/device validation unless the evidence text says so.</p>
+</main>
+<section class="controls"><div class="wrap controlrow"><input id="search" class="search" type="search" placeholder="Search capabilities, packages, or concepts…" aria-label="Search capabilities"><button class="filter" data-filter="all" aria-pressed="true">All</button><button class="filter" data-filter="behavior">Behavior</button><button class="filter" data-filter="interaction">Interaction</button><button class="filter" data-filter="composition">Composition</button><button class="filter" data-filter="presentation">Presentation</button><button class="filter" data-filter="visualization">Visualization</button><button class="filter" data-filter="intelligence">AI</button><button class="filter" data-filter="automation">Automation</button><button class="filter" data-filter="experience">Experiences</button><button class="filter" data-filter="proposed">Proposed</button></div></section>
+<section class="wrap layout"><div><div class="legend"><span><i class="dot"></i>Source + named tests</span><span><i class="dot violet"></i>Pages build; device check pending</span><span><i class="dot cyan"></i>Documented boundary</span><span><i class="dot gold"></i>Proposed / unverified</span></div><div id="cards" class="cards" aria-label="Capability cards"></div></div><aside id="inspector" class="inspector" aria-live="polite"><div class="eyebrow">Select a capability</div><h2>Follow the evidence.</h2><p>Choose a card to inspect what the capability means, which package owns it, how it is demonstrated, and where its source and tests live.</p></aside></section>
+<footer class="wrap">The atlas is an orientation layer, not a substitute for each repository's current contracts and release evidence.<img src="https://raw.githubusercontent.com/TrentBest/FSM_API/master/Documentation/Branding/TheSingularityWorkshop.png" alt="The Singularity Workshop"></footer>
+<script>
+(function(){
+"use strict";
+const cards=document.getElementById("cards"), inspector=document.getElementById("inspector"), search=document.getElementById("search");
+let catalog=[], activeFilter="all", selected=null;
+const $=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
+const link=(label,url)=>{if(!url)return null;const a=$("a","",label);a.href=url;a.target="_blank";a.rel="noopener noreferrer";return a;};
+const statusClass=s=>s==="proposed"?"proposed":s==="pages-build"?"pages-build":s==="documented"?"documented":"";
+function matches(c){const q=search.value.trim().toLowerCase();const hay=[c.title,c.meaning,c.owner,c.area,c.statusLabel,c.evidence,c.example].join(" ").toLowerCase();const filterOk=activeFilter==="all"||(activeFilter==="proposed"?c.status==="proposed":c.area===activeFilter);return filterOk&&(!q||hay.includes(q));}
+function renderInspector(c){
+ inspector.replaceChildren();
+ inspector.append($("div","eyebrow",c.area.replaceAll("-"," ")+" · capability"));
+ const h=$("h2","",c.title);inspector.append(h);
+ const owner=$("p","ownerline");owner.append("Owned by ");const own=link(c.owner,c.ownerUrl);if(own)owner.append(own);else owner.append(c.owner);inspector.append(owner);
+ const badge=$("span","status "+statusClass(c.status),c.statusLabel);inspector.append(badge);
+ inspector.append($("h3","","What it means"),$("p","",c.meaning));
+ inspector.append($("h3","","Implementation evidence"),$("div","evidence",c.evidence));
+ inspector.append($("h3","","Worked example"),$("p","",c.example));
+ const ex=link("Open example ↗",c.exampleUrl);if(ex){const row=$("div","links");row.append(ex);inspector.append(row);}
+ inspector.append($("h3","","Source and tests"));
+ const links=$("div","links");for(const [label,url] of [["Source ↗",c.sourceUrl],["Tests ↗",c.testUrl],["Guide ↗",c.guideUrl]]){const a=link(label,url);if(a)links.append(a);}inspector.append(links);
+ inspector.append($("h3","","Boundary / what this does not prove"),$("div","boundary",c.boundary));
+}
+function render(){
+ cards.replaceChildren();const visible=catalog.filter(matches);
+ for(const c of visible){
+  const b=$("button","cap");b.type="button";b.setAttribute("aria-pressed",String(c.id===selected));
+  const top=$("div","cap-top");top.append($("span","area",c.area.replaceAll("-"," ")), $("span","status "+statusClass(c.status),c.statusLabel));b.append(top);
+  b.append($("h2","",c.title),$("p","",c.meaning));
+  const owner=$("div","owner");owner.append("Owner · ");const a=link(c.owner,c.ownerUrl);if(a)owner.append(a);else owner.append($("b","",c.owner));b.append(owner);
+  b.addEventListener("click",()=>{selected=c.id;render();renderInspector(c);});
+  cards.append(b);
+ }
+ if(!visible.length)cards.append($("div","empty","No capabilities match that search. Clear the search or choose another filter."));
+ if(selected&&!visible.some(c=>c.id===selected))selected=null;
+ if(!selected&&visible.length){selected=visible[0].id;renderInspector(visible[0]);}
+ if(!visible.length){inspector.replaceChildren($("div","eyebrow","No selection"),$("h2","","No matching capability"),$("p","","Try a different search term or filter."));}
+}
+document.querySelectorAll("[data-filter]").forEach(b=>b.addEventListener("click",()=>{activeFilter=b.dataset.filter;document.querySelectorAll("[data-filter]").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));render();}));
+search.addEventListener("input",render);
+fetch("./data/capabilities.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("Catalog request failed: "+r.status);return r.json();}).then(data=>{
+ if(data.schemaVersion!==1||!Array.isArray(data.capabilities))throw new Error("Unsupported capability catalog.");
+ catalog=data.capabilities;
+ document.getElementById("total-count").textContent=catalog.length;
+ document.getElementById("source-count").textContent=catalog.filter(c=>c.status==="source-tested").length;
+ document.getElementById("proposed-count").textContent=catalog.filter(c=>c.status==="proposed").length;
+ render();
+}).catch(err=>{cards.replaceChildren($("div","empty","The capability catalog could not be loaded. "+err.message));});
+})();
+</script></body></html>
