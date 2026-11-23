@@ -8,7 +8,7 @@
 
 The Learning Center is a browser-based university prototype set inside the vision of Singularity City. Enter a full-screen, first-person campus. Walk its low-poly quad, find a workshop door, inspect a course, and enroll without leaving the scene.
 
-🧭 **[Enter Singularity University →](https://trentbest.github.io/TheSingularityWorkshop.Learning/)**
+🧭 **[Enter Singularity University →](https://trentbest.github.io/TheSingularityWorkshop.Learning/)** · [Explore the interactive Capability Atlas →](https://trentbest.github.io/TheSingularityWorkshop.Learning/capabilities.html)
 
 ## Test the campus on your devices
 
@@ -19,7 +19,7 @@ Use the hosted campus link below on either device:
 
 For the WebGPU renderer proof, use a browser/device with WebGPU enabled. On desktop, Chrome or Edge is the recommended first check. On a phone, use a current browser that exposes WebGPU on that device; availability depends on the phone, operating system, and browser. If the experience loads but the campus does not render, report the device model, OS, browser/version, and any on-screen error.
 
-**Build status:** GitHub Actions builds and deploys the `development` branch to this Pages site. `master` remains the stable reference branch and does not deploy automatically. The hosted campus is therefore the active development test surface; browser/device validation of the eighteen-tree instancing proof is still required.
+**Build and publication:** pushes to `development` build and validate the site; a deliberate `workflow_dispatch` on `development` publishes the resulting Pages artifact. `master` is not deployed automatically. The hosted campus is the active development test surface; browser/device validation of the eighteen-tree instancing proof is still required.
 
 ## Start with a problem
 
@@ -46,14 +46,14 @@ This is the learning progression used by the center, not a claim about the archi
 
 ## Enter a real lab
 
-🧪 **[Launch the FSM_API + FSM_UserIO Behavior Lab →](https://trentbest.github.io/TheSingularityWorkshop.Learning/demo/)** — change agent inputs, advance a shared processing group, and inspect real state transitions. Follow the [worked problem from model to proof](docs/PROBLEM_TO_PROOF.md), browse the [technology atlas](docs/TECHNOLOGY_ATLAS.md), or explore the [Frontier Lab](https://trentbest.github.io/TheSingularityWorkshop.Learning/frontier.html).
+🧪 **[Launch the FSM_API + FSM_UserIO Behavior Lab →](https://trentbest.github.io/TheSingularityWorkshop.Learning/demo/)** — change agent inputs, advance a shared processing group, and inspect real state transitions. Follow the [worked problem from model to proof](docs/PROBLEM_TO_PROOF.md), browse the [technology atlas](docs/TECHNOLOGY_ATLAS.md), explore the [Frontier Lab](https://trentbest.github.io/TheSingularityWorkshop.Learning/frontier.html), or inspect the [interactive Capability Atlas](https://trentbest.github.io/TheSingularityWorkshop.Learning/capabilities.html) for package ownership, examples, source/tests, and evidence boundaries.
 
 ## Standards and sources
 
 Learning pages teach by solving a problem and link to project repositories for deeper API and implementation reading. Documentation follows the [FSM_COS documentation standard](https://github.com/TrentBest/TheSingularityWorkshop.FSM_COS/blob/master/DOCUMENTATION_STANDARD.md).
 
 - [Learning plans](docs/plans/INDEX.md)
-- [Functional map](docs/FUNCTIONAL_MAP.md)
+- [Interactive Capability Atlas](capabilities.html) — live package map with implementation status and evidence links.\n- [Functional map](docs/FUNCTIONAL_MAP.md)
 - [Learning journey](docs/LEARNING_JOURNEY.md)
 - [FSM_API source](https://github.com/TrentBest/FSM_API)
 - [FSM_UserIO source](https://github.com/TrentBest/FSM_UserIO)
