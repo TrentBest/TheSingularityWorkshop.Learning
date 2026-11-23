@@ -19,7 +19,7 @@ Use the hosted campus link below on either device:
 
 For the WebGPU renderer proof, use a browser/device with WebGPU enabled. On desktop, Chrome or Edge is the recommended first check. On a phone, use a current browser that exposes WebGPU on that device; availability depends on the phone, operating system, and browser. If the experience loads but the campus does not render, report the device model, OS, browser/version, and any on-screen error.
 
-**Build and publication:** pushes to `development` build and validate the site; a deliberate `workflow_dispatch` on `development` publishes the resulting Pages artifact. `master` is not deployed automatically. The hosted campus is the active development test surface; browser/device validation of the eighteen-tree instancing proof is still required.
+**Build and publication:** pushes to `development` build, validate, and deploy the site; pull requests build without publishing. A deliberate `workflow_dispatch` on `development` can republish. `master` is not deployed automatically. The hosted campus is the active development test surface; browser/device validation of the eighteen-tree instancing proof is still required.
 
 ## Start with a problem
 
