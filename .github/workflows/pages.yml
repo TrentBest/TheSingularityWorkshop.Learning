@@ -89,7 +89,7 @@ jobs:
       - name: Build the browser showcase
         run: dotnet publish apps/FsmApiShowcase/FsmApiShowcase.csproj --configuration Release
 
-      - name: Assemble the static Pages site
+      - name: Validate the source-backed capability catalog\n        run: node tools/validate-capabilities.mjs\n\n      - name: Assemble the static Pages site
         shell: bash
         run: |
           mkdir -p _site/demo _site/data
